@@ -1,0 +1,142 @@
+// Modify this file to provide a description of your toolbox.
+// This file is used by Atoms GUI in scilab, to show information about the toolbox.
+//
+// Note that it will NOT be used when publishing your toolbox on http://atoms.scilab.org;
+// the present file is only used if you distribute your toolbox yourself.
+// On the http://atoms.scilab.org site, only the information you provide there is used.
+//
+//
+// Lines starting with // are comments
+// (you can remove all the comments designed to help you)
+// Lines starting with a space are continuation of the previous field.
+// Empty lines separate fields.
+
+
+// Unique identifier for this toolbox.
+// It must be alphanumeric, start with a letter and contain neither space
+// nor special characters other than underscore or dash.
+Toolbox: toolbox_samplestat
+
+// Human-friendly name for your toolbox
+Title: Toolbox SampleStat
+
+// One-line description for your toolbox
+Summary: SampleStat is a tiny toolbox for statistics of normal distributed populations
+
+// Version number, in format 'major.minor.patch', or
+// 'major.minor.patch', where all fields are numbers.
+// If you are just starting your toolbox, you should use '0.1' or '0.1.0'.
+// Use '1.0' or '1.0.0' for a tested, good quality first version.
+Version: 1.0.0
+
+// Name(s) of the author(s) of this toolbox.
+// They are usually the original copyright holders
+// (persons or entities)
+Author: Hani Ibrahim
+
+// Name(s) and email address(es) of the person(s) maintaining this toolbox
+Maintainer: Hani Ibrahim <hani.ibrahim@gmx.de>
+8
+// Categories that this toolbox belongs to.
+// The toolbox will appear in the Scilab Atoms GUI
+// under the categories that you select here.
+Category: biology - Robotic_2
+
+// Name of the institution (company, university, lab...) who has developped the toolbox.
+// If you developped the toolbox as an individual, then just enter "private individual"
+Entity: private individual8
+
+// Optional website that has more information about this toolbox
+WebSite: http://www.scilab.org
+
+// License under which the toolbox will be published
+License: GPL 3.0
+
+// Version of Scilab supported by this toolbox,
+// prefixed by =, >= ...
+ScilabVersion: >= 5.0
+
+// Other toolbox(es) that must be installed in order
+// this toolboxes to work. Atoms will automatically ensure that
+// the dependent toolboxes listed here are installed on the user's
+// Scilab installation.
+// Each toolbox dependency must be in format:
+//    <operator> <toolbox name> <toolbox version|any>
+// where operator can be: ~, >, <, >=, <=
+// If multiple dependencies, put one per line (starting each line with a space)
+Depends: 
+
+// Creation date
+Date: 2016-08-12
+
+Description: Toolbox for statistics of normal distributed populations.
+ 
+ This toolbox provides elemantary tests for evaluation of measuring data. It 
+ calculates the range of dispersion of the values and the mean regarding a 
+ given statistical confidence level.
+ 
+ These functions are good to extend the built-in functions mean(), stdev(), 
+ max(), min(), median().
+ 
+ The toolbox SampleStat provide the following functions (details refer example 
+ below).
+ 
+ MACROS:
+ 
+   * SS_strayarea: 
+     Calculates the stray area (range of dispersion of the values) 
+     for a given vector and for a statistical confidence level (95%, 99%, 99.9%)
+     and level of significance (0.5, 0.01, 0.001), resp.
+   * SS_trustarea: 
+     Calculates the trust area (range of dispersion of the mean) 
+     for a given vector and for a statistical confidence level (95%, 99%, 99.9%)
+     and level of significance (0.5, 0.01, 0.001), resp.
+   * SS_studentfactor: 
+     Determines the student factor for an amount of numbers and for a
+     statistical confidence level (95%, 99%, 99.9%) and level of 
+     significance (0.5, 0.01, 0.001), resp.- service function for 
+     SS_staryarea and SS_trustarea
+   * SS_demo.sce: 
+     Demo for mean evaluation via "SS_strayarea()" and "SS_trustarea()"
+   
+ EXAMPLES:
+ 
+   v = [9.999 9.998 10.002  10. 10.001  10.];
+ 
+   SS_strayarea(v, "95%") // confidence level in percent
+   SS_strayarea(v, 0.05)  // confidence level of significance
+   => ans = 0.0036345
+ 
+   SS_trustarea(v, "99.9")
+   SS_trustarea(v, 0.01)
+   => ans = 0.0039606
+ 
+ DEMO (SS_demo.sce):
+  
+   Vector of Values:
+ 
+      9.999   
+      9.998   
+      10.002  
+      10.     
+      10.001  
+      10.     
+ 
+   Number of Values            : 6
+   Arithmetic Mean             : 10.000000
+   Standard Deviation (S.D.)   : 0.001414
+   Confidence Level            : 95%
+   Range of Dispersion (values): 0.003635
+   Range of Dispersion (mean)  : 0.001484
+   Minimum                     : 9.99800088
+   Maximum                     : 10.002000
+ 
+   68 percent of the values will stray arount 10.000 +- 0.001 (S.D.). 95% of the 
+   values will be expected around 10.000 +/- 0.004 (Range of disp. of the values,
+   stray area). With a propability of 95% the mean of 10.000 will stray around 
+   10.000 +/- 0.001 (Rage of dispersion of the mean, trust area).
+ 
+ LITERATURE:
+ 
+ Based on the German book R. Kaiser, G. Gottschalk; "Elementare Tests zur 
+ Beurteilung von Meßdaten", BI Hochschultaschenbücher, Bd. 774, Mannheim 1972.
