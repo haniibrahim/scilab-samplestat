@@ -40,7 +40,7 @@ Maintainer: Hani Ibrahim <hani.ibrahim@gmx.de>
 // Categories that this toolbox belongs to.
 // The toolbox will appear in the Scilab Atoms GUI
 // under the categories that you select here.
-Category: biology - Robotic_2
+Category: statistics
 
 // Name of the institution (company, university, lab...) who has developped the toolbox.
 // If you developped the toolbox as an individual, then just enter "private individual"
