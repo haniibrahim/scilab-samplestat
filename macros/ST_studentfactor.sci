@@ -13,7 +13,7 @@
 // You should have received a copy of the GNU General Public License along with
 // this program; if not, see <http://www.gnu.org/licenses/>.
 
-function [retval] = SS_studentfactor(n, p)
+function [retval] = ST_studentfactor(n, p)
 // Determine the student factor
 //
 // Calling Sequence
@@ -27,15 +27,15 @@ function [retval] = SS_studentfactor(n, p)
 // Description
 // Determine the student factor from the internal t-table and 
 // interpolate the value if necessary. It is a service function for 
-// SS_strayarea() and SS_trustarea().
+// ST_strayarea() and ST_trustarea().
 //
 // Examples
-// retval = SS_studentfactor(35, "95%") // = 2.0324
-// retval = SS_studentfactor(35, 0.05)  // = 2.0324
+// retval = ST_studentfactor(35, "95%") // = 2.0324
+// retval = ST_studentfactor(35, 0.05)  // = 2.0324
 //
 // See also
-//  SS_trustarea
-//  SS_strayarea
+//  ST_trustarea
+//  ST_strayarea
 //
 // Authors
 //  Hani A. Ibrahim ; hani.ibrahim@gmx.de

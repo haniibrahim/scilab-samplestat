@@ -13,11 +13,11 @@
 // You should have received a copy of the GNU General Public License along with
 // this program; if not, see <http://www.gnu.org/licenses/>.
 
-function strayval = SS_strayarea(v, p)
+function strayval = ST_strayarea(v, p)
 // Determines the range of dispersion of the values.
 //
 // Calling Sequence
-//   strayval = SS_strayarea(v, p)
+//   strayval = ST_strayarea(v, p)
 //
 // Parameters
 // v: vector of numerical values
@@ -25,7 +25,7 @@ function strayval = SS_strayarea(v, p)
 // strayval: stray area, range of dispersion of the values.
 //
 // Description
-// "SS_strayarea" determines the range of dispersion of the values. It describes the quality of the raw values.
+// "ST_strayarea" determines the range of dispersion of the values. It describes the quality of the raw values.
 //
 // E.g. if strayval = 1.4 at p = 95% with a mean = 10,0 all raw 
 // values of the whole population will be expected with a confidence of 95% at 
@@ -34,12 +34,12 @@ function strayval = SS_strayarea(v, p)
 // Examples
 // V = [6 8 14 12 5 15];
 // mean(V) // = 10.
-// strayval1 = SS_strayarea(V, "95%") // = 10.904
-// strayval2 = SS_strayarea(V, 0.05)  // = 10.904
+// strayval1 = ST_strayarea(V, "95%") // = 10.904
+// strayval2 = ST_strayarea(V, 0.05)  // = 10.904
 //
 // See also
-//  SS_trustarea
-//  SS_studentfactor
+//  ST_trustarea
+//  ST_studentfactor
 //
 // Authors
 //  Hani A. Ibrahim ; hani.ibrahim@gmx.de
@@ -58,10 +58,10 @@ function strayval = SS_strayarea(v, p)
   // Number of values
   n = length(v);
 
-  if SS_studentfactor(n, p) < 0
+  if ST_studentfactor(n, p) < 0
     error("Wrong studenfactor t was committed. Here is something serously wrong!");
   end
   
-  strayval = stdev(v) * SS_studentfactor(n, p);
+  strayval = stdev(v) * ST_studentfactor(n, p);
 
 endfunction

@@ -14,8 +14,8 @@
 // this program; if not, see <http://www.gnu.org/licenses/>.
 
 // SampleStatDemo is a demo script for the toolbox_samplestat
-// - SS_strayarea.sci
-// - SS_trustarea.sci
+// - ST_strayarea.sci
+// - ST_trustarea.sci
 // Core functions as mean(), stdev(), min() and max() are also used.
 // Author: Hani Andreas Ibrahim <hani.ibrahim@gmx.de>
 // License: GPL 3.0
@@ -39,8 +39,8 @@ function samplestat_demo()
     n  = length(v);           // Number of values
     x  = mean(v);             // Arithmetic mean
     s  = stdev (v);           // Standard deviation (S.D.)
-    sa = SS_strayarea(v, p);  // Range of dispersion of the values (stray area)
-    ta = SS_trustarea(v, p);  // Range of dispersion of the mean (trust area)
+    sa = ST_strayarea(v, p);  // Range of dispersion of the values (stray area)
+    ta = ST_trustarea(v, p);  // Range of dispersion of the mean (trust area)
     mi = min(v);              // Minimal value
     ma = max(v);              // Maximal value
 

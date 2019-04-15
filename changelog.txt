@@ -1,3 +1,10 @@
+sampleStat (v1.0.0)
+ * SS_ prefix changed to ST_
+ * help-files
+
+samplestat (v0.9.1)
+ * Updated to Scilab 6.0
+
 samplestat (v0.9.0)
  * SS_studentfactor
  * SS_trustarea

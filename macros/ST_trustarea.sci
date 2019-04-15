@@ -13,11 +13,11 @@
 // You should have received a copy of the GNU General Public License along with
 // this program; if not, see <http://www.gnu.org/licenses/>.
 
-function trustval = SS_trustarea(v, p)
+function trustval = ST_trustarea(v, p)
 // Determines the range of dispersion of the mean.
 //
 // Calling Sequence
-//   trustval = SS_trustarea(v, p)
+//   trustval = ST_trustarea(v, p)
 //
 // Parameters
 // v: vector of numerical values
@@ -25,7 +25,7 @@ function trustval = SS_trustarea(v, p)
 // trustval: trust area, range of dispersion of the mean.
 //
 // Description
-// "SS_trustarea" determine the range of dispersion of the mean. It describes the
+// "ST_trustarea" determine the range of dispersion of the mean. It describes the
 // quality of the mean and indicates the range of dispersion of the 
 // mean and not of the raw values as the stray area does.
 //
@@ -35,12 +35,12 @@ function trustval = SS_trustarea(v, p)
 // Examples
 // V = [6 8 14 12 5 15];
 // mean(V) // = 10.
-// trustval1 = SS_trustarea(V, "95%") // = 4.4514
-// trustval2 = SS_trustarea(V, 0.05)  // = 4.4514
+// trustval1 = ST_trustarea(V, "95%") // = 4.4514
+// trustval2 = ST_trustarea(V, 0.05)  // = 4.4514
 //
 // See also
-//  SS_strayarea
-//  SS_studentfactor
+//  ST_strayarea
+//  ST_studentfactor
 //
 // Authors
 //  Hani A. Ibrahim ; hani.ibrahim@gmx.de
@@ -58,10 +58,10 @@ function trustval = SS_trustarea(v, p)
   
   n = length(v); // Number of values
   
-  if (SS_strayarea(v,p) < 0) then
+  if (ST_strayarea(v,p) < 0) then
     error("Wrong studenfactor t was committed. Here is something serously wrong!");
   else
-   trustval = SS_strayarea(v,p)/sqrt(n);
+   trustval = ST_strayarea(v,p)/sqrt(n);
   end
   
 endfunction

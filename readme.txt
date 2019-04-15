@@ -19,21 +19,21 @@ Description: Toolbox for statistics of normal distributed populations.
  
  MACROS:
  
-   * SS_strayarea: 
+   * ST_strayarea: 
      Calculates the stray area (range of dispersion of the values) 
      for a given vector and for a statistical confidence level (95%, 99%, 99.9%)
      and level of significance (0.5, 0.01, 0.001), resp.
-   * SS_trustarea: 
+   * ST_trustarea: 
      Calculates the trust area (range of dispersion of the mean) 
      for a given vector and for a statistical confidence level (95%, 99%, 99.9%)
      and level of significance (0.5, 0.01, 0.001), resp.
-   * SS_studentfactor: 
+   * ST_studentfactor: 
      Determines the student factor for an amount of numbers and for a
      statistical confidence level (95%, 99%, 99.9%) and level of 
      significance (0.5, 0.01, 0.001), resp.- service function for 
-     SS_staryarea and SS_trustarea
-   * SS_demo.sce: 
-     Demo for mean evaluation via "SS_strayarea()" and "SS_trustarea()"
+     ST_staryarea and ST_trustarea
+   * samplestat.dem.sce: 
+     Demo for mean evaluation via "ST_strayarea()" and "ST_trustarea()"
   
  -------------------------------------------------------------------------------
    
@@ -43,12 +43,12 @@ Description: Toolbox for statistics of normal distributed populations.
    stdev(v)
    => ans = 0.0014142
  
-   SS_strayarea(v, "95%") // confidence level in percent OR
-   SS_strayarea(v, 0.05)  // confidence level of significance
+   ST_strayarea(v, "95%") // confidence level in percent OR
+   ST_strayarea(v, 0.05)  // confidence level of significance
    => ans = 0.0036345
  
-   SS_trustarea(v, "95%")
-   SS_trustarea(v, 0.05)
+   ST_trustarea(v, "95%")
+   ST_trustarea(v, 0.05)
    => ans = 0.0014838
    
    68 percent of the values will stray arount 10.000 +- 0.001 (S.D.). 95% of the 
