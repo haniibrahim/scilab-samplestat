@@ -1,4 +1,4 @@
-// Copyright (C) 2016 Hani Andreas Ibrahim
+// Copyright (C) 2019 Hani Andreas Ibrahim
 //
 // This program is free software; you can redistribute it and/or modify it under
 // the terms of the GNU General Public License as published by the Free Software
@@ -13,51 +13,39 @@
 // You should have received a copy of the GNU General Public License along with
 // this program; if not, see <http://www.gnu.org/licenses/>.
 
-//strayval = SS_strayarea(v, p)
-//
-//"SS_strayarea" determines the range of dispersion of the values. It describes the
-//quality of the raw values.
-//
-//E.g. if strayval = 1.4 at p = 95% with a mean = 10,0 all raw 
-//values of the whole population will be expected with a confidence of 95% at 
-//about 10.0 +/- 1.4.
-//
-//The strayarea strayval indicates that P% of all single values are expected
-//around mean + strayval and mean - strayval.
-//
-//v is a vector of numerical values, 
-//p is the statistical confidence level (%) as a string or
-//  the level of significance (alpha) as a decimal value.
-//
-//conf. level   level of signif.
-//------------------------------
-//  "95%"             0.05
-//  "99%"             0.01
-//  "99.9%"           0.001
-//
-//Example:
-//
-//V = [6 8 14 12 5 15];
-//mean(V)
-//  10.
-//SS_strayarea(V, "95%")
-//  10.904
-//
-//SS_strayarea(V, 0.05)
-//  10.904
-//
-//In the committed vector "v" 95% of all values will stray about 10.9 
-//around the arithmetic mean of 10 => 0 and 20.9
-//
-//The strayarea is calculated as s * t. (t = student factor, dependent on the 
-//confidence level P% = 95%, 99% or 99.9% and the degree of freedom f = n - 1.
-//
-//Based on the German book R. Kaiser, G. Gottschalk; "Elementare Tests zur 
-//Beurteilung von Meßdaten", BI Hochschultaschenbücher, Bd. 774, Mannheim 1972.
-
-// Author: Hani Andreas Ibrahim <hani.ibrahim@gmx.de>
-// License: GPL 3.0
 function strayval = SS_strayarea(v, p)
+// Determines the range of dispersion of the values.
+//
+// Calling Sequence
+//   strayval = SS_strayarea(v, p)
+//
+// Parameters
+// v: vector of numerical values
+// p: statistical confidence level (%) as a string or the level of significance (alpha) as a decimal value, "95%", "99%", "99.9%" or 0.05, 0.01, 0.001 resp (see examples).
+// strayval: stray area, range of dispersion of the values.
+//
+// Description
+// "SS_strayarea" determines the range of dispersion of the values. It describes the quality of the raw values.
+//
+// E.g. if strayval = 1.4 at p = 95% with a mean = 10,0 all raw 
+// values of the whole population will be expected with a confidence of 95% at 
+// about 10.0 +/- 1.4.
+//
+// Examples
+// V = [6 8 14 12 5 15];
+// mean(V) // = 10.
+// strayval1 = SS_strayarea(V, "95%") // = 10.904
+// strayval2 = SS_strayarea(V, 0.05)  // = 10.904
+//
+// See also
+//  SS_trustarea
+//  SS_studentfactor
+//
+// Authors
+//  Hani A. Ibrahim ; hani.ibrahim@gmx.de
+//
+// Bibliography
+//   R. Kaiser, G. Gottschalk; "Elementare Tests zur Beurteilung von Meßdaten", BI Hochschultaschenbücher, Bd. 774, Mannheim 1972.
 
 // Check arguments
   inarg = argn(2);

@@ -15,13 +15,13 @@
 // Unique identifier for this toolbox.
 // It must be alphanumeric, start with a letter and contain neither space
 // nor special characters other than underscore or dash.
-Toolbox: toolbox_samplestat
+Toolbox: samplestat
 
 // Human-friendly name for your toolbox
-Title: Toolbox SampleStat
+Title: SampleSTAT
 
 // One-line description for your toolbox
-Summary: SampleStat is a tiny toolbox for statistics of normal distributed populations
+Summary: SampleSTAT is a tiny toolbox for statistics of normal distributed populations
 
 // Version number, in format 'major.minor.patch', or
 // 'major.minor.patch', where all fields are numbers.
@@ -32,7 +32,7 @@ Version: 1.0.0
 // Name(s) of the author(s) of this toolbox.
 // They are usually the original copyright holders
 // (persons or entities)
-Author: Hani Ibrahim
+Author: Hani A. Ibrahim
 
 // Name(s) and email address(es) of the person(s) maintaining this toolbox
 Maintainer: Hani Ibrahim <hani.ibrahim@gmx.de>
@@ -44,10 +44,10 @@ Category: statistics
 
 // Name of the institution (company, university, lab...) who has developped the toolbox.
 // If you developped the toolbox as an individual, then just enter "private individual"
-Entity: private individual8
+Entity: private individual
 
 // Optional website that has more information about this toolbox
-WebSite: http://www.scilab.org
+WebSite: 
 
 // License under which the toolbox will be published
 License: GPL 3.0
@@ -67,7 +67,7 @@ ScilabVersion: >= 5.0
 Depends: 
 
 // Creation date
-Date: 2016-08-12
+Date: 2019-04-15
 
 Description: Toolbox for statistics of normal distributed populations.
  

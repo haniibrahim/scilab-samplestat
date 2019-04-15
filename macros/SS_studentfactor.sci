@@ -13,40 +13,36 @@
 // You should have received a copy of the GNU General Public License along with
 // this program; if not, see <http://www.gnu.org/licenses/>.
 
-//retval = studentfactor(n, p)
-//
-//Servicefunction for strayarea() and trustarea():
-//Determine the student factor from the internal t-table and interpolate the 
-//value if necessary.
-//
-//n is the number of values in the sample distribution, committed as an
-//integer. p is the statistical confidence level (%) as a string or
-//the level of significance (alpha) as a decimal value.
-//
-//conf. level   level of signif.
-//------------------------------
-//  "95%"             0.05
-//  "99%"             0.01
-//  "99.9%"           0.001
-//
-//retval is a the student factor. 
-//
-//Examples:
-//
-//SS_studentfactor(35, "95%")
-//2.0324
-//
-//SS_studentfactor(35, 0.05)
-//2.0324
-//
-//Based on the German book R. Kaiser, G. Gottschalk; "Elementare Tests zur 
-//Beurteilung von Meßdaten", BI Hochschultaschenbücher, Bd. 774, Mannheim 1972.
-
-
-// Author: Hani Andreas Ibrahim <hani.ibrahim@gmx.de>
-// License: GPL 3.0
-
 function [retval] = SS_studentfactor(n, p)
+// Determine the student factor
+//
+// Calling Sequence
+//   retval = studentfactor(n, p)
+//
+// Parameters
+// n: number of values in the sample distribution
+// p: statistical confidence level (%) as a string or the level of significance (alpha) as a decimal value, "95%", "99%", "99.9%" or 0.05, 0.01, 0.001 resp (see examples).
+// retval: student factor
+//
+// Description
+// Determine the student factor from the internal t-table and 
+// interpolate the value if necessary. It is a service function for 
+// SS_strayarea() and SS_trustarea().
+//
+// Examples
+// retval = SS_studentfactor(35, "95%") // = 2.0324
+// retval = SS_studentfactor(35, 0.05)  // = 2.0324
+//
+// See also
+//  SS_trustarea
+//  SS_strayarea
+//
+// Authors
+//  Hani A. Ibrahim ; hani.ibrahim@gmx.de
+//
+// Bibliography
+//   R. Kaiser, G. Gottschalk; "Elementare Tests zur Beurteilung von Meßdaten", BI Hochschultaschenbücher, Bd. 774, Mannheim 1972.
+
   
   // Check arguments
   inarg = argn(2);
