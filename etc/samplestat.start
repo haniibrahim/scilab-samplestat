@@ -45,11 +45,11 @@ function samplestat = startModule()
 //
 // Load demos
 // =============================================================================
-//  if or(getscilabmode() == ["NW";"STD"]) then
-//    mprintf("\tLoad demos\n");
-//    pathdemos = pathconvert(root_tlbx+"/demos/SS_demo.sce", %F, %T);
-//    add_demo(TOOLBOX_TITLE, pathdemos);
-//  end
+  if or(getscilabmode() == ["NW";"STD"]) then
+    mprintf("\tLoad demos\n");
+    pathdemos = pathconvert(root_tlbx+"/demos/samplestat.dem.gateway.sce", %F, %T);
+    add_demo(TOOLBOX_TITLE, pathdemos);
+  end
 
 // Load Preferences GUI
 // =============================================================================
@@ -57,6 +57,10 @@ function samplestat = startModule()
 //    addModulePreferences(TOOLBOX_TITLE, root_tlbx, etc_tlbx + "toolbox_skeleton_preferences.xml");
 //  end
 
+// ====================================================================
+    // A Welcome message.
+    mprintf("\tType ""demo_gui()"" and search for "+TOOLBOX_TITLE+" for Demonstrations.\n");
+    
 endfunction
 
 samplestat = startModule();

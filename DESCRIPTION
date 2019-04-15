@@ -39,7 +39,7 @@ Maintainer: Hani Ibrahim (hani.ibrahim@gmx.de)
 // Categories that this toolbox belongs to.
 // The toolbox will appear in the Scilab Atoms GUI
 // under the categories that you select here.
-Category: statistics
+Category: Data Analysis - Statistics
 
 // Name of the institution (company, university, lab...) who has developped the toolbox.
 // If you developped the toolbox as an individual, then just enter "private individual"
@@ -53,7 +53,7 @@ License: GPL 3.0
 
 // Version of Scilab supported by this toolbox,
 // prefixed by =, >= ...
-ScilabVersion: >= 5.0
+ScilabVersion: >= 5.5
 
 // Other toolbox(es) that must be installed in order
 // this toolboxes to work. Atoms will automatically ensure that
@@ -100,47 +100,24 @@ Description: Toolbox for statistics of normal distributed populations.
          
  ---------------------------------------------------------------------
    
- EXAMPLES:
+ EXAMPLE:
  
    v = [9.999 9.998 10.002  10. 10.001  10.];
  
-   SS_strayarea(v, "95%") // confidence level in percent
+   SS_strayarea(v, "95%") // confidence level in percent OR
    SS_strayarea(v, 0.05)  // confidence level of significance
    => ans = 0.0036345
  
-   SS_trustarea(v, "99.9")
-   SS_trustarea(v, 0.01)
-   => ans = 0.0039606
+   SS_trustarea(v, "95") // OR
+   SS_trustarea(v, 0.05)
+   => ans = 0.0014838
    
+   95% of the values will be expected around 10.000 +/- 0.004 (Range 
+   of dispersion of the values, stray area). With a propability of 95%
+   the mean of 10.000 will stray around 10.000 +/- 0.001 (Rage of 
+   dispersion of the mean, trust area).
  ---------------------------------------------------------------------
- 
- DEMO (SS_demo.sce):
-  
-   Vector of Values:
- 
-      9.999   
-      9.998   
-      10.002  
-      10.     
-      10.001  
-      10.     
- 
-   Number of Values            : 6
-   Arithmetic Mean             : 10.000000
-   Standard Deviation (S.D.)   : 0.001414
-   Confidence Level            : 95%
-   Range of Dispersion (values): 0.003635
-   Range of Dispersion (mean)  : 0.001484
-   Minimum                     : 9.99800088
-   Maximum                     : 10.002000
- 
-   68 percent of the values will stray arount 10.000 +- 0.001 (S.D.). 95% of the 
-   values will be expected around 10.000 +/- 0.004 (Range of disp. of the values,
-   stray area). With a propability of 95% the mean of 10.000 will stray around 
-   10.000 +/- 0.001 (Rage of dispersion of the mean, trust area).
    
- ---------------------------------------------------------------------
- 
  LITERATURE:
  
  Based on the German book R. Kaiser, G. Gottschalk; "Elementare Tests zur 
