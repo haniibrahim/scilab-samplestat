@@ -11,7 +11,6 @@
 // Lines starting with a space are continuation of the previous field.
 // Empty lines separate fields.
 
-
 // Unique identifier for this toolbox.
 // It must be alphanumeric, start with a letter and contain neither space
 // nor special characters other than underscore or dash.
@@ -27,7 +26,7 @@ Summary: SampleSTAT is a tiny toolbox for statistics of normal distributed popul
 // 'major.minor.patch', where all fields are numbers.
 // If you are just starting your toolbox, you should use '0.1' or '0.1.0'.
 // Use '1.0' or '1.0.0' for a tested, good quality first version.
-Version: 1.0.0
+Version: 0.9.0
 
 // Name(s) of the author(s) of this toolbox.
 // They are usually the original copyright holders
@@ -35,8 +34,8 @@ Version: 1.0.0
 Author: Hani A. Ibrahim
 
 // Name(s) and email address(es) of the person(s) maintaining this toolbox
-Maintainer: Hani Ibrahim <hani.ibrahim@gmx.de>
-8
+Maintainer: Hani Ibrahim (hani.ibrahim@gmx.de)
+ 
 // Categories that this toolbox belongs to.
 // The toolbox will appear in the Scilab Atoms GUI
 // under the categories that you select here.
@@ -98,6 +97,8 @@ Description: Toolbox for statistics of normal distributed populations.
      SS_staryarea and SS_trustarea
    * SS_demo.sce: 
      Demo for mean evaluation via "SS_strayarea()" and "SS_trustarea()"
+         
+ ---------------------------------------------------------------------
    
  EXAMPLES:
  
@@ -110,6 +111,8 @@ Description: Toolbox for statistics of normal distributed populations.
    SS_trustarea(v, "99.9")
    SS_trustarea(v, 0.01)
    => ans = 0.0039606
+   
+ ---------------------------------------------------------------------
  
  DEMO (SS_demo.sce):
   
@@ -135,6 +138,8 @@ Description: Toolbox for statistics of normal distributed populations.
    values will be expected around 10.000 +/- 0.004 (Range of disp. of the values,
    stray area). With a propability of 95% the mean of 10.000 will stray around 
    10.000 +/- 0.001 (Rage of dispersion of the mean, trust area).
+   
+ ---------------------------------------------------------------------
  
  LITERATURE:
  
