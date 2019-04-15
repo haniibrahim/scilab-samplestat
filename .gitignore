@@ -5,5 +5,5 @@ cleaner.sce
 loader.sce
 unloader.sce
 *.jar
-
+.DS_Store
 

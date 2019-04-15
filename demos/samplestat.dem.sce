@@ -72,7 +72,7 @@ function samplestat_demo()
     //
     // Load this script into the editor
     //
-    filename = "SS_demo.sce";
+    filename = "samplestat.dem.sce";
     dname = get_absolute_file_path(filename);
     editor ( fullfile(dname,filename) );
 

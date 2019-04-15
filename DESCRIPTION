@@ -26,7 +26,7 @@ Summary: SampleSTAT is a tiny toolbox for statistics of normal distributed popul
 // 'major.minor.patch', where all fields are numbers.
 // If you are just starting your toolbox, you should use '0.1' or '0.1.0'.
 // Use '1.0' or '1.0.0' for a tested, good quality first version.
-Version: 0.9.0
+Version: 0.9.1
 
 // Name(s) of the author(s) of this toolbox.
 // They are usually the original copyright holders
@@ -34,7 +34,7 @@ Version: 0.9.0
 Author: Hani A. Ibrahim
 
 // Name(s) and email address(es) of the person(s) maintaining this toolbox
-Maintainer: Hani Ibrahim (hani.ibrahim@gmx.de)
+Maintainer: Hani A. Ibrahim (hani.ibrahim@gmx.de)
  
 // Categories that this toolbox belongs to.
 // The toolbox will appear in the Scilab Atoms GUI

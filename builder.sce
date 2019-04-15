@@ -7,9 +7,8 @@ mode(-1);
 lines(0);
 
 function main_builder()
-
     TOOLBOX_NAME  = "samplestat";
-    TOOLBOX_TITLE = "SampleStat";
+    TOOLBOX_TITLE = "SampleSTAT";
     toolbox_dir   = get_absolute_file_path("builder.sce");
 
     // Check Scilab's version
@@ -37,12 +36,12 @@ function main_builder()
     // =============================================================================
 
     tbx_builder_macros(toolbox_dir);
-//    tbx_builder_src(toolbox_dir);
-//    tbx_builder_gateway(toolbox_dir);
-//    tbx_build_localization(TOOLBOX_NAME, toolbox_dir);
-//    tbx_builder_help(toolbox_dir);
-    tbx_build_loader(TOOLBOX_NAME, toolbox_dir);
-    tbx_build_cleaner(TOOLBOX_NAME, toolbox_dir);
+ //   tbx_builder_src(toolbox_dir);
+ //   tbx_builder_gateway(toolbox_dir);
+ //   tbx_build_localization(toolbox_dir);
+ //   tbx_builder_help(toolbox_dir);
+    tbx_build_loader(toolbox_dir);
+    tbx_build_cleaner(toolbox_dir);
 
 endfunction
 // =============================================================================

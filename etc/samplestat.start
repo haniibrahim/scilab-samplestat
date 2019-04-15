@@ -1,11 +1,16 @@
-function samplestat = startModule()
+// Copyright (C) 2008 - INRIA
+// Copyright (C) 2009 - DIGITEO
+
+// This file is released under the 3-clause BSD license. See COPYING-BSD.
+
+function samplestatlib = startModule()
 
     TOOLBOX_NAME  = "samplestat";
     TOOLBOX_TITLE = "SampleSTAT";
 
   mprintf("Start " + TOOLBOX_TITLE + "\n");
 
-  if isdef("samplestat") then
+  if isdef("samplestatlib") then
     warning("Toolbox samplestat library is already loaded");
     return;
   end
@@ -18,7 +23,7 @@ function samplestat = startModule()
 // =============================================================================
   mprintf("\tLoad macros\n");
   pathmacros = pathconvert( root_tlbx ) + "macros" + filesep();
-  samplestat = lib(pathmacros);
+  samplestatlib = lib(pathmacros);
 
 // load gateways and Java libraries
 // =============================================================================
@@ -42,7 +47,7 @@ function samplestat = startModule()
 //      add_help_chapter(TOOLBOX_NAME, path_addchapter, %F);
 //    end
 //  end
-//
+
 // Load demos
 // =============================================================================
   if or(getscilabmode() == ["NW";"STD"]) then
@@ -59,9 +64,9 @@ function samplestat = startModule()
 
 // ====================================================================
     // A Welcome message.
-    mprintf("\tType ""demo_gui()"" and search for "+TOOLBOX_TITLE+" for Demonstrations.\n");
-    
+    mprintf("\tType ""demo_gui()"" and search for "+TOOLBOX_TITLE+" for Demonstration.\n");
+
 endfunction
 
-samplestat = startModule();
+toolbox_skeletonlib = startModule();
 clear startModule; // remove startModule on stack
