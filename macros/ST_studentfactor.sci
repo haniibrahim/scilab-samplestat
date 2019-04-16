@@ -45,13 +45,24 @@ function [retval] = ST_studentfactor(n, p)
 
   
   // Check arguments
-  inarg = argn(2);
-  if inarg > 2 | inarg == 0 then error('Commit 2 arguments: n=Numbers of values; p=confidence level'); end
-  if ~isnum(string(n)) then error("First argument is the number of values and has to be an integer"); end
-  if (n < 2 | n > 1000); error("First value has to be greater or equal 2 and less or equal 1000"); end
+  [lhs,rhs]=argn()
+  apifun_checkrhs("ST_studentfactor", rhs, 2); // Input args
+  apifun_checklhs("ST_studentfactor", lhs, 1); // Output args
+  apifun_checkflint("ST_studentfactor", n, "n", 1); // Integer?
+  apifun_checkscalar("ST_studentfactor", n, "n", 1); // Scalar?
+  apifun_checkscalar("ST_studentfactor", p, "p", 1); // Scalar?
   if ~(strcmp(string(p),"95%") | strcmp(string(p),"99%") | strcmp(string(p),"99.9%") | p ~= 0.05 | p ~= 0.01 | p ~= 0.001)
-    error("Second argument is the statistical confidence level and has to be a string, as 95%, 99% or 99.9% or as alpha value: 0.05, 0.01, 0.001");
+    error(msprintf("%s: Second argument is the statistical confidence level and has to be a string, as 95%, 99% or 99.9%" + ..
+    " or as alpha value: 0.05, 0.01, 0.001", "ST_studentfactor") );
   end
+  
+//  inarg = argn(2);
+//  if inarg > 2 | inarg == 0 then error('Commit 2 arguments: n=Numbers of values; p=confidence level'); end
+//  if ~isnum(string(n)) then error("First argument is the number of values and has to be an integer"); end
+//  if (n < 2 | n > 1000); error("First value has to be greater or equal 2 and less or equal 1000"); end
+//  if ~(strcmp(string(p),"95%") | strcmp(string(p),"99%") | strcmp(string(p),"99.9%") | p ~= 0.05 | p ~= 0.01 | p ~= 0.001)
+//    error("Second argument is the statistical confidence level and has to be a string, as 95%, 99% or 99.9% or as alpha value: 0.05, 0.01, 0.001");
+//  end
 
   // Contains the Student factor t-table
   // ===================================

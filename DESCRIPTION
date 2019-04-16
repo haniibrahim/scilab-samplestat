@@ -63,7 +63,7 @@ ScilabVersion: >= 5.5
 //    <operator> <toolbox name> <toolbox version|any>
 // where operator can be: ~, >, <, >=, <=
 // If multiple dependencies, put one per line (starting each line with a space)
-Depends: 
+Depends: >= apifun 0.4.0
 
 // Creation date
 Date: 2019-04-15

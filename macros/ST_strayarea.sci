@@ -48,12 +48,24 @@ function strayval = ST_strayarea(v, p)
 //   R. Kaiser, G. Gottschalk; "Elementare Tests zur Beurteilung von Meßdaten", BI Hochschultaschenbücher, Bd. 774, Mannheim 1972.
 
 // Check arguments
-  inarg = argn(2);
-  if inarg > 2 | inarg == 0 then error('Commit 2 arguments: v=vector of values; p=confidence level'); end
-  if (~isnum(string(v)) | ~isvector(v)); error("First argument has to be a numeric vector\n"); end
+  [lhs,rhs]=argn()
+  apifun_checkrhs("ST_strayarea", rhs, 2); // Input args
+  apifun_checklhs("ST_strayarea", lhs, 1); // Output args
+  apifun_checkvector("ST_strayarea", v, "v", 1); // Vector?
+  apifun_checktype ("ST_strayarea", v, "v", 1, "constant"); //Double?
+  apifun_checkscalar("ST_strayarea", p, "p", 1); // Scalar?
   if ~(strcmp(string(p),"95%") | strcmp(string(p),"99%") | strcmp(string(p),"99.9%") | p ~= 0.05 | p ~= 0.01 | p ~= 0.001)
-    error("Second argument is the statistical confidence level and has to be a string, as 95%, 99% or 99.9% or as alpha value: 0.05, 0.01, 0.001");
+    error(msprintf("%s: Second argument is the statistical confidence level and has to be a string, as 95%, 99% or 99.9%" + ..
+    " or as alpha value: 0.05, 0.01, 0.001", "ST_strayarea"));
   end
+  
+    
+//  inarg = argn(2);
+//  if inarg > 2 | inarg == 0 then error('Commit 2 arguments: v=vector of values; p=confidence level'); end
+//  if (~isnum(string(v)) | ~isvector(v)); error("First argument has to be a numeric vector\n"); end
+//  if ~(strcmp(string(p),"95%") | strcmp(string(p),"99%") | strcmp(string(p),"99.9%") | p ~= 0.05 | p ~= 0.01 | p ~= 0.001)
+//    error("Second argument is the statistical confidence level and has to be a string, as 95%, 99% or 99.9% or as alpha value: 0.05, 0.01, 0.001");
+//  end
   
   // Number of values
   n = length(v);
