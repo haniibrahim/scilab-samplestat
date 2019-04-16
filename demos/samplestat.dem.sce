@@ -64,7 +64,7 @@ function samplestat_demo()
     mprintf("\n"); // blank line
 
     mprintf( ..
-    "68 percent of the values will stray arount %.3f +- %.3f (S.D.). %s of the values\n" + ..
+    "68 percent of the values will stray arount %.3f +/- %.3f (S.D.). %s of the values\n" + ..
     "will be expected around %.3f +/- %.3f (Range of disp. of the values, stray area).\n" + ..
     "With a propability of %s the mean of %.3f will stray around %.3f +/- %.3f (Rage of \n" + ..
     "dispersion of the mean, trust area).\n", x, s, p, x, sa, p, x, x, ta);

@@ -17,7 +17,7 @@ function strayval = ST_strayarea(v, p)
 // Determines the range of dispersion of the values.
 //
 // Calling Sequence
-//   strayval = ST_strayarea(v, p)
+//  strayval = ST_strayarea(v, p)
 //
 // Parameters
 // v: vector of numerical values
@@ -42,7 +42,7 @@ function strayval = ST_strayarea(v, p)
 //  ST_studentfactor
 //
 // Authors
-//  Hani A. Ibrahim ; hani.ibrahim@gmx.de
+//  Hani A. Ibrahim - hani.ibrahim@gmx.de
 //
 // Bibliography
 //   R. Kaiser, G. Gottschalk; "Elementare Tests zur Beurteilung von Meßdaten", BI Hochschultaschenbücher, Bd. 774, Mannheim 1972.

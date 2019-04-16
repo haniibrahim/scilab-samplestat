@@ -17,7 +17,7 @@ function [retval] = ST_studentfactor(n, p)
 // Determine the student factor
 //
 // Calling Sequence
-//   retval = studentfactor(n, p)
+//  retval = studentfactor(n, p)
 //
 // Parameters
 // n: number of values in the sample distribution
@@ -38,7 +38,7 @@ function [retval] = ST_studentfactor(n, p)
 //  ST_strayarea
 //
 // Authors
-//  Hani A. Ibrahim ; hani.ibrahim@gmx.de
+//  Hani A. Ibrahim - hani.ibrahim@gmx.de
 //
 // Bibliography
 //   R. Kaiser, G. Gottschalk; "Elementare Tests zur Beurteilung von Meßdaten", BI Hochschultaschenbücher, Bd. 774, Mannheim 1972.

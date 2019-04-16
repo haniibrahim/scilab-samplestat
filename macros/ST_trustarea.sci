@@ -17,7 +17,7 @@ function trustval = ST_trustarea(v, p)
 // Determines the range of dispersion of the mean.
 //
 // Calling Sequence
-//   trustval = ST_trustarea(v, p)
+//  trustval = ST_trustarea(v, p)
 //
 // Parameters
 // v: vector of numerical values
@@ -43,7 +43,7 @@ function trustval = ST_trustarea(v, p)
 //  ST_studentfactor
 //
 // Authors
-//  Hani A. Ibrahim ; hani.ibrahim@gmx.de
+//  Hani A. Ibrahim - hani.ibrahim@gmx.de
 //
 // Bibliography
 //   R. Kaiser, G. Gottschalk; "Elementare Tests zur Beurteilung von Meßdaten", BI Hochschultaschenbücher, Bd. 774, Mannheim 1972.

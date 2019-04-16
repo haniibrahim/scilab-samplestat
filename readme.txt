@@ -14,7 +14,7 @@ Description: Toolbox for statistics of normal distributed populations.
  
  -------------------------------------------------------------------------------
  
- The toolbox SampleStat provide the following functions (details refer example 
+ The toolbox SampleSTAT provide the following functions (details refer example 
  below).
  
  MACROS:

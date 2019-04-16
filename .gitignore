@@ -6,4 +6,4 @@ loader.sce
 unloader.sce
 *.jar
 .DS_Store
-
+scilab_en_US_help/

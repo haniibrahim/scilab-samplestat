@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book [
+<!--Begin Entities-->
+<!ENTITY a571f916a7ab09ef8111cc777c5de095b SYSTEM "file:///C:/Users/hi/Dropbox/Entwicklung/Scilab/dev/samplestat/help/en_US/ST_strayarea.xml">
+<!ENTITY a4e5184f90679f30d24d2a37c93822bb9 SYSTEM "file:///C:/Users/hi/Dropbox/Entwicklung/Scilab/dev/samplestat/help/en_US/ST_studentfactor.xml">
+<!ENTITY af6b8e9711e383bc7f4c58eab3b3e0f4f SYSTEM "file:///C:/Users/hi/Dropbox/Entwicklung/Scilab/dev/samplestat/help/en_US/ST_trustarea.xml">
+<!--End Entities-->
+]>
+<book version="5.0-subset Scilab" xml:lang="en_US"
+      xmlns="http://docbook.org/ns/docbook"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      xmlns:svg="http://www.w3.org/2000/svg"
+      xmlns:mml="http://www.w3.org/1998/Math/MathML"
+      xmlns:html="http://www.w3.org/1999/xhtml"
+      xmlns:db="http://docbook.org/ns/docbook">
+  <info xml:id='samplestat_manual'>
+    <title>SampleSTAT</title>
+  </info>
+
+<part xml:id='section_1716cc7417c7ecfd2e164a8745a39f0c'>
+<title>SampleSTAT</title>
+&a571f916a7ab09ef8111cc777c5de095b;
+&a4e5184f90679f30d24d2a37c93822bb9;
+&af6b8e9711e383bc7f4c58eab3b3e0f4f;
+</part>
+</book>
