@@ -12,6 +12,9 @@ Description: Toolbox for statistics of normal distributed populations.
  INSTALLATION:
  atomsInstall("/path/to/samplestat_x.x.x_x.x_bin.zip")
  
+ DEPENDENCIES:
+ apifun >= 0.4.0
+ 
  -------------------------------------------------------------------------------
  
  The toolbox SampleSTAT provide the following functions (details refer example 

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book [
 <!--Begin Entities-->
-<!ENTITY a571f916a7ab09ef8111cc777c5de095b SYSTEM "file:///C:/Users/hi/Dropbox/Entwicklung/Scilab/dev/samplestat/help/en_US/ST_strayarea.xml">
-<!ENTITY a4e5184f90679f30d24d2a37c93822bb9 SYSTEM "file:///C:/Users/hi/Dropbox/Entwicklung/Scilab/dev/samplestat/help/en_US/ST_studentfactor.xml">
-<!ENTITY af6b8e9711e383bc7f4c58eab3b3e0f4f SYSTEM "file:///C:/Users/hi/Dropbox/Entwicklung/Scilab/dev/samplestat/help/en_US/ST_trustarea.xml">
+<!ENTITY affaef4d62524a1f1c43ccb41d3abbcb5 SYSTEM "/Users/hi/Dropbox/Entwicklung/Scilab/dev/samplestat/help/en_US/0samplestat-overview.xml">
+<!ENTITY a928b7b436627ec26141585acdf73ddf6 SYSTEM "/Users/hi/Dropbox/Entwicklung/Scilab/dev/samplestat/help/en_US/ST_strayarea.xml">
+<!ENTITY a4c397f73c956e954c1593cd3e42e957b SYSTEM "/Users/hi/Dropbox/Entwicklung/Scilab/dev/samplestat/help/en_US/ST_studentfactor.xml">
+<!ENTITY a522d9f28b451e1fed2e8ca774999469c SYSTEM "/Users/hi/Dropbox/Entwicklung/Scilab/dev/samplestat/help/en_US/ST_trustarea.xml">
 <!--End Entities-->
 ]>
 <book version="5.0-subset Scilab" xml:lang="en_US"
@@ -18,10 +19,11 @@
     <title>SampleSTAT</title>
   </info>
 
-<part xml:id='section_1716cc7417c7ecfd2e164a8745a39f0c'>
+<part xml:id='section_f6c3467bd3af326e52fce30ea86caf46'>
 <title>SampleSTAT</title>
-&a571f916a7ab09ef8111cc777c5de095b;
-&a4e5184f90679f30d24d2a37c93822bb9;
-&af6b8e9711e383bc7f4c58eab3b3e0f4f;
+&affaef4d62524a1f1c43ccb41d3abbcb5;
+&a928b7b436627ec26141585acdf73ddf6;
+&a4c397f73c956e954c1593cd3e42e957b;
+&a522d9f28b451e1fed2e8ca774999469c;
 </part>
 </book>
