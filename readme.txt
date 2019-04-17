@@ -1,4 +1,5 @@
-Description: Toolbox for statistics of normal distributed populations.
+ SampleSTAT - Toolbox for statistics of normal distributed populations
+ =====================================================================
  
  This toolbox provides elemantary tests for evaluation of measuring data. It 
  calculates the range of dispersion of the values and the mean regarding a 
@@ -8,6 +9,16 @@ Description: Toolbox for statistics of normal distributed populations.
  max(), min(), median().
  
  -------------------------------------------------------------------------------
+ 
+ COMPATIBILITY
+ Can be build with Scilab 5.5.x and 6.0.x
+ 
+ BUILD:
+   * Decompress the source distribution file: samplestat-x.x.x_5.5_6.0_src.zip
+   * Start Scilab and move to the decompressed folder where "buolder.sce" resides
+   * Execute builder.sce: exec("builder.sce",-1)
+   * For temporary use, execute loader.sce. (Does not resit "clear" comand)
+   * For permanent use, zip the whole folder "samplestat" and run atomsInstall
  
  INSTALLATION:
  atomsInstall("/path/to/samplestat_x.x.x_x.x_bin.zip")
@@ -54,7 +65,7 @@ Description: Toolbox for statistics of normal distributed populations.
    ST_trustarea(v, 0.05)
    => ans = 0.0014838
    
-   68 percent of the values will stray arount 10.000 +- 0.001 (S.D.). 95% of the 
+   68 percent of the values will stray arount 10.000 +/- 0.001 (S.D.). 95% of the 
    values will be expected around 10.000 +/- 0.004 (Range of disp. of the values,
    stray area). With a propability of 95% the mean of 10.000 will stray around 
    10.000 +/- 0.001 (Rage of dispersion of the mean, trust area).
