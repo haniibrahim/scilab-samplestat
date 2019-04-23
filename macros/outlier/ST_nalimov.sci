@@ -57,9 +57,6 @@ function [outlierfree, outlier] = ST_nalimov(v, p)
 function [critval] = nalimov_crit(n, p)
     // Returns the critical Q value
     //
-    // Calling Sequence
-    //   [critval] = ST_nalimov(v, p)
-    //
     // Parameters
     // n: number of numerical values
     // p: statistical confidence level (%) as a string or the level of significance (alpha) as a decimal value, "95%", "99%", "99.9%" or 0.05, 0.01, 0.001 resp (see examples).
@@ -78,20 +75,6 @@ function [critval] = nalimov_crit(n, p)
     apifun_checkscalar("nalimov_crit", n, "n", 1); // Scalar?
     apifun_checkrange("nalimov_crit", n, "n", 1, 3,1002) // 3<= n <=1002
     apifun_checkscalar("nalimov_crit", p, "p", 1); // Scalar?
-    if ~(strcmp(string(p),"95%") | strcmp(string(p),"99%") | strcmp(string(p),"99.9%") | p ~= 0.05 | p ~= 0.01 | p ~= 0.001)
-        error(msprintf("%s: Second argument is the statistical confidence level and has to be a string, as 95%, 99% or 99.9%" + ..
-        " or as alpha value: 0.05, 0.01, 0.001", "ST_studentfactor") );
-    end
-
-    // Checking arguments
-    //  if (nargin < 2 | nargin > 2); print_usage(); end
-    //  if (~isnumeric(n) | (n-floor(n) ~= 0)); error("First argument has to be a integer\n"); end
-    //  if (n <3 | n>1000); error("First value has to be greater or equal 3 and less or equal 1000"); end
-    //  if ~(strcmp(p,"95%") | strcmp(p,"99%") | strcmp(p,"99.9%") | p ~= 0.05 | ...
-    //        p ~= 0.01 | p ~= 0.001)
-    //    error("Second argument is the statistical confidence level and has to be a string, \
-    //as \"95%\", \"99%\" or \"99.9%\" or as alpha value: 0.05, 0.01, 0.001");
-    //  end
 
     // qtable contains the critical values critval for N (number of values)
     // and alpha (niveau of significance)  
@@ -197,8 +180,8 @@ endfunction
   apifun_checkvector("ST_nalimov", v, "v", 1); // Vector?
   apifun_checktype ("ST_nalimov", v, "v", 1, "constant"); //Double?
   apifun_checkscalar("ST_nalimov", p, "p", 1); // Scalar?
-  if ~(strcmp(string(p),"95%") | strcmp(string(p),"99%") | strcmp(string(p),"99.9%") | p ~= 0.05 | p ~= 0.01 | p ~= 0.001)
-    error(msprintf("%s: Second argument is the statistical confidence level and has to be a string, as 95%, 99% or 99.9%" + ..
+  if string(p)~="95%" & string(p)~="99%" & string(p)~="99.9%" & p ~= 0.05 & p ~= 0.01 & p ~= 0.001
+    error(msprintf("%s: Second argument is the statistical confidence level and has to be a string, as 95%%, 99%% or 99.9%%" + ..
     " or as alpha value: 0.05, 0.01, 0.001", "ST_strayarea"));
   end
 
