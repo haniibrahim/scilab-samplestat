@@ -55,8 +55,9 @@ function trustval = ST_trustarea(v, p)
   apifun_checkvector("ST_strayarea", v, "v", 1); // Vector?
   apifun_checktype ("ST_strayarea", v, "v", 1, "constant"); //Double?
   apifun_checkscalar("ST_strayarea", p, "p", 1); // Scalar?
-  if ~(strcmp(string(p),"95%") | strcmp(string(p),"99%") | strcmp(string(p),"99.9%") | p ~= 0.05 | p ~= 0.01 | p ~= 0.001)
-    error("Second argument is the statistical confidence level and has to be a string, as 95%, 99% or 99.9% or as alpha value: 0.05, 0.01, 0.001");
+  if string(p)~="95%" & string(p)~="99%" & string(p)~="99.9%" & p ~= 0.05 & p ~= 0.01 & p ~= 0.001
+    error(msprintf("%s: Second argument is the statistical confidence level and has to be a string, as 95%%, 99%% or 99.9%%" + ..
+    " or as alpha value: 0.05, 0.01, 0.001", "ST_trustarea"));
   end
   
  
