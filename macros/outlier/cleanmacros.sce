@@ -13,7 +13,6 @@ function cleanmacros()
     mdelete(libpath+"/names");
     mdelete(libpath+"/lib");
     
-    exec(libpath+filesep()+"outlier"+filesep()+"cleanmacros.sce");
 endfunction
 
 cleanmacros();
