@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ *
+ * This help file was generated from ST_nalimov.sci using help_from_sci().
+ *
+ -->
+
+<refentry version="5.0-subset Scilab" xml:id="ST_nalimov" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns3="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:scilab="http://www.scilab.org"
+          xmlns:db="http://docbook.org/ns/docbook">
+
+  <refnamediv>
+    <refname>ST_nalimov</refname>
+    <refpurpose>Performs a Nalimov outlier test.</refpurpose>
+  </refnamediv>
+
+
+<refsynopsisdiv>
+   <title>Calling Sequence</title>
+   <synopsis>
+   [outlierfree] = ST_nalimov(v, p)
+   [outlierfree, outlier] = ST_nalimov(v, p)
+   
+   </synopsis>
+</refsynopsisdiv>
+
+<refsection>
+   <title>Parameters</title>
+   <variablelist>
+   <varlistentry><term>v:</term>
+      <listitem><para> vector of numerical values</para></listitem></varlistentry>
+   <varlistentry><term>p:</term>
+      <listitem><para> statistical confidence level (%) as a string or the level of significance (alpha) as a decimal value, "95%", "99%", "99.9%" or 0.05, 0.01, 0.001 resp (see examples).</para></listitem></varlistentry>
+   <varlistentry><term>outlierfree:</term>
+      <listitem><para> vector of outlier-free data</para></listitem></varlistentry>
+   <varlistentry><term>outlier:</term>
+      <listitem><para> vector of outliers</para></listitem></varlistentry>
+   </variablelist>
+</refsection>
+
+<refsection>
+   <title>Description</title>
+   <para>
+Performs a Nalimov outlier test.
+   </para>
+   <para>
+IMPORTANT: Do use nalimov() with care. It indicates outliers very
+strict and is controversially discussed.
+   </para>
+   <para>
+</para>
+</refsection>
+
+<refsection>
+   <title>Examples</title>
+   <programlisting role="example"><![CDATA[
+data = [6 8 14 12 35 15];
+of = ST_nalimov(data, "95%")      // outlier-free values
+[of, o] = ST_nalimov(data, "95%") // outlier and outlier-free values
+[of, o] = ST_nalimov(data, 0.05)  // outlier and outlier-free values
+
+   ]]></programlisting>
+</refsection>
+
+<refsection>
+   <title>See also</title>
+   <simplelist type="inline">
+   <member><link linkend="ST_strayarea">ST_strayarea</link></member>
+   <member><link linkend="ST_trustarea">ST_trustarea</link></member>
+   <member><link linkend="ST_studentfactor">ST_studentfactor</link></member>
+   <member><link linkend="ST_dixon">ST_dixon</link></member>
+   <member><link linkend="ST_deandixon">ST_deandixon</link></member>
+   <member><link linkend="ST_grubbs">ST_grubbs</link></member>
+   <member><link linkend="ST_pearsonhartley">ST_pearsonhartley</link></member>
+   <member><link linkend="ST_shapirowilk">ST_shapirowilk</link></member>
+   </simplelist>
+</refsection>
+
+<refsection>
+   <title>Authors</title>
+   <simplelist type="vert">
+   <member>Hani A. Ibrahim - hani.ibrahim@gmx.de</member>
+   </simplelist>
+</refsection>
+
+<refsection>
+   <title>Bibliography</title>
+   <para>R. Kaiser, G. Gottschalk; "Elementare Tests zur Beurteilung von Meßdaten", BI Hochschultaschenbücher, Bd. 774, Mannheim 1972.</para>
+</refsection>
+</refentry>
