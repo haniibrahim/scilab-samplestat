@@ -27,9 +27,9 @@ function [outlierfree, outlier] = ST_nalimov(v, p)
 // outlier: vector of outliers
 //
 // Description
-// Performs a Nalimov outlier test. 
+// Performs Nalimov outlier test. 
 //
-// IMPORTANT: Do use nalimov() with care. It indicates outliers very 
+// IMPORTANT: Do use ST_nalimov() with care. It indicates outliers very 
 // strict and is controversially discussed.
 //
 // Examples
