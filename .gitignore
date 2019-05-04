@@ -5,5 +5,7 @@ cleaner.sce
 loader.sce
 unloader.sce
 *.jar
+*.xml
 .DS_Store
 scilab_en_US_help/
+internals/

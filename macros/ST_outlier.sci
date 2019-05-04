@@ -24,25 +24,39 @@ function [outlierfree, outlier] = ST_outlier(v, mod)
     //
     // Parameters
     // v: n-by-1 or 1-by-m matrix of doubles, numerical values (n>10, better n>25)
-    // mod: 1-by-1 matrix of strings, "sd" or "iqr" mode
+    // mod: 1-by-1 matrix of strings, "sd" "iqr15"or "iqr30" mode
     // outlierfree: n-by-1 or 1-by-m matrix of doubles, outlier-free data
     // outlier: n-by-1 or 1-by-m matrix of doubles, outliers
     //
     // Description
     // Performs basic outlier tests. 
     //
-    // If you have a normal, symetric and unimodal distribution you
+    // SD-MODE: If you have a normal, symetric and unimodal distribution you
     // can use the "sd" mode (standard deviation, S.D.). In this mode 
     // a value is presented as an outlier when it is greater or less 
     // than 2.5*S.D. from the arithmetic mean.
     //
-    // If you have a normal but skewed distribution the "iqr"-mode
-    // should be used. If the value is greater or less than 
-    // 1.5*IQR (inter-quartile range) it is presented as an outlier.
+    // IQR15-MODE: If you have a normal but skewed distribution one othe iqr-modes
+    // should be used. But they can be used for non-skewed distribution, too.
+    // It is common when the value is greater or less than 1.5xIQR 
+    // (inter-quartile range) from the lower or upper quartile it is 
+    // presented as an outlier. "iqr15"-mode make use of this.
+    //
+    // IQR30-MODE: But with a border of 1,5xIQR 0.7% of the distribution can be  
+    // expected as an outlier automatically. This means that a distribution of 143 
+    // values or more could have at least one outlier anyway. To avoid this, 
+    // values between 1.5xIQR and 3.0xIQR from the lower or upper quartileare 
+    // called extreme values but not outliers and just values outside of 3.0xIQR  
+    // are outliers.SampleSTAT toolbox take care of it by introducing the "iqr30" 
+    // mode. All values inside 3.0xIQR from the quartiles are valid data 
+    // otherwise outliers.
+    //
+    // You can use "ST_skewness" to check for skewed ditributions
     //
     // <important><para>
-    // Do use ST_outlier ONLY with NORMAL distrinutions and
-    // with more than 10 or better more than 25 values!
+    // Do use ST_outlier ONLY with NORMAL distributed data and
+    // with more than 10 or better more than 25 values! Use ST_nalimov or 
+    // ST_deandixon for distributions with lower number of values.
     // </para></important>
     //
     // Examples
@@ -51,21 +65,20 @@ function [outlierfree, outlier] = ST_outlier(v, mod)
     // -0.7107495  -0.2547306   0.0290803    0.1386087 .. 
     // -0.7698385   1.0743628   1.0945652    0.4365680 .. 
     // -0.5913411  -0.7426987   1.609719     0.8079680 .. 
-    // -2.1700554  -0.7361261   0.0069708    14.626386  
+    // -2.1700554  -0.7361261   0.0069708    14.626386 .. 
     // ];
     // of = ST_outlier(data)      // outlier-free values with sd-mode
     // [of, o] = ST_outlier(data', "sd")  // outlier and outlier-free values
-    // [of, o] = ST_outlier(data', "iqr")  // outlier and outlier-free values
+    // [of, o] = ST_outlier(data', "iqr15")  // outlier and outlier-free values
+    // [of, o] = ST_outlier(data', "iqr30")  // outlier and outlier-free values
     //
     // See also
+    //  ST_skewness
+    //  ST_nalimov
+    //  ST_deandixon
+    //  ST_pearsonhartley
     //  ST_strayarea
     //  ST_trustarea
-    //  ST_studentfactor
-    //  ST_nalimov
-    //  ST_dixon
-    //  ST_deandixon
-    //  ST_grubbs
-    //  ST_pearsonhartley
     //  ST_shapirowilk
     //
     // Authors
@@ -127,7 +140,7 @@ function [outlierfree, outlier] = ST_outlier(v, mod)
     apifun_checkvector("ST_outlier", v, "v", 1); // Vector?
     apifun_checktype("ST_outlier", v, "v", 1, "constant"); //Double?
     if rhs > 1 then
-        apifun_checkoption("ST_outlier",mod,"mod",2,["sd" "iqr"]);
+        apifun_checkoption("ST_outlier",mod,"mod",2,["sd" "iqr15" "iqr30"]);
     end
     if rhs < 2 then mod = "sd"; end  // if mode is not specified S.D.-mode is default
     if length(v) < 10 then
@@ -140,18 +153,23 @@ function [outlierfree, outlier] = ST_outlier(v, mod)
     IQR = x75-x25; // Inter-quartile range 
 
     // Outlier borders
-    oIQRlo = x25 - IQR * 1.5; // low border outliers (mode "iqr")
-    oIQRhi = x75 + IQR * 1.5; // high border outliers (mode "iqr")
+    oIQR15lo = x25 - IQR * 1.5; // low border for outliers (mode "iqr15")
+    oIQR15hi = x75 + IQR * 1.5; // high border for outliers (mode "iqr15")
+    oIQR30lo = x25 - IQR * 3; // low border for outliers (mode "iqr30")
+    oIQR30hi = x75 + IQR * 3; // high border for outliers (mode "iqr30")
     oSDlo  = mean(v) - 2.5 * stdev(v) // low border 2.5 * standard deviation (mode "sd") 
     oSDhi  = mean(v) + 2.5 * stdev(v) // high border 2.5 * standard deviation (mode "sd") 
 
     if mod =="sd" then // standard deviation mode
         outlierfree = v([v<oSDhi & v>oSDlo]);
         outlier     = v([v>oSDhi | v<oSDlo]);
-    elseif mod == "iqr" // Inter-quartile range mode
-        outlierfree = v([v<oIQRhi & v>oIQRlo]);
-        outlier     = v([v>oIQRhi | v<oIQRlo]);
+    elseif mod == "iqr15" // Inter-quartile range mode (IQR*1.5)
+        outlierfree = v([v<oIQR15hi & v>oIQR15lo]);
+        outlier     = v([v>oIQR15hi | v<oIQR15lo]);
+    elseif mod == "iqr3" // Inter-quartile range mode (IQR*3.0)
+        outlierfree = v([v<oIQR30hi & v>oIQR30lo]);
+        outlier     = v([v>oIQR30hi | v<oIQR30lo]);
     else
-        error("ST_outlier: Wrong mode => ""sd"" or ""iqr"" are valid");
+        error("ST_outlier: Wrong mode => ""sd"", ""irq"" or ""iqr3"" are valid");
     end
 endfunction
