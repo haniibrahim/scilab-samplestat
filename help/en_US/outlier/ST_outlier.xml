@@ -58,6 +58,15 @@ a value is presented as an outlier when it is more than 2.5xS.D. off
 the arithmetic mean in both directions.
    </para>
    <para>
+<latex>
+\begin{eqnarray}
+(\bar{x} - 2.5\sigma) &gt; x_i &gt; (\bar{x} + 2.5\sigma) \; \text{with} \quad \sigma = \sqrt{{1 \over n}\sum_{i=1}^{n}(x_i-\bar{x})^2} \quad \Rightarrow \quad x_i = outlier\\
+x_i: \text{value} \quad ; \quad \bar{x}: \text{arithmetic mean} \\
+\sigma: \text{standard deviation of population} \quad ; \quad n: \text{number of values}
+\end{eqnarray}
+</latex>
+   </para>
+   <para>
 IQR15-MODE: If you have a normal but skewed distribution one of the iqr-modes
 should be used. But they can be applied for non-skewed distribution, too.
 It is common to specify a value as an outlier when it is more than 1.5xIQR

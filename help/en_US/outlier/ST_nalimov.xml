@@ -47,8 +47,9 @@
 <refsection>
    <title>Description</title>
    <para>
-Performs Nalimov outlier test. It calculates for all values the test value
-"q". It compres these q-alues with the appropriate qcrit value from a table.
+Performs Nalimov outlier test for small and larger sample sizes.
+It calculates for all values the test value "q".
+It compares these q-values with the appropriate qcrit value from a table.
    </para>
    <para>
 <latex>
@@ -66,8 +67,16 @@ outliers
    <para>
 <important><para>
 Do use ST_nalimov ONLY with NORMAL distributed data and
-with more than 3 and less than 1000 values! Do use ST_nalimov() with care.
-It indicates outliers very strict and is controversially discussed.
+with more than 3 and less than 1000 values!
+</para></important>
+   </para>
+   <para>
+<important><para>
+Do use ST_nalimov with care. It indicates outliers very strict and is
+controversially discussed in the scientific community. For a convervative
+outlier test substitute Nalimov with Dean-Dixon (ST_deandixon)
+small sample sizes (&lt;30) and Pearson-Hartley (ST-pearsonhartley) for
+larger ones (&gt;30).
 </para></important>
    </para>
    <para>

@@ -36,6 +36,14 @@ function [outlierfree, outlier] = ST_outlier(v, mod)
     // a value is presented as an outlier when it is more than 2.5xS.D. off 
     // the arithmetic mean in both directions.
     //
+    // <latex>
+    // \begin{eqnarray}
+    // (\bar{x} - 2.5\sigma) > x_i > (\bar{x} + 2.5\sigma) \; \text{with} \quad \sigma = \sqrt{{1 \over n}\sum_{i=1}^{n}(x_i-\bar{x})^2} \quad \Rightarrow \quad x_i = outlier\\
+    // x_i: \text{value} \quad ; \quad \bar{x}: \text{arithmetic mean} \\
+    // \sigma: \text{standard deviation of population} \quad ; \quad n: \text{number of values}
+    //\end{eqnarray}
+    //</latex>
+    //
     // IQR15-MODE: If you have a normal but skewed distribution one of the iqr-modes
     // should be used. But they can be applied for non-skewed distribution, too.
     // It is common to specify a value as an outlier when it is more than 1.5xIQR 
@@ -158,15 +166,16 @@ function [outlierfree, outlier] = ST_outlier(v, mod)
     // Quantiles and inter-quartile range
     x25 = ST_quantile(v, 0.25);
     x75 = ST_quantile(v, 0.75);
-    IQR = x75-x25; // Inter-quartile range 
+    IQR = x75-x25; // Inter-quartile range
+    m   = mean(v);
 
     // Outlier borders
     oIQR15lo = x25 - IQR * 1.5; // low border for outliers (mode "iqr15")
     oIQR15hi = x75 + IQR * 1.5; // high border for outliers (mode "iqr15")
     oIQR30lo = x25 - IQR * 3; // low border for outliers (mode "iqr30")
     oIQR30hi = x75 + IQR * 3; // high border for outliers (mode "iqr30")
-    oSDlo  = mean(v) - 2.5 * stdev(v) // low border 2.5 * standard deviation (mode "sd") 
-    oSDhi  = mean(v) + 2.5 * stdev(v) // high border 2.5 * standard deviation (mode "sd") 
+    oSDlo  = m - 2.5 * stdev(v, "*", m) // low border 2.5 * standard deviation of population(mode "sd") 
+    oSDhi  = m + 2.5 * stdev(v, "*", m) // high border 2.5 * standard deviation of population (mode "sd") 
 
     if mod =="sd" then // standard deviation mode
         outlierfree = v([v<oSDhi & v>oSDlo]);
