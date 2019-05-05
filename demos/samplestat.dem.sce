@@ -46,7 +46,7 @@ function samplestat_demo()
 
     // Output
     clc;
-    mprintf("\nSampleStatDemo - Demo script for toolbox_samplestat\n\n");
+    mprintf("\nDemo for range of dispersion (stray- and trustarea)\n\n");
     mprintf("Values:\n");
     disp(v); // Display data
     mprintf("\n"); // blank line

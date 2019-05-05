@@ -36,16 +36,20 @@ function [outlierfree, outlier] = ST_deandixon(v, p)
     //
     // <latex>
     // \begin{eqnarray}
-    // Q = \frac{\left | x_{i+1}-x_i \right |}{\left | x_n-x_i \right |} \quad ; \quad Q > Q_{crit} \quad \Rightarrow \quad x_i = \text{outlier}
+    // Q = \left | x_{i+1}-x_i \right |/\left | x_n-x_i \right | \quad ; \quad Q > Q_{crit} \quad \Rightarrow \quad x_i = \text{outlier}
     // \end{eqnarray}
     // </latex>
     //
     // Only one outlier can be found on each side.
     //
     // <important><para>
+    // Apply this test ONLY one time to your data.
+    // </para></important>
+    //
+    // <important><para>
     // Do use ST_deandixon ONLY with NORMAL distributed data and
     // with more than 3 and less than 30 values! For more than 30 values use 
-    // Pearson-Hartley test ""ST_pearsonhartley()"" instead. 
+    // Pearson-Hartley test ""ST_pearsonhartley()"" instead.
     // </para></important>
     //
     // Examples

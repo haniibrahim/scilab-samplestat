@@ -2,11 +2,11 @@
 
 <!--
  *
- * This help file was generated from ST_nalimov.sci using help_from_sci().
+ * This help file was generated from ST_pearsonhartley.sci using help_from_sci().
  *
  -->
 
-<refentry version="5.0-subset Scilab" xml:id="ST_nalimov" xml:lang="en"
+<refentry version="5.0-subset Scilab" xml:id="ST_pearsonhartley" xml:lang="en"
           xmlns="http://docbook.org/ns/docbook"
           xmlns:xlink="http://www.w3.org/1999/xlink"
           xmlns:svg="http://www.w3.org/2000/svg"
@@ -16,16 +16,16 @@
           xmlns:db="http://docbook.org/ns/docbook">
 
   <refnamediv>
-    <refname>ST_nalimov</refname>
-    <refpurpose>Performs a Nalimov outlier test.</refpurpose>
+    <refname>ST_pearsonhartley</refname>
+    <refpurpose>Pearson-Hartley outlier test</refpurpose>
   </refnamediv>
 
 
 <refsynopsisdiv>
    <title>Calling Sequence</title>
    <synopsis>
-   [outlierfree] = ST_nalimov(v, p)
-   [outlierfree, outlier] = ST_nalimov(v, p)
+   [outlierfree] = ST_pearsonhartley(v, p)
+   [outlierfree, outlier] = ST_pearsonhartley(v, p)
    
    </synopsis>
 </refsynopsisdiv>
@@ -36,7 +36,7 @@
    <varlistentry><term>v:</term>
       <listitem><para> vector of numerical values</para></listitem></varlistentry>
    <varlistentry><term>p:</term>
-      <listitem><para> statistical confidence level (%) as a string or the level of significance (alpha) as a decimal value, "95%", "99%", "99.9%" or 0.05, 0.01, 0.001 resp (see examples).</para></listitem></varlistentry>
+      <listitem><para> statistical confidence level (%) as a string or the level of significance (alpha) as a decimal value, "95%", "99%" or 0.05, 0.01 resp (see examples).</para></listitem></varlistentry>
    <varlistentry><term>outlierfree:</term>
       <listitem><para> vector of outlier-free data</para></listitem></varlistentry>
    <varlistentry><term>outlier:</term>
@@ -47,27 +47,22 @@
 <refsection>
    <title>Description</title>
    <para>
-Performs Nalimov outlier test. It calculates for all values the test value
-"q". It compres these q-alues with the appropriate qcrit value from a table.
+Performs the Pearson-Hartley outlier test. It should be used for distributions
+with more than 30 values.
    </para>
    <para>
 <latex>
 \begin{eqnarray}
-q = \left | \frac{1}{s}(x_i- \bar{x}) \right | \sqrt{\frac{n}{n-1}} \quad;\quad q>q_{crit}\;\Rightarrow \; x_i=\text{outlier} \\
-x_i: \text{test value} \quad ; \quad \bar{x}: \text{arithmetic mean} \\
-s: \text{standard deviation of samples} \quad ; \quad n: \text{number of values}
+q=\left| \frac{1}{s}(x_i - \bar{x}) \right| \quad ; \quad q &gt;q_{crit} \quad  \Rightarrow \quad x_i = \text{outlier} \\
+x_i: \text{test value} \quad ; \quad \bar{x}: \text{arithmetic mean} \quad ; \quad s: \text{standard deviation}
 \end{eqnarray}
 </latex>
    </para>
    <para>
-q-values of the sample values which are greater than the qcrit value are
-outliers
-   </para>
-   <para>
 <important><para>
-Do use ST_nalimov ONLY with NORMAL distributed data and
-with more than 3 and less than 1000 values! Do use ST_nalimov() with care.
-It indicates outliers very strict and is controversially discussed.
+Do use ST_pearsonhartley ONLY with NORMAL distrinutions and
+with more than 3 and less than 30 values! For more than 30 values use
+Pearson-Hartley test ""ST_pearsonhartley()"" instead.
 </para></important>
    </para>
    <para>
@@ -77,10 +72,10 @@ It indicates outliers very strict and is controversially discussed.
 <refsection>
    <title>Examples</title>
    <programlisting role="example"><![CDATA[
-data = [6 8 14 12 35 15];
-of = ST_nalimov(data, "95%")      // outlier-free values
-[of, o] = ST_nalimov(data, "95%") // outlier and outlier-free values
-[of, o] = ST_nalimov(data, 0.05)  // outlier and outlier-free values
+data = [];
+of = ST_pearsonhartley(data, "95%")      // outlier-free values
+[of, o] = ST_pearsonhartley(data, "95%") // outlier and outlier-free values
+[of, o] = ST_pearsonhartley(data, 0.05)  // outlier and outlier-free values
 
    ]]></programlisting>
 </refsection>
@@ -88,8 +83,8 @@ of = ST_nalimov(data, "95%")      // outlier-free values
 <refsection>
    <title>See also</title>
    <simplelist type="inline">
-   <member><link linkend="ST_deandixon">ST_deandixon</link></member>
-   <member><link linkend="ST_pearsonhartley">ST_pearsonhartley</link></member>
+   <member><link linkend="ST_outlier">ST_outlier</link></member>
+   <member><link linkend="ST_nalimov">ST_nalimov</link></member>
    <member><link linkend="ST_strayarea">ST_strayarea</link></member>
    <member><link linkend="ST_trustarea">ST_trustarea</link></member>
    <member><link linkend="ST_shapirowilk">ST_shapirowilk</link></member>
@@ -105,6 +100,6 @@ of = ST_nalimov(data, "95%")      // outlier-free values
 
 <refsection>
    <title>Bibliography</title>
-   <para>R. Kaiser, G. Gottschalk; "Elementare Tests zur Beurteilung von Meßdaten", BI Hochschultaschenbücher, Bd. 774, Mannheim 1972.</para>
+   <para>Lohringer, H., "Grundlagen der Statistik", Oct, 10th, 2012, http://www.statistics4u.info/fundstat_germ/cc_outlier_tests_4sigma.html</para>
 </refsection>
 </refentry>

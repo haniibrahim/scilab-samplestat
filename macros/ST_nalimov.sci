@@ -27,16 +27,15 @@ function [outlierfree, outlier] = ST_nalimov(v, p)
     // outlier: vector of outliers
     //
     // Description
-    // Performs Nalimov outlier test. It calculates for all values the test value
-    // "q". It compres these q-alues with the appropriate qcrit value from a table.
+    // Performs Nalimov outlier test for small and larger sample sizes. 
+    // It calculates for all values the test value "q". 
+    // It compares these q-values with the appropriate qcrit value from a table.
     //
     // <latex>
     // \begin{eqnarray}
-    // q = \left | \frac{x_i- \bar{x}}{s} \right | \sqrt{\frac{n}{n-1}} \quad;\quad q>q_{crit}\;\Rightarrow \; x_i=\text{outlier} \\\
-    // x_i: \text{prospective outlier} \\\
-    // \bar{x}: \text{arithmetic mean} \\\
-    // s: \text{standard deviation of samples} \\\
-    // n: \text{number of values}
+    // q = \left | \frac{1}{s}(x_i- \bar{x}) \right | \sqrt{\frac{n}{n-1}} \quad;\quad q>q_{crit}\;\Rightarrow \; x_i=\text{outlier} \\
+    // x_i: \text{test value} \quad ; \quad \bar{x}: \text{arithmetic mean} \\
+    // s: \text{standard deviation of samples} \quad ; \quad n: \text{number of values}
     // \end{eqnarray}
     // </latex>
     //
@@ -45,8 +44,15 @@ function [outlierfree, outlier] = ST_nalimov(v, p)
     //
     // <important><para>
     // Do use ST_nalimov ONLY with NORMAL distributed data and
-    // with more than 3 and less than 1000 values! Do use ST_nalimov() with care. 
-    // It indicates outliers very strict and is controversially discussed.
+    // with more than 3 and less than 1000 values!
+    // </para></important>
+    //
+    // <important><para>
+    // Do use ST_nalimov with care. It indicates outliers very strict and is 
+    // controversially discussed in the scientific community. For a convervative
+    // outlier test substitute Nalimov with Dean-Dixon (ST_deandixon)
+    // small sample sizes (<30) and Pearson-Hartley (ST-pearsonhartley) for 
+    // larger ones (>30).
     // </para></important>
     //
     // Examples

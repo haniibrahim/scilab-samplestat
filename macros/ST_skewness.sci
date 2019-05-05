@@ -35,17 +35,19 @@ function skew = ST_skewness(v)
     //
     // <latex>
     // \begin{eqnarray}
-    // v = {1\over n}\sum_{i=1}^{n} \left( \frac{x_i-\bar{x}}{\sigma} \right )^3 \; \text{with}\quad\bar{x}= {1 \over n}\sum_{i=1}^{n} x_i \quad \text{and} \quad \sigma = \sqrt{{1 \over n}\sum_{i=1}^{n}(x_i-\bar{x})^2}
+    // v = {1\over n}\sum_{i=1}^{n} \left( {1 \over \sigma} (x_i-\bar{x}) \right )^3 \; \text{with}\quad\bar{x}= {1 \over n}\sum_{i=1}^{n} x_i \quad \text{and} \quad \sigma = \sqrt{{1 \over n}\sum_{i=1}^{n}(x_i-\bar{x})^2} \\
+    // x_i: \text{value} \quad ; \quad \bar{x}: \text{arithmetic mean} \\
+    // \sigma: \text{standard deviation of population} \quad ; \quad n: \text{number of values}
     // \end{eqnarray}
     // </latex>
     //
-    // So with a symmetrical distribution you get the value zero for v. If v is 
-    // greater than zero, then there is a right-skewed/left-sided distribution; 
+    // So with a symmetrical distribution you get the value close to zero for v.  
+    // If v is greater than zero, then there is a right-skewed/left-sided distribution; 
     // in the case of a negative value of v, the distribution is left-skewed or 
     // right-sided.
     // 
     // <inlinemediaobject><imageobject>
-    // <imagedata fileref="../images/skewness.png" align="center" valign="middle"/>
+    // <imagedata fileref="../../images/skewness.png" align="center" valign="middle"/>
     // </imageobject></inlinemediaobject>
     //
     // <important><para>
@@ -55,7 +57,7 @@ function skew = ST_skewness(v)
     //
     // Examples
     // data = [18 23 27 31 34 39 42 45 52 65]
-    // skew = ST_skewness(data)
+    // skew = ST_skewness(data) // = 0.49 => positive skew = right skewed
     //
     // See also
     //  ST_outlier

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ *
+ * This help file was generated from ST_skewness.sci using help_from_sci().
+ *
+ -->
+
+<refentry version="5.0-subset Scilab" xml:id="ST_skewness" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns3="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:scilab="http://www.scilab.org"
+          xmlns:db="http://docbook.org/ns/docbook">
+
+  <refnamediv>
+    <refname>ST_skewness</refname>
+    <refpurpose>Skewness of a sample distribution</refpurpose>
+  </refnamediv>
+
+
+<refsynopsisdiv>
+   <title>Calling Sequence</title>
+   <synopsis>
+   skew = ST_skewness(v)
+   
+   </synopsis>
+</refsynopsisdiv>
+
+<refsection>
+   <title>Parameters</title>
+   <variablelist>
+   <varlistentry><term>v:</term>
+      <listitem><para> m-by-1 or 1-by-n matrix of doubles, numerical values (n>10, better n>25)</para></listitem></varlistentry>
+   <varlistentry><term>skew:</term>
+      <listitem><para> 1-by-1 matrix of doubles, skewness</para></listitem></varlistentry>
+   </variablelist>
+</refsection>
+
+<refsection>
+   <title>Description</title>
+   <para>
+In probability theory and statistics, skewness is a measure of the
+asymmetry of the probability distribution of a real-valued random
+variable about its mean. The skewness value can be positive or negative,
+or undefined.
+   </para>
+   <para>
+As a measure of the type and strength of asymmetry, you can calculate
+the skewness "v" of your empirical distribution as the third empirical
+moment:
+   </para>
+   <para>
+<latex>
+\begin{eqnarray}
+v = {1\over n}\sum_{i=1}^{n} \left( \frac{x_i-\bar{x}}{\sigma} \right )^3 \; \text{with}\quad\bar{x}= {1 \over n}\sum_{i=1}^{n} x_i \quad \text{and} \quad \sigma = \sqrt{{1 \over n}\sum_{i=1}^{n}(x_i-\bar{x})^2} \\
+x_i: \text{value} \quad ; \quad \bar{x}: \text{arithmetic mean} \\
+\sigma: \text{standard deviation of population} \quad ; \quad n: \text{number of values}
+\end{eqnarray}
+</latex>
+   </para>
+   <para>
+So with a symmetrical distribution you get the value close to zero for v.
+If v is greater than zero, then there is a right-skewed/left-sided distribution;
+in the case of a negative value of v, the distribution is left-skewed or
+right-sided.
+   </para>
+   <para>
+<inlinemediaobject><imageobject>
+<imagedata fileref="../../images/skewness.png" align="center" valign="middle"/>
+</imageobject></inlinemediaobject>
+   </para>
+   <para>
+<important><para>
+Do use ST_skewness ONLY with NORMAL distrinutions and
+with more than 10 or better more than 25 values!
+</para></important>
+   </para>
+   <para>
+</para>
+</refsection>
+
+<refsection>
+   <title>Examples</title>
+   <programlisting role="example"><![CDATA[
+data = [18 23 27 31 34 39 42 45 52 65]
+skew = ST_skewness(data)
+
+   ]]></programlisting>
+</refsection>
+
+<refsection>
+   <title>See also</title>
+   <simplelist type="inline">
+   <member><link linkend="ST_outlier">ST_outlier</link></member>
+   </simplelist>
+</refsection>
+
+<refsection>
+   <title>Authors</title>
+   <simplelist type="vert">
+   <member>Hani A. Ibrahim - hani.ibrahim@gmx.de</member>
+   </simplelist>
+</refsection>
+
+<refsection>
+   <title>Bibliography</title>
+   <para>Lohringer, H., "Grundlagen der Statistik", Oct, 10th, 2012, http://www.statistics4u.info/</para>
+</refsection>
+</refentry>

@@ -16,7 +16,7 @@
 function path = ST_getpath()
 // Returns the path to the current module.
 //
-// Syntax
+// Calling Sequence
 //   path = ST_getpath()
 //
 // Parameters
@@ -33,7 +33,7 @@ function path = ST_getpath()
 apifun_checkrhs("ST_getpath", rhs, 0)
 apifun_checklhs("ST_getpath", lhs, 1)
 
-path=get_function_path("ST_strayarea");
+path=get_function_path("ST_getpath");
 path=fullpath(fullfile(fileparts(path),".."));
 
 endfunction

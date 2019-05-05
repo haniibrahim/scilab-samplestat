@@ -33,25 +33,33 @@ function [outlierfree, outlier] = ST_outlier(v, mod)
     //
     // SD-MODE: If you have a normal, symetric and unimodal distribution you
     // can use the "sd" mode (standard deviation, S.D.). In this mode 
-    // a value is presented as an outlier when it is greater or less 
-    // than 2.5*S.D. from the arithmetic mean.
+    // a value is presented as an outlier when it is more than 2.5xS.D. off 
+    // the arithmetic mean in both directions.
     //
-    // IQR15-MODE: If you have a normal but skewed distribution one othe iqr-modes
-    // should be used. But they can be used for non-skewed distribution, too.
-    // It is common when the value is greater or less than 1.5xIQR 
-    // (inter-quartile range) from the lower or upper quartile it is 
-    // presented as an outlier. "iqr15"-mode make use of this.
+    // IQR15-MODE: If you have a normal but skewed distribution one of the iqr-modes
+    // should be used. But they can be applied for non-skewed distribution, too.
+    // It is common to specify a value as an outlier when it is more than 1.5xIQR 
+    // (inter-quartile range) off from the lower or upper quartile. The 
+    // "iqr15"-mode make use of this.
     //
     // IQR30-MODE: But with a border of 1,5xIQR 0.7% of the distribution can be  
     // expected as an outlier automatically. This means that a distribution of 143 
-    // values or more could have at least one outlier anyway. To avoid this, 
+    // values or more could have at least one outlier in any case. To avoid this, 
     // values between 1.5xIQR and 3.0xIQR from the lower or upper quartileare 
     // called extreme values but not outliers and just values outside of 3.0xIQR  
-    // are outliers.SampleSTAT toolbox take care of it by introducing the "iqr30" 
+    // are outliers. SampleSTAT toolbox take care of this by introducing the "iqr30" 
     // mode. All values inside 3.0xIQR from the quartiles are valid data 
-    // otherwise outliers.
+    // outside this barrier outliers.
     //
-    // You can use "ST_skewness" to check for skewed ditributions
+    // <latex>
+    // \begin{eqnarray}
+    // IQR = x_{0.75} - x_{0.25} \\
+    // (x_{0.25} - 1.5 \cdot IQR)  < x_i < (x_{0.25} + 1.5 \cdot IQR)  \quad \Rightarrow \quad x_i = \text{weak outlier (iqr15 mode)} \\
+    // (x_{0.25} - 3.0 \cdot IQR)  < x_i < (x_{0.25} + 3.0 \cdot IQR)  \quad \Rightarrow \quad x_i = \text{strong outlier (iqr30 mode)}
+    //\end{eqnarray}
+    //</latex>
+    //
+    // You can use "ST_skewness" to check for skewed distributions
     //
     // <important><para>
     // Do use ST_outlier ONLY with NORMAL distributed data and
@@ -67,7 +75,7 @@ function [outlierfree, outlier] = ST_outlier(v, mod)
     // -0.5913411  -0.7426987   1.609719     0.8079680 .. 
     // -2.1700554  -0.7361261   0.0069708    14.626386 .. 
     // ];
-    // of = ST_outlier(data)      // outlier-free values with sd-mode
+    // of = ST_outlier(data')      // outlier-free values with sd-mode
     // [of, o] = ST_outlier(data', "sd")  // outlier and outlier-free values
     // [of, o] = ST_outlier(data', "iqr15")  // outlier and outlier-free values
     // [of, o] = ST_outlier(data', "iqr30")  // outlier and outlier-free values
@@ -166,10 +174,10 @@ function [outlierfree, outlier] = ST_outlier(v, mod)
     elseif mod == "iqr15" // Inter-quartile range mode (IQR*1.5)
         outlierfree = v([v<oIQR15hi & v>oIQR15lo]);
         outlier     = v([v>oIQR15hi | v<oIQR15lo]);
-    elseif mod == "iqr3" // Inter-quartile range mode (IQR*3.0)
+    elseif mod == "iqr30" // Inter-quartile range mode (IQR*3.0)
         outlierfree = v([v<oIQR30hi & v>oIQR30lo]);
         outlier     = v([v>oIQR30hi | v<oIQR30lo]);
     else
-        error("ST_outlier: Wrong mode => ""sd"", ""irq"" or ""iqr3"" are valid");
+        error("ST_outlier: Wrong mode => ""sd"", ""irq15"" or ""iqr30"" are valid");
     end
 endfunction

@@ -49,6 +49,18 @@ quality of the mean and indicates the range of dispersion of the
 mean and not of the raw values as the stray area does.
    </para>
    <para>
+<latex>
+\begin{eqnarray}
+T = s \cdot t \\
+T_{\bar{x}} = T/ \sqrt{n}
+\end{eqnarray}
+</latex>
+   </para>
+   <para>
+T: stray area of values; s: standard deviation of samples; t: student factor (dependent
+on statistical confidence level P% and degree of freedom f=n-1 with n: number of values)
+   </para>
+   <para>
 E.g. if trustval = 1.4 at p = 95% with a mean = 10,0 the mean for
 the whole population will stray with a confidence of 95% at about 10.0 +/- 1.4.
    </para>
@@ -59,10 +71,10 @@ the whole population will stray with a confidence of 95% at about 10.0 +/- 1.4.
 <refsection>
    <title>Examples</title>
    <programlisting role="example"><![CDATA[
-V = [6 8 14 12 5 15];
+v = [6 8 14 12 5 15];
 mean(V) // = 10.
-trustval1 = ST_trustarea(V, "95%") // = 4.4514
-trustval2 = ST_trustarea(V, 0.05)  // = 4.4514
+ST_trustarea(v, "95%") // = 4.4514
+ST_trustarea(v, 0.05)  // = 4.4514
 
    ]]></programlisting>
 </refsection>
@@ -72,6 +84,10 @@ trustval2 = ST_trustarea(V, 0.05)  // = 4.4514
    <simplelist type="inline">
    <member><link linkend="ST_strayarea">ST_strayarea</link></member>
    <member><link linkend="ST_studentfactor">ST_studentfactor</link></member>
+   <member><link linkend="ST_outlier">ST_outlier</link></member>
+   <member><link linkend="ST_deandixon">ST_deandixon</link></member>
+   <member><link linkend="ST_pearsonhartley">ST_pearsonhartley</link></member>
+   <member><link linkend="ST_shapirowilk">ST_shapirowilk</link></member>
    </simplelist>
 </refsection>
 

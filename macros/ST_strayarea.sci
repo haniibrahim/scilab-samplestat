@@ -27,15 +27,24 @@ function strayval = ST_strayarea(v, p)
 // Description
 // "ST_strayarea" determines the range of dispersion of the values. It describes the quality of the raw values.
 //
+// <latex>
+// \begin{eqnarray}
+// T = s \cdot t
+// \end{eqnarray}
+// </latex>
+//
+// T: stray area of values; s: standard deviation of samples; t: student factor (dependent 
+// on statistical confidence level P% and degree of freedom f=n-1 with n: number of values)
+//
 // E.g. if strayval = 1.4 at p = 95% with a mean = 10,0 all raw 
 // values of the whole population will be expected with a confidence of 95% at 
 // about 10.0 +/- 1.4.
 //
 // Examples
-// V = [6 8 14 12 5 15];
-// mean(V) // = 10.
-// strayval1 = ST_strayarea(V, "95%") // = 10.904
-// strayval2 = ST_strayarea(V, 0.05)  // = 10.904
+// v = [6 8 14 12 5 15];
+// mean(v) // = 10.
+// ST_strayarea(v, "95%") // = 10.904
+// ST_strayarea(v, 0.05)  // = 10.904
 //
 // See also
 //  ST_trustarea

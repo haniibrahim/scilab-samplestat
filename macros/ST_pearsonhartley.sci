@@ -17,23 +17,24 @@ function [outlierfree, outlier] = ST_pearsonhartley(v, p)
     //
     // <latex>
     // \begin{eqnarray}
-    // q=\left| \frac{x_i - \bar{x}}{s} \right| \quad ; \quad q >q_{crit} \quad  \Rightarrow \quad x_i = \text{outlier} \\\
-    // x_i: \text{test value} \\\
-    // \bar{x}: \text{arithmetic mean} \\\
-    // s: \text{standard deviation}
+    // q=\left| \frac{1}{s}(x_i - \bar{x}) \right| \quad ; \quad q >q_{crit} \quad  \Rightarrow \quad x_i = \text{outlier} \\
+    // x_i: \text{test value} \quad ; \quad \bar{x}: \text{arithmetic mean} \quad ; \quad s: \text{standard deviation}
     // \end{eqnarray}
     // </latex>
     //
-    // x_i=value, .
-    //
     // <important><para>
     // Do use ST_pearsonhartley ONLY with NORMAL distrinutions and
-    // with more than 3 and less than 30 values! For more than 30 values use 
+    // with more than 30 values! For more than 30 values use 
     // Pearson-Hartley test ""ST_pearsonhartley()"" instead. 
     // </para></important>
     //
     // Examples
-    // data = [];
+    // data = [..
+    // 0.21 0.75 0.00 0.33 0.66 0.62 0.84 0.68 0.87 0.06 ..
+    // 0.56 0.66 0.72 0.19 0.54 0.23 0.23 0.21 0.88 0.65 ..
+    // 0.30 0.93 0.21 0.31 0.36 0.29 0.56 0.48 0.33 0.59 ..
+    // 1.23 1.84 0.50 0.43 0.26 0.63 ..
+    // ];
     // of = ST_pearsonhartley(data, "95%")      // outlier-free values
     // [of, o] = ST_pearsonhartley(data, "95%") // outlier and outlier-free values
     // [of, o] = ST_pearsonhartley(data, 0.05)  // outlier and outlier-free values
