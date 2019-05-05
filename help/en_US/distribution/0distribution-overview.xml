@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * Overview SampleSTAT - Outlier-functions
+ * Copyright (c) 2019 - Hani A. Ibrahim
+ *
+-->
+<refentry xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svg="http://www.w3.org/2000/svg" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:db="http://docbook.org/ns/docbook" xmlns:scilab="http://www.scilab.org" xml:lang="en_US" xml:id="distribution_overview">
+	<refnamediv>
+		<refname>Overview - Distribution Tests</refname>
+		<refpurpose>An overview of the SampleSTAT's Distribution Functions</refpurpose>
+	</refnamediv>
+	<refsection>
+		<title>Introduction</title>
+		<para>
+        The test for normality is a commonly needed procedure, since many of the statistical procedures are assumed to be applied to normally distributed data. SampleSTAT's routine require normal distributed data. In general, the test for normality can be achieved by applying a goodness-of-fit method (i.e. chi-square test, or Kolmogorov-Smirnov test). These two tests, however, do not perform well (the power of these tests is not too high). Therefore some other tests have been developed, which have various advantages but also some drawbacks: the power of the Shapiro-Wilk test is good, but the calculation procedure is rather cumbersome but thanks to SampleSTAT easy to do now.
+    </para>
+		<para>
+			There are other distribution existing. Some data are not symmetric distributed, they are skewed. Some tests just perform well on symmetric data. To test this ST_skewness is introduced in SampleSTAT.
+	</para>
+	</refsection>
+	<refsection>
+		<title>Overview</title>
+		<para>
+			<variablelist>
+				<varlistentry>
+					<term>Skewness (ST_skewness):</term>
+					<listitem>
+						<para> Calculate of the asymmetry of the probability distribution of a real-valued random variable about its mean. </para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Shapiro-Wilk (ST_shapirowilk):</term>
+					<listitem>
+						<para>Check if a distribution is normal distributed even with small sample sizes to apply the routines introduced by SampleSTAT on them reasonably.</para>
+					</listitem>
+					</varlistentry>
+			</variablelist>
+		</para>
+	</refsection>
+	<refsection>
+		<title>Skewness (ST_skewness)</title>
+		<para>
+		Skewness is a measure of the asymmetry of the probability distribution of a real-valued random variable about its mean. The skewness value can be positive (right-skewed) or negative (left-skewed).
+	</para>
+		<para>
+			<inlinemediaobject>
+				<imageobject>
+					<imagedata fileref="../../images/skewness.png" align="center" valign="middle"/>
+				</imageobject>
+			</inlinemediaobject>
+		</para>
+		<para>
+			As a measure of the type and strength of asymmetry, you can calculate
+			the skewness "v" of your empirical distribution as the third empirical
+			moment:
+    </para>
+		<para>
+			<latex><![CDATA[
+\begin{eqnarray}
+v = {1\over n}\sum_{i=1}^{n} \left( \frac{x_i-\bar{x}}{\sigma} \right )^3 \; \text{with}\quad\bar{x}= {1 \over n}\sum_{i=1}^{n} x_i \quad \text{and} \quad \sigma = \sqrt{{1 \over n}\sum_{i=1}^{n}(x_i-\bar{x})^2} \\
+x_i: \text{value} \quad ; \quad \bar{x}: \text{arithmetic mean} \\
+\sigma: \text{standard deviation of population} \quad ; \quad n: \text{number of values}
+\end{eqnarray}
+]]></latex>
+		</para>
+		<para>
+			So with a symmetrical distribution you get the value close to zero for v.
+			If v is greater than 0, then there is a right-skewed/left-sided distribution;
+			in the case of a negative value of v, the distribution is left-skewed or
+			right-sided.
+		</para>
+	</refsection>
+	<refsection>
+		<title>Shapiro-Wilk (ST_shapirowilk)</title>
+		<para>
+		The Shapiro-Wilk test is a test for normal distribution exhibiting high power, leading to good results even with a small number of observations. In contrast to other comparison tests the Shapiro-Wilk test is only applicable to check for normality. 
+	</para>
+		<para>
+The basis idea behind the Shapiro-Wilk test is to estimate the variance of the sample in two ways: (1) the regression line in the QQ-Plot allows to estimate the variance, and (2) the variance of the sample can also be regarded as an estimator of the population variance. Both estimated values should approximately equal in the case of a normal distribution and thus should result in a quotient of close to 1.0. If the quotient is significantly lower than 1.0 then the null hypothesis (of having a normal distribution) should be rejected.
+    </para>
+		<para>
+			<inlinemediaobject>
+				<imageobject>
+					<imagedata fileref="../../images/shapirowilk.png" align="center" valign="middle"/>
+				</imageobject>
+			</inlinemediaobject>
+		</para>
+		<para>
+			<orderedlist>
+				<listitem>
+					<para>The sample of size n (x1,x2,...xn) has to be sorted in increasing order, the resulting sorted sample will be designated by y1,y2,...yn (y1 &lt; y2 &lt; ... &lt; yn). </para>
+				</listitem>
+				<listitem>
+					<para>Calculate the sum</para>
+					<para>
+						<latex><![CDATA[
+\begin{eqnarray}
+S^2= \sum_{i=1}^{n}(x_i-\bar{x})^2 \, ;
+\end{eqnarray}
+]]></latex>
+					</para>
+				</listitem>
+				<listitem>
+					<para>a) if n is even, then b is calculated using:</para>
+					<para>
+						<latex><![CDATA[
+\begin{eqnarray}
+k = \frac{n}{2} \quad \text{in} \quad b= \sum_{i=1}^{k}{a_{n-i+1}(y_{n-i+1}-y_i)} \, ;
+\end{eqnarray}
+]]></latex>
+					</para>
+					<para>b) if n is odd, b is calculated by using k=(n-1)/2, the median must not be included. The parameters a<subscript>n-i+1</subscript> depend on the sample size and have to be taken from a table published by Shapiro and Wilk</para>
+					<para>
+						<latex><![CDATA[
+\begin{eqnarray}
+k = \frac{n-1}{2} \quad \text{in} \quad b= \sum_{i=1}^{k}{a_{n-i+1}(y_{n-i+1}-y_i)} \, ;
+\end{eqnarray}
+]]></latex>
+					</para>
+				</listitem>
+				<listitem>
+					<para>Calculate the test statistic W:</para>
+					<para>
+						<latex><![CDATA[
+\begin{eqnarray}
+W = \frac{b^2}{S^2} \, ;
+\end{eqnarray}
+]]></latex>
+					</para>
+				</listitem>
+			</orderedlist>
+		</para>
+		<para>
+		If the test statistic W is smaller than the critical threshold (see table below) the assumption of a normal distribution has to be rejected. 
+	</para>
+	</refsection>
+	<refsection>
+		<title>Authors</title>
+		<para>
+		Hani A. Ibrahim - hani.ibrahim@gmx.de
+	</para>
+	</refsection>
+	<refsection>
+		<title>Credits</title>
+		<para>Most of the text and images are from Lohringer, H., "Fundamentals of Statistics", Oct, 10th, 2012, <ulink url="http://www.statistics4u.info/fundstat_eng/">http://www.statistics4u.info/fundstat_eng/</ulink></para>
+	</refsection>
+	<refsection>
+		<title>Bibliography</title>
+		<para>Lohringer, H., "Grundlagen der Statistik", Oct, 10th, 2012, http://www.statistics4u.info/"</para>
+		<para>R. Kaiser, G. Gottschalk; "Elementare Tests zur Beurteilung von Meßdaten", BI Hochschultaschenbücher, Bd. 774, Mannheim 1972.</para>
+	</refsection>
+</refentry>

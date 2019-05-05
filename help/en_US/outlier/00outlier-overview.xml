@@ -5,9 +5,9 @@
  * Copyright (c) 2019 - Hani A. Ibrahim
  *
 -->
-<refentry xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svg="http://www.w3.org/2000/svg" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:db="http://docbook.org/ns/docbook" xmlns:scilab="http://www.scilab.org" xml:lang="en_US" xml:id="0utlier_overview">
+<refentry xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svg="http://www.w3.org/2000/svg" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:db="http://docbook.org/ns/docbook" xmlns:scilab="http://www.scilab.org" xml:lang="en_US" xml:id="outlier_overview">
 	<refnamediv>
-		<refname>Overview</refname>
+		<refname>Overview - Outlier Tests</refname>
 		<refpurpose>An overview of the SampleSTAT's Outlier Functions</refpurpose>
 	</refnamediv>
 	<refsection>
@@ -68,7 +68,7 @@
 					<term>Basic rules (ST_outlier):</term>
 					<listitem>
 						<para>Up from medium sample sizes (larger than 10, better more than 25). </para>
-						<para>Mode based on standard deviation ("sd" mode) is applicable for symmetrical distributions. This mode is not recommended for skewed data (see function "ST_skewness"). </para>
+						<para>Mode based on standard deviation ("sd" mode) is applicable for symmetrical distributions. This mode is not recommended for skewed data (see function <link linkend='ST_skewness'>ST_skewness</link>). </para>
 						<para>For for skewed - and of course symmetrical -  data both IQR-Modes (iqr15, iqr30) are recommended.</para>
 					</listitem>
 				</varlistentry>
@@ -202,8 +202,12 @@ IQR = x_{0.75} - x_{0.25} \\
 	</para>
 	</refsection>
 	<refsection>
+		<title>Credits</title>
+		<para>Most of the text and images are from Lohringer, H., "Fundamentals of Statistics", Oct, 10th, 2012, <ulink url="http://www.statistics4u.info/fundstat_eng/">http://www.statistics4u.info/fundstat_eng/</ulink></para>
+	</refsection>
+	<refsection>
 		<title>Bibliography</title>
-		<para>Lohringer, H., "Grundlagen der Statistik", Oct, 10th, 2012, http://www.statistics4u.info/</para>
+		<para>Lohringer, H., "Fundamentals of Statistics", Oct, 10th, 2012, <ulink url="http://www.statistics4u.info/fundstat_eng/">http://www.statistics4u.info/fundstat_eng/</ulink></para>
 		<para>R. Kaiser, G. Gottschalk; "Elementare Tests zur Beurteilung von Meßdaten", BI Hochschultaschenbücher, Bd. 774, Mannheim 1972.</para>
 	</refsection>
 </refentry>
