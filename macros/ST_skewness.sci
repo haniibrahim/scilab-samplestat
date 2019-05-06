@@ -51,7 +51,7 @@ function skew = ST_skewness(v)
     // </imageobject></inlinemediaobject>
     //
     // <important><para>
-    // Do use ST_skewness ONLY with NORMAL distrinutions and
+    // Do use ST_skewness ONLY with NORMAL distributions and
     // with more than 10 or better more than 25 values!
     // </para></important>
     //

@@ -6,6 +6,8 @@ function subdemolist = demo_gateway()
 
     subdemolist = [
 	"Range of dispersion (stray/trustarea)", "samplestat.dem.sce"; ..
+    "Normal distribution", "distribution.dem.sce"
+    "Outlier", "outlier.dem.sce"; ..
 	];
 
     subdemolist(:,2) = demopath + subdemolist(:,2);
