@@ -47,13 +47,13 @@ function [outlierfree, outlier] = ST_nalimov(v, p)
     // with more than 3 and less than 1000 values!
     // </para></important>
     //
-    // <important><para>
+    // <caution><para>
     // Do use ST_nalimov with care. It indicates outliers very strict and is 
     // controversially discussed in the scientific community. For a convervative
     // outlier test substitute Nalimov with Dean-Dixon (ST_deandixon)
     // small sample sizes (<30) and Pearson-Hartley (ST-pearsonhartley) for 
     // larger ones (>30).
-    // </para></important>
+    // </para></caution>
     //
     // Examples
     // data = [6 8 14 12 35 15];

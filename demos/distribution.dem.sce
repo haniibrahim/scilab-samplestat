@@ -35,15 +35,26 @@ function distribution_demo()
     disp("Check for sample size: " + string(n))
     W=0;
     //Check for skewness & normal distribution
-    histplot(round(2*sqrt(n)),dat1,style=2);
+    nclass = round(sqrt(n)) // number of classes for the histogram, Rule of thumb: sqrt(n)
+    histplot(nclass,dat1,style=2);
     //W = ST_shapirowilk(dat1)); // 1=normal distributed 0=not normal distributed
     disp("Check for normality via Shapiro-Wilk: W = " + string(W))
     
     disp("Values are NOT normal distributed according histogram and " + ..
     "Shapiro-Wilk test (W=0), normal distributed values W=1")
     disp("SampleSTAT''s routines cannot be applied to this data! ")
+    
+    //
+    // Load this script into the editor
+    //
+    filename = "distribution.dem.sce";
+    dname = get_absolute_file_path(filename);
+    editor ( fullfile(dname,filename) );
+    
 endfunction
+
 // Main
+
 distribution_demo();
 clear distribution_demo;
 

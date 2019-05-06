@@ -70,11 +70,7 @@
  
    * ST_shapirowilk: 
      Shapiro-Wilk test for normality is powerful even on small
-	 sample sizes.
-   * ST_skewness
-     Calculates the skew value helping to determine if a sample distribution 
-	 is skewed (right or left) or not. This is important to chose the correct
-	 method on ST_outlier.   
+	 sample sizes.  
          
  ---------------------------------------------------------------------
    

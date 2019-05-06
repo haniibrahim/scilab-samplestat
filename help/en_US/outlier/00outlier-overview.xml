@@ -68,8 +68,7 @@
 					<term>Basic rules (ST_outlier):</term>
 					<listitem>
 						<para>Up from medium sample sizes (larger than 10, better more than 25). </para>
-						<para>Mode based on standard deviation ("sd" mode) is applicable for symmetrical distributions. This mode is not recommended for skewed data (see function <link linkend='ST_skewness'>ST_skewness</link>). </para>
-						<para>For for skewed - and of course symmetrical -  data both IQR-Modes (iqr15, iqr30) are recommended.</para>
+						<para>Threshold are based on standard deviation ("sd" mode) or interquantile range distance ("iqr15", "iqr30" modes). The latter allows to distinguish weak from strong outliers.</para>
 					</listitem>
 				</varlistentry>
 			</variablelist>
@@ -87,7 +86,7 @@
 			<latex>
 <![CDATA[
 \begin{eqnarray}
-Q = \left | x_{i+1}-x_i \right |/\left | x_n-x_i \right | \quad ; \quad Q &gt; Q_{crit} \quad \Rightarrow \quad x_i = \text{outlier}
+Q = \left | x_{i+1}-x_i \right |/\left | x_n-x_i \right | \quad ; \quad Q > Q_{crit} \quad \Rightarrow \quad x_i = \text{outlier}
 \end{eqnarray}
 ]]>
 	    </latex>
@@ -108,7 +107,7 @@ Q = \left | x_{i+1}-x_i \right |/\left | x_n-x_i \right | \quad ; \quad Q &gt; Q
 			<latex>
 <![CDATA[
 \begin{eqnarray}
-q=\left| \frac{1}{s}(x_i - \bar{x}) \right| \quad ; \quad q &gt;q_{crit} \quad  \Rightarrow \quad x_i = \text{outlier} \\
+q=\left| \frac{1}{s}(x_i - \bar{x}) \right| \quad ; \quad q > q_{crit} \quad  \Rightarrow \quad x_i = \text{outlier} \\
 x_i: \text{test value} \quad ; \quad \bar{x}: \text{arithmetic mean} \quad ; \quad s: \text{standard deviation}
 \end{eqnarray}
 ]]>
@@ -124,7 +123,7 @@ x_i: \text{test value} \quad ; \quad \bar{x}: \text{arithmetic mean} \quad ; \qu
 			<latex>
 <![CDATA[
 \begin{eqnarray}
-q = \left | \frac{1}{s}(x_i- \bar{x}) \right | \sqrt{\frac{n}{n-1}} \quad;\quad q&gt;q_{crit}\;\Rightarrow \; x_i=\text{outlier} \\
+q = \left | \frac{1}{s}(x_i- \bar{x}) \right | \sqrt{\frac{n}{n-1}} \quad;\quad > q_{crit}\;\Rightarrow \; x_i=\text{outlier} \\
 x_i: \text{test value} \quad ; \quad \bar{x}: \text{arithmetic mean} \\
 s: \text{standard deviation of samples} \quad ; \quad n: \text{number of values}
 \end{eqnarray}
@@ -134,11 +133,11 @@ s: \text{standard deviation of samples} \quad ; \quad n: \text{number of values}
 		<para>
 		The Nalimov test widely known in Germany and German-speaking countries. But it has it flaws. It indicates outliers very strict. That could eliminates valid data in some circumstances. There is some scientific discussion about this test. It is thus recommended to use other tests instead of the Nalimov test (Dean-Dixon test for small samples, the test of Pearson and Hartley for larger ones).
     </para>
-		<important>
+		<caution>
 			<para>
 		If you want to use Nalimov, use it with care.
 	</para>
-		</important>
+		</caution>
 	</refsection>
 	<refsection>
 		<title>ST_outlier</title>
@@ -150,13 +149,13 @@ s: \text{standard deviation of samples} \quad ; \quad n: \text{number of values}
 				<term>Based on Standard deviation:</term>
 				<listitem>
 					<para>
-			 If we assume a normal distribution, a single value may be considered as an outlier if it falls outside a certain range of the standard deviation. In many cases a factor of 2.5 is used, which means that approx. 99 % of the data belonging to a normal distribution fall inside this range. You have to be sure that your data is not skewed. You can test this with ST_skewed() in SampleSTAT.
+			 If we assume a normal distribution, a single value may be considered as an outlier if it falls outside a certain range of the standard deviation. In many cases a factor of 2.5 is used, which means that approx. 99 % of the data belonging to a normal distribution fall inside this range.
     </para>
 					<para>
 						<latex>
 <![CDATA[
 \begin{eqnarray}
-(\bar{x} - 2.5\sigma) &gt; x_i &gt; (\bar{x} + 2.5\sigma) \; \text{with} \quad \sigma = \sqrt{{1 \over n}\sum_{i=1}^{n}(x_i-\bar{x})^2} \quad \Rightarrow \quad x_i = outlier\\
+(\bar{x} - 2.5\sigma) > x_i > (\bar{x} + 2.5\sigma) \; \text{with} \quad \sigma = \sqrt{{1 \over n}\sum_{i=1}^{n}(x_i-\bar{x})^2} \quad \Rightarrow \quad x_i = \text{outlier}\\
 x_i: \text{value} \quad ; \quad \bar{x}: \text{arithmetic mean} \\
 \sigma: \text{standard deviation of population} \quad ; \quad n: \text{number of values}
 \end{eqnarray}
@@ -172,7 +171,8 @@ x_i: \text{value} \quad ; \quad \bar{x}: \text{arithmetic mean} \\
 				<term>Based on he interquartile range (IQR)</term>
 				<listitem>
 					<para>
-			 The above-mentioned strategies for identifying outliers are probably most appropriate for symmetric unimodal distributions. If a distribution is skewed, it is recommended to calculate the threshold for outliers from the interquartile distance. </para>
+					This approach is used for skewed data in the first place but is - of course - applicable for normal distributed data as well. It allows to distinguish between weak and strong outliers.
+					</para>
 			 <para>
 				 x0.25 is the first quartile and x0.75 the third and IQR is the difference. 
     </para>
@@ -180,16 +180,17 @@ x_i: \text{value} \quad ; \quad \bar{x}: \text{arithmetic mean} \\
 						<latex><![CDATA[
 \begin{eqnarray}
 IQR = x_{0.75} - x_{0.25} \\
-(x_{0.25} - 1.5 \cdot IQR)  < x_i < (x_{0.25} + 1.5 \cdot IQR)  \quad \Rightarrow \quad x_i = \text{weak outlier (iqr15 mode)} \\
+(x_{0.25} - 1.5 \cdot IQR)  < x_i < (x_{0.25} + 1.5 \cdot IQR)  \quad \Rightarrow \quad x_i = \text{outliers (iqr15 mode)} \\
 (x_{0.25} - 3.0 \cdot IQR)  < x_i < (x_{0.25} + 3.0 \cdot IQR)  \quad \Rightarrow \quad x_i = \text{strong outlier (iqr30 mode)}
 \end{eqnarray}
 ]]></latex>
 					</para>
 					<para>
-		Values which are weak but not strong outliers are also called extreme values. SampleSTAT provides the modes "iqr15" (1.5xIQR) and "iqr30" (3.0xIQR) for testing on weak or strong outliers. 
+		Values between the thresholds 3.0xIQR and 1.5xIQR are called weak outliers. SampleSTAT provides the modes "iqr15" (1.5xIQR) and "iqr30" (3.0xIQR) for testing on weak or strong outliers. 
 	</para>
-					<para>
+					<para><important><para>
 		Please note that these basic tests require at least 10 observations (better 25, or more). 
+		</para></important>
 	</para>
 				</listitem>
 			</varlistentry>

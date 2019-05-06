@@ -38,41 +38,40 @@ function [outlierfree, outlier] = ST_outlier(v, mod)
     //
     // <latex>
     // \begin{eqnarray}
-    // (\bar{x} - 2.5\sigma) > x_i > (\bar{x} + 2.5\sigma) \; \text{with} \quad \sigma = \sqrt{{1 \over n}\sum_{i=1}^{n}(x_i-\bar{x})^2} \quad \Rightarrow \quad x_i = outlier\\
+    // (\bar{x} - 2.5\sigma) > x_i > (\bar{x} + 2.5\sigma) \; \text{with} \quad \sigma = \sqrt{{1 \over n}\sum_{i=1}^{n}(x_i-\bar{x})^2} \quad \Rightarrow \quad x_i = \text{outlier}\\
     // x_i: \text{value} \quad ; \quad \bar{x}: \text{arithmetic mean} \\
     // \sigma: \text{standard deviation of population} \quad ; \quad n: \text{number of values}
     //\end{eqnarray}
     //</latex>
     //
-    // IQR15-MODE: If you have a normal but skewed distribution one of the iqr-modes
-    // should be used. But they can be applied for non-skewed distribution, too.
-    // It is common to specify a value as an outlier when it is more than 1.5xIQR 
-    // (inter-quartile range) off from the lower or upper quartile. The 
-    // "iqr15"-mode make use of this.
+    // IQR-MODES:Testing on outliers with interquartile range (IQR) distance is
+    // recommended for skewed data in the first place. But it is also applicaple
+    // for normal distributed data.
+    //
+    // IQR15-MODE: It is common to consider a value an outlier when it is more 
+    // than 1.5xIQR (inter-quartile range) off from the lower or upper quartile.  
+    // The "iqr15"-mode make use of this.
     //
     // IQR30-MODE: But with a border of 1,5xIQR 0.7% of the distribution can be  
     // expected as an outlier automatically. This means that a distribution of 143 
     // values or more could have at least one outlier in any case. To avoid this, 
-    // values between 1.5xIQR and 3.0xIQR from the lower or upper quartileare 
-    // called extreme values but not outliers and just values outside of 3.0xIQR  
-    // are outliers. SampleSTAT toolbox take care of this by introducing the "iqr30" 
-    // mode. All values inside 3.0xIQR from the quartiles are valid data 
-    // outside this barrier outliers.
+    // values between 1.5xIQR and 3.0xIQR from the lower or upper quartile are 
+    // called extreme values or weak outliers and just values outside of 3.0xIQR  
+    // are strong outliers. SampleSTAT toolbox take care of this by introducing  
+    // the "iqr30" mode.
     //
     // <latex>
     // \begin{eqnarray}
     // IQR = x_{0.75} - x_{0.25} \\
-    // (x_{0.25} - 1.5 \cdot IQR)  < x_i < (x_{0.25} + 1.5 \cdot IQR)  \quad \Rightarrow \quad x_i = \text{weak outlier (iqr15 mode)} \\
+    // (x_{0.25} - 1.5 \cdot IQR)  < x_i < (x_{0.25} + 1.5 \cdot IQR)  \quad \Rightarrow \quad x_i = \text{outliers (iqr15 mode)} \\
     // (x_{0.25} - 3.0 \cdot IQR)  < x_i < (x_{0.25} + 3.0 \cdot IQR)  \quad \Rightarrow \quad x_i = \text{strong outlier (iqr30 mode)}
     //\end{eqnarray}
     //</latex>
     //
-    // You can use "ST_skewness" to check for skewed distributions
-    //
     // <important><para>
-    // Do use ST_outlier ONLY with NORMAL distributed data and
-    // with more than 10 or better more than 25 values! Use ST_nalimov or 
-    // ST_deandixon for distributions with lower number of values.
+    // Do use ST_outlier "sd" mode ONLY with NORMAL distributed data and
+    // with more than 10 or better more than 25 values! Use ST_deandixon 
+    // (or ST_nalimov) for distributions with lower number of values.
     // </para></important>
     //
     // Examples
@@ -81,15 +80,15 @@ function [outlierfree, outlier] = ST_outlier(v, mod)
     // -0.7107495  -0.2547306   0.0290803    0.1386087 .. 
     // -0.7698385   1.0743628   1.0945652    0.4365680 .. 
     // -0.5913411  -0.7426987   1.609719     0.8079680 .. 
-    // -2.1700554  -0.7361261   0.0069708    14.626386 .. 
+    // -2.1700554  -4.7361261   0.0069708    14.626386 ..
+    // -2.5036545  -2.9046385 ..
     // ];
     // of = ST_outlier(data')      // outlier-free values with sd-mode
     // [of, o] = ST_outlier(data', "sd")  // outlier and outlier-free values
-    // [of, o] = ST_outlier(data', "iqr15")  // outlier and outlier-free values
-    // [of, o] = ST_outlier(data', "iqr30")  // outlier and outlier-free values
+    // [of15, o15] = ST_outlier(data', "iqr15")  // outlier and outlier-free values
+    // [of30, o30] = ST_outlier(data', "iqr30")  // outlier and outlier-free values
     //
     // See also
-    //  ST_skewness
     //  ST_nalimov
     //  ST_deandixon
     //  ST_pearsonhartley

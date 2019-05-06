@@ -44,7 +44,7 @@ function trustval = ST_trustarea(v, p)
 //
 // Examples
 // v = [6 8 14 12 5 15];
-// mean(V) // = 10.
+// mean(v) // = 10.
 // ST_trustarea(v, "95%") // = 4.4514
 // ST_trustarea(v, 0.05)  // = 4.4514
 //
