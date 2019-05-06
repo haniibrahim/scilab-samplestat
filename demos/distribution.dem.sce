@@ -33,15 +33,18 @@ function distribution_demo()
     // Check for sample size
     n=length(dat1);
     disp("Check for sample size: " + string(n))
-    W=0;
-    //Check for skewness & normal distribution
+    
+    // Check for normal distribution
+    // -- Plot histogram
     nclass = round(sqrt(n)) // number of classes for the histogram, Rule of thumb: sqrt(n)
     histplot(nclass,dat1,style=2);
-    //W = ST_shapirowilk(dat1)); // 1=normal distributed 0=not normal distributed
-    disp("Check for normality via Shapiro-Wilk: W = " + string(W))
+    // -- Perform Shapiro-Wilk test with 95% confidence level
+    normality = ST_shapirowilk(dat1, "95%"); // %T=normal distributed %F=not normal distributed
+    disp("Check for normality via Shapiro-Wilk: normality = " + string(normality))
     
     disp("Values are NOT normal distributed according histogram and " + ..
-    "Shapiro-Wilk test (W=0), normal distributed values W=1")
+    "Shapiro-Wilk test [normality=f(alse)], normal distributed values would " + ..
+    "have normality=T(rue)")
     disp("SampleSTAT''s routines cannot be applied to this data! ")
     
     //

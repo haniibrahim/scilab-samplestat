@@ -162,9 +162,6 @@ x_i: \text{value} \quad ; \quad \bar{x}: \text{arithmetic mean} \\
 ]]>
     </latex>
 					</para>
-					<para>
-		Sample STAT provides the mode "sd" for testing on outliers regarding on S.D.
-	</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
