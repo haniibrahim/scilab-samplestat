@@ -36,7 +36,6 @@ function [retval] = ST_studentfactor(n, p)
 // See also
 //  ST_trustarea
 //  ST_strayarea
-//  ST_shapirowilk
 //
 // Authors
 //  Hani A. Ibrahim - hani.ibrahim@gmx.de

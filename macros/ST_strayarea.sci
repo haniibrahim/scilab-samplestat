@@ -53,6 +53,7 @@ function strayval = ST_strayarea(v, p)
 //  ST_deandixon
 //  ST_pearsonhartley
 //  ST_shapirowilk
+//  ST_ivplot
 //
 // Authors
 //  Hani A. Ibrahim - hani.ibrahim@gmx.de

@@ -86,6 +86,7 @@ ST_strayarea(v, 0.05)  // = 10.904
    <member><link linkend="ST_deandixon">ST_deandixon</link></member>
    <member><link linkend="ST_pearsonhartley">ST_pearsonhartley</link></member>
    <member><link linkend="ST_shapirowilk">ST_shapirowilk</link></member>
+   <member><link linkend="ST_ivplot">ST_ivplot</link></member>
    </simplelist>
 </refsection>
 

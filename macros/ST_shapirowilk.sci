@@ -53,22 +53,22 @@ function [normal] = ST_shapirowilk(v, p)
     // mentioned above. 
     // </para>
     // <para>
-    // Check the results graphically with histogram, QQ-plot or box-plot. The 
-    // latter two are provided in the toolbox STIXBOX.
+    // Check the results graphically with individual value plot, histogram, 
+    // QQ-plot or box-plot. The latter two are provided in the toolbox STIXBOX.
     // </para></important>
     //
     // Examples
+    // scf();
     // data1 = [200, 545, 290, 165, 190, 355, 185, 205, 175, 255];
     // normal = ST_shapirowilk(data1, "95%") // normal = %F => non-normally distr.
-    // histplot(round(sqrt(length(data1))),data1); // histogram shows right skewed data
-    // xtitle("data1")
+    // ST_ivplot(data1,"data1");
     // scf();
     // data2 = [-15.6, -21.6, -19.5, -19.1, -20.9, -20.7, -19.3, -18.3, -15.1]; 
-    // normal = ST_shapirowilk(data2, "95%") // normal = %T => normallly distributed
-    // histplot(round(sqrt(length(data2))),data2); 
-    // xtitle("data2")
+    // normal = ST_shapirowilk(data2, "95%") // normal = %T => normally distributed
+    // ST_ivplot(data2,"data2"); 
     //
     // See also
+    //  ST_ivplot
     //  ST_deandixon
     //  ST_pearsonhartley
     //  ST_nalimov

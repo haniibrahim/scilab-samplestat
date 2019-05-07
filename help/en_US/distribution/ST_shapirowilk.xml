@@ -77,8 +77,8 @@ smaller sample sizes, it should not be used blindfolded for the reasons
 mentioned above.
 </para>
 <para>
-Check the results graphically with histogram, QQ-plot or box-plot. The
-latter two are provided in the toolbox STIXBOX.
+Check the results graphically with individual value plot, histogram,
+QQ-plot or box-plot. The latter two are provided in the toolbox STIXBOX.
 </para></important>
    </para>
    <para>
@@ -88,15 +88,14 @@ latter two are provided in the toolbox STIXBOX.
 <refsection>
    <title>Examples</title>
    <programlisting role="example"><![CDATA[
+scf();
 data1 = [200, 545, 290, 165, 190, 355, 185, 205, 175, 255];
 normal = ST_shapirowilk(data1, "95%") // normal = %F => non-normally distr.
-histplot(round(sqrt(length(data1))),data1); // histogram shows right skewed data
-xtitle("data1")
+ST_ivplot(data1,"data1");
 scf();
 data2 = [-15.6, -21.6, -19.5, -19.1, -20.9, -20.7, -19.3, -18.3, -15.1];
-normal = ST_shapirowilk(data2, "95%") // normal = %T => normallly distributed
-histplot(round(sqrt(length(data2))),data2);
-xtitle("data2")
+normal = ST_shapirowilk(data2, "95%") // normal = %T => normally distributed
+ST_ivplot(data2,"data2");
 
    ]]></programlisting>
 </refsection>
@@ -104,6 +103,7 @@ xtitle("data2")
 <refsection>
    <title>See also</title>
    <simplelist type="inline">
+   <member><link linkend="ST_ivplot">ST_ivplot</link></member>
    <member><link linkend="ST_deandixon">ST_deandixon</link></member>
    <member><link linkend="ST_pearsonhartley">ST_pearsonhartley</link></member>
    <member><link linkend="ST_nalimov">ST_nalimov</link></member>

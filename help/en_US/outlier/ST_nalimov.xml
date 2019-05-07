@@ -102,6 +102,7 @@ of = ST_nalimov(data, "95%")      // outlier-free values
    <member><link linkend="ST_strayarea">ST_strayarea</link></member>
    <member><link linkend="ST_trustarea">ST_trustarea</link></member>
    <member><link linkend="ST_shapirowilk">ST_shapirowilk</link></member>
+   <member><link linkend="ST_ivplot">ST_ivplot</link></member>
    </simplelist>
 </refsection>
 

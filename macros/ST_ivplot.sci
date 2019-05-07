@@ -20,7 +20,7 @@
 // Author: Hani Andreas Ibrahim <hani.ibrahim@gmx.de>
 // License: GPL 3.0
 
-function ST_ivplot(dat, datname)
+function ST_ivplot(v, datname)
     // Very basic Individual Value Plot (EXPERIMENTAL)
     //
     // Calling Sequence
@@ -76,15 +76,22 @@ function ST_ivplot(dat, datname)
     //
     // Authors
     //  Hani A. Ibrahim - hani.ibrahim@gmx.de
-    //
-    // Bibliography
-    //   Lohringer, H., "Grundlagen der Statistik", Oct, 10th, 2012, http://www.statistics4u.info/fundstat_germ/cc_outlier_tests_4sigma.html
-    
-    
 
-    n=length(dat);
+    // Check arguments
+    [lhs,rhs]=argn()
+    apifun_checkrhs("ST_ivplot", rhs, 1:2); // Input args
+    apifun_checklhs("ST_ivplot", lhs, 1); // Output args
+    apifun_checkvector("ST_ivplot", v, "v", 1); // Vector?
+    apifun_checktype ("ST_ivplot", v, "v", 1, "constant"); //Double?
+    if rhs == 1 then datname=""; end
+    if rhs == 2 then
+        apifun_checkscalar("ST_ivplot", datname, "datname", 2); // Scalar?
+        apifun_checktype("ST_ivplot", datname, "datname",2, "string");
+    end
+
+    n=length(v);
     x=ones(1,n);
-    plot(x,dat, "o");
+    plot(x,v, "o");
 
     a=gca()
     a.axes_visible=["off","on","off"]

@@ -88,6 +88,7 @@ ST_trustarea(v, 0.05)  // = 4.4514
    <member><link linkend="ST_deandixon">ST_deandixon</link></member>
    <member><link linkend="ST_pearsonhartley">ST_pearsonhartley</link></member>
    <member><link linkend="ST_shapirowilk">ST_shapirowilk</link></member>
+   <member><link linkend="ST_ivplot">ST_ivplot</link></member>
    </simplelist>
 </refsection>
 

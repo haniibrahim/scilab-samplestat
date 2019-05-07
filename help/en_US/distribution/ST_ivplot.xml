@@ -107,9 +107,4 @@ ST_ivplot(data2, "Non-Normal Distribution")
    <member>Hani A. Ibrahim - hani.ibrahim@gmx.de</member>
    </simplelist>
 </refsection>
-
-<refsection>
-   <title>Bibliography</title>
-   <para>Lohringer, H., "Grundlagen der Statistik", Oct, 10th, 2012, http://www.statistics4u.info/fundstat_germ/cc_outlier_tests_4sigma.html</para>
-</refsection>
 </refentry>

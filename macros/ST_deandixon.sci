@@ -64,6 +64,7 @@ function [outlierfree, outlier] = ST_deandixon(v, p)
     //  ST_strayarea
     //  ST_trustarea
     //  ST_shapirowilk
+    //  ST_ivplot
     //
     // Authors
     //  Hani A. Ibrahim - hani.ibrahim@gmx.de
