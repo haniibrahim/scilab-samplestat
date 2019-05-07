@@ -36,7 +36,7 @@ function trustval = ST_trustarea(v, p)
 // \end{eqnarray}
 // </latex>
 //
-// T: stray area of values; s: standard deviation of samples; t: student factor (dependent 
+// T: stray area of values; s: sample standard deviation; t: student factor (dependent 
 // on statistical confidence level P% and degree of freedom f=n-1 with n: number of values) 
 //
 // E.g. if trustval = 1.4 at p = 95% with a mean = 10,0 the mean for

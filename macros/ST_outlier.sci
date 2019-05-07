@@ -32,7 +32,7 @@ function [outlierfree, outlier] = ST_outlier(v, mod)
     // Performs basic outlier tests. 
     //
     // SD-MODE: If you have a normal, symetric and unimodal distribution you
-    // can use the "sd" mode (standard deviation, S.D.). In this mode 
+    // can use the "sd" mode (population standard deviation, S.D. or sigma). In this mode 
     // a value is presented as an outlier when it is more than 2.5xS.D. off 
     // the arithmetic mean in both directions.
     //
@@ -40,7 +40,7 @@ function [outlierfree, outlier] = ST_outlier(v, mod)
     // \begin{eqnarray}
     // (\bar{x} - 2.5\sigma) > x_i > (\bar{x} + 2.5\sigma) \; \text{with} \quad \sigma = \sqrt{{1 \over n}\sum_{i=1}^{n}(x_i-\bar{x})^2} \quad \Rightarrow \quad x_i = \text{outlier}\\
     // x_i: \text{value} \quad ; \quad \bar{x}: \text{arithmetic mean} \\
-    // \sigma: \text{standard deviation of population} \quad ; \quad n: \text{number of values}
+    // \sigma: \text{population standard deviation} \quad ; \quad n: \text{number of values}
     //\end{eqnarray}
     //</latex>
     //

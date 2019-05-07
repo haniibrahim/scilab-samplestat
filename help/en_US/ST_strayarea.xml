@@ -54,7 +54,7 @@ T = s \cdot t
 </latex>
    </para>
    <para>
-T: stray area of values; s: standard deviation of samples; t: student factor (dependent
+T: stray area of values; s: sample standard deviation; t: student factor (dependent
 on statistical confidence level P% and degree of freedom f=n-1 with n: number of values)
    </para>
    <para>

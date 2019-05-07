@@ -25,7 +25,7 @@
 		<para>
 	   Several outlier tests are available, each of them having its own special advantages and drawbacks. Following is a short description of the most commonly used strategies to identify outliers:
 
-           <itemizedlist><listitem><para>Basic rules using the standard deviation and the interquartile range</para></listitem><listitem><para>Dean-Dixon Test</para></listitem><listitem><para>Significance of extreme values (Pearson-Hartley)</para></listitem><listitem><para>Nalimov test</para></listitem><listitem><para> Outlier test according to Walsh (for not normally distributed data, not provided in SampleSTAT)</para></listitem><listitem><para>Grubbs test for outliers (not provided in SampleSTAT - yet)</para></listitem></itemizedlist>
+           <itemizedlist><listitem><para>Basic rules using the population standard deviation (S.D.) and the interquartile range</para></listitem><listitem><para>Dean-Dixon Test</para></listitem><listitem><para>Significance of extreme values (Pearson-Hartley)</para></listitem><listitem><para>Nalimov test</para></listitem><listitem><para> Outlier test according to Walsh (for not normally distributed data, not provided in SampleSTAT)</para></listitem><listitem><para>Grubbs test for outliers (not provided in SampleSTAT - yet)</para></listitem></itemizedlist>
 
 	</para>
 		<para>
@@ -68,10 +68,24 @@
 					<term>Basic rules (ST_outlier):</term>
 					<listitem>
 						<para>Up from medium sample sizes (larger than 10, better more than 25). </para>
-						<para>Threshold are based on standard deviation ("sd" mode) or interquantile range distance ("iqr15", "iqr30" modes). The latter allows to distinguish weak from strong outliers.</para>
+						<para>Threshold are based on population standard deviation ("sd" mode) or interquantile range distance ("iqr15", "iqr30" modes). The latter allows to distinguish weak from strong outliers.</para>
 					</listitem>
 				</varlistentry>
 			</variablelist>
+		</para>
+		<para>
+			<note>
+				<para>Important Note:</para>
+				<para>
+					<latex><![CDATA[
+	\begin{eqnarray}
+	\bar{x}: \text{arithmetic mean} \quad \Rightarrow \quad \bar{x} = {1 \over{n}}\sum_{i=1}^{n}x_i \\
+	s: \text{sample standard deviation} \quad \Rightarrow \quad s = \sqrt{{1 \over{n-1}}\sum_{i=1}^{n}(x_i-\bar{x})^2} \\
+	\sigma: \text{population standard deviation, S.D.} \quad \Rightarrow \quad \sigma = \sqrt{{1 \over{n}}\sum_{i=1}^{n}(x_i-\bar{x})^2}
+	\end{eqnarray}
+	]]></latex>
+				</para>
+			</note>
 		</para>
 	</refsection>
 	<refsection>
@@ -83,13 +97,11 @@
  It sorts the distribution in ascending or descending order, then takes the minimum and maximum values (xi) and calculates the respective Q value for both xi values. This is compared with the critical value from a table (Qcrit). If one of the two  or both Q values greater than the corresponding Qcrit value, one or both xi values are outliers.
     </para>
 		<para>
-			<latex>
-<![CDATA[
+			<latex><![CDATA[
 \begin{eqnarray}
 Q = \left | x_{i+1}-x_i \right |/\left | x_n-x_i \right | \quad ; \quad Q > Q_{crit} \quad \Rightarrow \quad x_i = \text{outlier}
 \end{eqnarray}
-]]>
-	    </latex>
+]]></latex>
 		</para>
 		<para>
  	   Only one outlier can be found on each side of the sorted distribution.
@@ -104,14 +116,12 @@ Q = \left | x_{i+1}-x_i \right |/\left | x_n-x_i \right | \quad ; \quad Q > Q_{c
  xi is regarded to be an outlier if the test statistic q exceeds the critical threshold qcrit for a given level of significance alpha (statistical confidence level) and a sample size n. 
     </para>
 		<para>
-			<latex>
-<![CDATA[
+			<latex><![CDATA[
 \begin{eqnarray}
 q=\left| \frac{1}{s}(x_i - \bar{x}) \right| \quad ; \quad q > q_{crit} \quad  \Rightarrow \quad x_i = \text{outlier} \\
-x_i: \text{test value} \quad ; \quad \bar{x}: \text{arithmetic mean} \quad ; \quad s: \text{standard deviation}
+x_i: \text{test value} \quad ; \quad \bar{x}: \text{arithmetic mean} \quad ; \quad s: \text{sample standard deviation}
 \end{eqnarray}
-]]>
-	    </latex>
+]]></latex>
 		</para>
 	</refsection>
 	<refsection>
@@ -120,15 +130,13 @@ x_i: \text{test value} \quad ; \quad \bar{x}: \text{arithmetic mean} \quad ; \qu
 		Nalimov is applicable for data sets between 3 and 1000 values. It calculates for all values the test value "q". It compares these q-values with the appropriate qcrit value from a table (Kaiser/Gottschalk 1972).
 	</para>
 		<para>
-			<latex>
-<![CDATA[
+			<latex><![CDATA[
 \begin{eqnarray}
 q = \left | \frac{1}{s}(x_i- \bar{x}) \right | \sqrt{\frac{n}{n-1}} \quad;\quad > q_{crit}\;\Rightarrow \; x_i=\text{outlier} \\
 x_i: \text{test value} \quad ; \quad \bar{x}: \text{arithmetic mean} \\
-s: \text{standard deviation of samples} \quad ; \quad n: \text{number of values}
+s: \text{sample standard deviation} \quad ; \quad n: \text{number of values}
 \end{eqnarray}
-]]>
-	    </latex>
+]]></latex>
 		</para>
 		<para>
 		The Nalimov test widely known in Germany and German-speaking countries. But it has it flaws. It indicates outliers very strict. That could eliminates valid data in some circumstances. There is some scientific discussion about this test. It is thus recommended to use other tests instead of the Nalimov test (Dean-Dixon test for small samples, the test of Pearson and Hartley for larger ones).
@@ -142,25 +150,23 @@ s: \text{standard deviation of samples} \quad ; \quad n: \text{number of values}
 	<refsection>
 		<title>ST_outlier</title>
 		<para>
-		Provide two basic tests on outliers based on standard deviation (S.D.) or inter-quartile range (IQR). It should be applied to sample sizes larger than 10 better more than 25. For small sample sizes the Dean-Dixon test is recommended.
+		Provide two basic tests on outliers based on population standard deviation (S.D.) or inter-quartile range (IQR). It should be applied to sample sizes larger than 10 better more than 25. For small sample sizes the Dean-Dixon test is recommended.
 	</para>
 		<variablelist>
 			<varlistentry>
 				<term>Based on Standard deviation:</term>
 				<listitem>
 					<para>
-			 If we assume a normal distribution, a single value may be considered as an outlier if it falls outside a certain range of the standard deviation. In many cases a factor of 2.5 is used, which means that approx. 99 % of the data belonging to a normal distribution fall inside this range.
+			 If we assume a normal distribution, a single value may be considered as an outlier if it falls outside a certain range of the population standard deviation. In many cases a factor of 2.5 is used, which means that approx. 99 % of the data belonging to a normal distribution fall inside this range.
     </para>
 					<para>
-						<latex>
-<![CDATA[
+						<latex><![CDATA[
 \begin{eqnarray}
 (\bar{x} - 2.5\sigma) > x_i > (\bar{x} + 2.5\sigma) \; \text{with} \quad \sigma = \sqrt{{1 \over n}\sum_{i=1}^{n}(x_i-\bar{x})^2} \quad \Rightarrow \quad x_i = \text{outlier}\\
 x_i: \text{value} \quad ; \quad \bar{x}: \text{arithmetic mean} \\
-\sigma: \text{standard deviation of population} \quad ; \quad n: \text{number of values}
+\sigma: \text{population standard deviation} \quad ; \quad n: \text{number of values}
 \end{eqnarray}
-]]>
-    </latex>
+]]></latex>
 					</para>
 				</listitem>
 			</varlistentry>
@@ -170,7 +176,7 @@ x_i: \text{value} \quad ; \quad \bar{x}: \text{arithmetic mean} \\
 					<para>
 					This approach is used for skewed data in the first place but is - of course - applicable for normally distributed data as well. It allows to distinguish between weak and strong outliers.
 					</para>
-			 <para>
+					<para>
 				 x0.25 is the first quartile and x0.75 the third and IQR is the difference. 
     </para>
 					<para>
@@ -185,10 +191,13 @@ IQR = x_{0.75} - x_{0.25} \\
 					<para>
 		Values between the thresholds 3.0xIQR and 1.5xIQR are called weak outliers. SampleSTAT provides the modes "iqr15" (1.5xIQR) and "iqr30" (3.0xIQR) for testing on weak or strong outliers. 
 	</para>
-					<para><important><para>
+					<para>
+						<important>
+							<para>
 		Please note that these basic tests require at least 10 observations (better 25, or more). 
-		</para></important>
-	</para>
+		</para>
+						</important>
+					</para>
 				</listitem>
 			</varlistentry>
 		</variablelist>

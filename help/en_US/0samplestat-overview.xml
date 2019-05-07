@@ -25,7 +25,7 @@
 				<term>Measures of Variation:</term>
 				<listitem>
 					<para>
-		   Calculates the stray areas of values and mean of normally distributed data. That gives you more information of the quality of your data as the standard deviation (S.D.) of samples can do. S.D. has an statistical confidence of 68%. Stray area (of values) can provide a confidence level of 95%, 99% and 99.9%. The trust area (stray area of the mean) gives you information of the confidence of your mean with a probability of 95%, 99% and 99.9%.
+		   Calculates the stray areas of values and mean of normally distributed data. That gives you more information of the quality of your data as the sample standard deviation (s) of samples can do. s has an statistical confidence of 68%. Stray area (of values) can provide a confidence level of 95%, 99% and 99.9%. The trust area (stray area of the mean) gives you information of the confidence of your mean with a probability of 95%, 99% and 99.9%.
 	   </para>
 				</listitem>
 			</varlistentry>
@@ -108,7 +108,7 @@
 				<term>ST_outlier:</term>
 				<listitem>
 					<para>
-			  Provide two basic tests on outliers based on standard deviation (S.D.) or inter-quartile range (IQR). It should be applied to sample sizes larger than 10 better more than 25. For small sample sizes the Dean-Dixon test is recommended.
+			  Provide two basic tests on outliers based on population standard deviation (S.D.) or inter-quartile range (IQR). It should be applied to sample sizes larger than 10 better more than 25. For small sample sizes the Dean-Dixon test is recommended.
          </para>
 				</listitem>
 			</varlistentry>

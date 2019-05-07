@@ -35,7 +35,7 @@ function [outlierfree, outlier] = ST_nalimov(v, p)
     // \begin{eqnarray}
     // q = \left | \frac{1}{s}(x_i- \bar{x}) \right | \sqrt{\frac{n}{n-1}} \quad;\quad q>q_{crit}\;\Rightarrow \; x_i=\text{outlier} \\
     // x_i: \text{test value} \quad ; \quad \bar{x}: \text{arithmetic mean} \\
-    // s: \text{standard deviation of samples} \quad ; \quad n: \text{number of values}
+    // s: \text{sample standard deviation} \quad ; \quad n: \text{number of values}
     // \end{eqnarray}
     // </latex>
     //

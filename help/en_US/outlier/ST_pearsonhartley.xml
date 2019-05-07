@@ -54,7 +54,7 @@ with more than 30 values.
 <latex>
 \begin{eqnarray}
 q=\left| \frac{1}{s}(x_i - \bar{x}) \right| \quad ; \quad q &gt;q_{crit} \quad  \Rightarrow \quad x_i = \text{outlier} \\
-x_i: \text{test value} \quad ; \quad \bar{x}: \text{arithmetic mean} \quad ; \quad s: \text{standard deviation}
+x_i: \text{test value} \quad ; \quad \bar{x}: \text{arithmetic mean} \quad ; \quad s: \text{sample standard deviation}
 \end{eqnarray}
 </latex>
    </para>

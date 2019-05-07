@@ -38,7 +38,7 @@ function samplestat_demo()
     // Calculate statistical results
     n  = length(v);           // Number of values
     x  = mean(v);             // Arithmetic mean
-    s  = stdev (v);           // Standard deviation (S.D.)
+    s  = stdev (v);           // Sample standard deviation
     sa = ST_strayarea(v, p);  // Range of dispersion of the values (stray area)
     ta = ST_trustarea(v, p);  // Range of dispersion of the mean (trust area)
     mi = min(v);              // Minimal value
@@ -53,7 +53,7 @@ function samplestat_demo()
     mprintf(..
     "Number of Values            : %i\n" + ..
     "Arithmetic Mean             : %f\n" + ..
-    "Standard Deviation (S.D.)   : %f\n" + ..
+    "Sample standard Deviation   : %f\n" + ..
     "Confidence Level            : %s\n" + ..
     "Range of Dispersion (values): %f\n" + ..
     "Range of Dispersion (mean)  : %f\n" + ..
@@ -64,10 +64,11 @@ function samplestat_demo()
     mprintf("\n"); // blank line
 
     mprintf( ..
-    "68 percent of the values will stray arount %.3f +/- %.3f (S.D.). %s of the values\n" + ..
-    "will be expected around %.3f +/- %.3f (Range of disp. of the values, stray area).\n" + ..
-    "With a propability of %s the mean of %.3f will stray around %.3f +/- %.3f (Rage of \n" + ..
-    "dispersion of the mean, trust area).\n", x, s, p, x, sa, p, x, x, ta);
+    "68 percent of the values will stray arount %.3f +/- %.3f (sample standard \n" + .. 
+    "deviation). %s of the values will be expected around %.3f +/- %.3f (Range \n" + ..
+    "of disp. of the values, stray area).\n" + ..
+    "With a propability of %s the mean of %.3f will stray around %.3f +/- %.3f \n" + ..
+    "(Rage of dispersion of the mean, trust area).\n", x, s, p, x, sa, p, x, x, ta);
     
     //
     // Load this script into the editor

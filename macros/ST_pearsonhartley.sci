@@ -18,7 +18,7 @@ function [outlierfree, outlier] = ST_pearsonhartley(v, p)
     // <latex>
     // \begin{eqnarray}
     // q=\left| \frac{1}{s}(x_i - \bar{x}) \right| \quad ; \quad q >q_{crit} \quad  \Rightarrow \quad x_i = \text{outlier} \\
-    // x_i: \text{test value} \quad ; \quad \bar{x}: \text{arithmetic mean} \quad ; \quad s: \text{standard deviation}
+    // x_i: \text{test value} \quad ; \quad \bar{x}: \text{arithmetic mean} \quad ; \quad s: \text{sample standard deviation}
     // \end{eqnarray}
     // </latex>
     //
