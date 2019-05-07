@@ -60,6 +60,7 @@ function ST_ivplot(dat, datname)
     // Examples
     // data1 = [9.999  9.998  10.002  10.  10.001  10.];
     // data2 = [30.41 30.05 30.49 29.22 30.40 30.42];
+    // scf();
     // ST_ivplot(data1, "Normal Distribution")
     // scf();
     // ST_ivplot(data2, "Non-Normal Distribution")

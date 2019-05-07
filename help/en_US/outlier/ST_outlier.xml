@@ -69,7 +69,7 @@ x_i: \text{value} \quad ; \quad \bar{x}: \text{arithmetic mean} \\
    <para>
 IQR-MODES:Testing on outliers with interquartile range (IQR) distance is
 recommended for skewed data in the first place. But it is also applicaple
-for normal distributed data.
+for normally distributed data.
    </para>
    <para>
 IQR15-MODE: It is common to consider a value an outlier when it is more
@@ -114,11 +114,12 @@ data = [
 -0.7698385   1.0743628   1.0945652    0.4365680 ..
 -0.5913411  -0.7426987   1.609719     0.8079680 ..
 -2.1700554  -4.7361261   0.0069708    14.626386 ..
+-2.5036545  -2.9046385 ..
 ];
 of = ST_outlier(data')      // outlier-free values with sd-mode
 [of, o] = ST_outlier(data', "sd")  // outlier and outlier-free values
-[of, o] = ST_outlier(data', "iqr15")  // outlier and outlier-free values
-[of, o] = ST_outlier(data', "iqr30")  // outlier and outlier-free values
+[of15, o15] = ST_outlier(data', "iqr15")  // outlier and outlier-free values
+[of30, o30] = ST_outlier(data', "iqr30")  // outlier and outlier-free values
 
    ]]></programlisting>
 </refsection>

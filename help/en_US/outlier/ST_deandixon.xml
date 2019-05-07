@@ -66,6 +66,11 @@ Only one outlier can be found on each side.
    </para>
    <para>
 <important><para>
+Apply this test ONLY one time to your data.
+</para></important>
+   </para>
+   <para>
+<important><para>
 Do use ST_deandixon ONLY with NORMAL distributed data and
 with more than 3 and less than 30 values! For more than 30 values use
 Pearson-Hartley test ""ST_pearsonhartley()"" instead.
