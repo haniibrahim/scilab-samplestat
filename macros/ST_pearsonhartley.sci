@@ -24,8 +24,8 @@ function [outlierfree, outlier] = ST_pearsonhartley(v, p)
     //
     // <important><para>
     // Do use ST_pearsonhartley ONLY with NORMAL distrinutions and
-    // with more than 30 values! For more than 30 values use 
-    // Pearson-Hartley test ""ST_pearsonhartley()"" instead. 
+    // with more than 30 values! For less than 30 values use 
+    // Dean-Dixon test "ST_deandion()" instead. 
     // </para></important>
     //
     // Examples

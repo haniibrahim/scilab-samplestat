@@ -36,15 +36,19 @@ function distribution_demo()
     
     // Check for normal distribution
     // -- Plot histogram
+    scf();
     nbin = round(sqrt(n)) // number of bins for the histogram, Rule of thumb: sqrt(n)
     histplot(nbin,dat1,style=2);
+    // -- PLot Individual Value Plot
+    scf();
+    ST_ivplot(dat1);
     // -- Perform Shapiro-Wilk test with 95% confidence level
     normality = ST_shapirowilk(dat1, "95%"); // %T=normal distributed %F=not normal distributed
     disp("Check for normality via Shapiro-Wilk: normality = " + string(normality))
     
-    disp("Values are NOT normal distributed according histogram and " + ..
-    "Shapiro-Wilk test [normality=f(alse)], normal distributed values would " + ..
-    "have normality=T(rue)")
+    disp("Values are NOT normal distributed according histogram, Indivdual Value " + ..
+    "Plot and Shapiro-Wilk test [normality=f(alse)], normal distributed values  " + ..
+    "would have normality=T(rue)")
     disp("SampleSTAT''s routines cannot be applied to this data! ")
     
     //
