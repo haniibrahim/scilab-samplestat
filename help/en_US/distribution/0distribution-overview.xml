@@ -13,14 +13,63 @@
 	<refsection>
 		<title>Introduction</title>
 		<para>
-        The test for normality is a commonly needed procedure, since many of the statistical procedures are assumed to be applied to normally distributed data. SampleSTAT's routine require normal distributed data. In general, the test for normality can be achieved by applying a goodness-of-fit method (i.e. chi-square test, or Kolmogorov-Smirnov test). These two tests, however, do not perform well (the power of these tests is not too high). Therefore some other tests have been developed, which have various advantages but also some drawbacks: the power of the Shapiro-Wilk test is good, but the calculation procedure is rather cumbersome but thanks to SampleSTAT easy to do now.
+        The test for normality is a commonly needed procedure, since many of the statistical procedures are assumed to be applied to normally distributed data. SampleSTAT's routines require normally distributed data. The images below shows normally and non-normally distributed sample distributions as histograms/step charts
+	</para>
+	<para>
+		<inlinemediaobject>
+			<imageobject>
+				<imagedata fileref="../../images/distributions.png" align="center" valign="middle"/>
+				
+			</imageobject>
+		</inlinemediaobject>
+		<para>Image source: <ulink url="http://www.biostathandbook.com/normality.html">http://www.biostathandbook.com/normality.html</ulink></para>
+	</para>
+	<para>
+		or as boxplots.
+	</para>
+	<para>
+			<inlinemediaobject>
+				<imageobject>
+					<imagedata fileref="../../images/normality_box-plot.png" align="center" valign="middle"/>
+				</imageobject>
+			</inlinemediaobject>
+			<para>Image source: <ulink url="https://upload.wikimedia.org/wikipedia/commons/9/94/Normality_box-plot.png">Wikimedia</ulink></para>
+		</para>
+		<para>
+			Boxplots or histograms are useful to distinguish normal from non-normally distributed data but they are sometimes hard to interpret by unexperienced users and limited on small sample sizes smaller than 20 values. For this sizes "<link linkend="ST_ivplot">Individual Value Plots</link>" are more significant.
+		</para>
+		<para>
+		<inlinemediaobject>
+				<imageobject>
+					<imagedata fileref="../../images/ivplot.png" align="center" valign="middle"/>
+				</imageobject>
+			</inlinemediaobject>
+		</para>
+	<para>
+		In general, the test for normality can be achieved by applying a goodness-of-fit method (i.e. chi-square test, or Kolmogorov-Smirnov test). These two tests, however, do not perform well (the power of these tests is not too high). Therefore some other tests have been developed, which have various advantages but also some drawbacks: the power of the Shapiro-Wilk test is good, but the calculation procedure is rather cumbersome but thanks to SampleSTAT easy to do now. It returns easy to interpret results: True (normal distribution) or false (non-normal distribution).
     </para>
 	</refsection>
 	<refsection>
 		<title>Shapiro-Wilk (ST_shapirowilk)</title>
 		<para>
-		The Shapiro-Wilk test is a test for normal distribution exhibiting high power, leading to good results even with a small number of observations. In contrast to other comparison tests the Shapiro-Wilk test is only applicable to check for normality. 
+		The Shapiro-Wilk test is a statistical significance test that tests the hypothesis that the underlying population of a sample is normally distributed. The Shapiro-Wilk test exhibiting high power, leading to good results even with a small number of observations. In contrast to other comparison tests the Shapiro-Wilk test is only applicable to check for normality. 
 	</para>
+	<para>
+		The test can be used for sample sizes from 3 to 50 values.
+	</para>
+	<para>
+		<caution><para>
+			The test reacts very sensitively to outliers, both for one-sided and two-sided ones. Outliers can strongly distort the distribution pattern so that the normal distribution assumption could be erroneously rejected.
+		</para><para>
+		The test is relatively susceptible to Ties, i.e. if there are many identical values, the test strength is strongly affected.
+		</para></caution>
+	</para> 
+	<para>
+		<important><para>
+			Although the Shapiro-Wilk test has a big test strength, especially for smaller sample sizes, it should not be used blindfolded for the reasons mentioned above. 
+		</para>
+		<para>Check the results graphically with histogram, QQ-plot or box-plot. The latter two are provided in the toolbox STIXBOX.</para></important>
+	</para> 
 		<para>
 The basis idea behind the Shapiro-Wilk test is to estimate the variance of the sample in two ways: (1) the regression line in the QQ-Plot allows to estimate the variance, and (2) the variance of the sample can also be regarded as an estimator of the population variance. Both estimated values should approximately equal in the case of a normal distribution and thus should result in a quotient of close to 1.0. If the quotient is significantly lower than 1.0 then the null hypothesis (of having a normal distribution) should be rejected.
     </para>
@@ -34,7 +83,7 @@ The basis idea behind the Shapiro-Wilk test is to estimate the variance of the s
 		<para>
 			<orderedlist>
 				<listitem>
-					<para>The sample of size n (x1,x2,...xn) has to be sorted in increasing order, the resulting sorted sample will be designated by y1,y2,...yn (y1 &lt; y2 &lt; ... &lt; yn). </para>
+					<para>The sample of size n (x<subscript>1</subscript>,x<subscript>2</subscript>,...x<subscript>n</subscript>) has to be sorted in increasing order, the resulting sorted sample will be designated by y<subscript>1</subscript>,y<subscript>2</subscript>,...y<subscript>n</subscript> (y<subscript>1</subscript> &lt; y<subscript>2</subscript> &lt; ... &lt; y<subscript>n</subscript>). </para>
 				</listitem>
 				<listitem>
 					<para>Calculate the sum</para>
@@ -77,7 +126,39 @@ W = \frac{b^2}{S^2} \, ;
 			</orderedlist>
 		</para>
 		<para>
-		If the test statistic W is smaller than the critical threshold (see table below) the assumption of a normal distribution has to be rejected. ST_shapiriwilk returns %T  (true) if the data is normal distributed and %F (false) if not.
+		If the test statistic W is smaller than the critical threshold the assumption of a normal distribution has to be rejected. <link linkend="ST_shapirowilk">ST_shapiriwilk</link> returns %T  (true) if the data is normally distributed and %F (false) if not.
+	</para>
+	</refsection>
+	<refsection>
+	<title>ST_ivplot - EXPERIMENTAL</title>
+	<para>
+	Individual value plots (IVP) are well suited for evaluating and comparing 
+    distributions of sample data. A IVP displays a point for the actual value 
+    of each observation in a group, making it easy to identify outliers and 
+    see the dispersion of the distribution. A IVP is especially recommended 
+    for small sample sizes in comparison to histograms, box-plots and QQ-plots,
+    which need at least 20 values to be significant.
+	</para>
+	<para>
+	Therefore IVPs are well suited to test very small sample sizes on normal 
+    distribution when outliers or ties could be present and the Shapiro-Wilk 
+    distribution test cannot be reliably applied. 
+	</para>
+	<para>
+			<inlinemediaobject>
+				<imageobject>
+					<imagedata fileref="../../images/ivplot_single.png" align="center" valign="middle"/>
+				</imageobject>
+			</inlinemediaobject>
+		</para>
+	<para>
+	If your sample size is larger than 50 values you should use a histogram or box-plot instead.
+	</para>
+	<para>
+	<note><para>
+    Please be advised that ST_ivplot is EXPERIMENTAL and very basic. It can 
+    just handle one data set at a time at the moment. 
+    </para></note>
 	</para>
 	</refsection>
 	<refsection>
@@ -88,11 +169,11 @@ W = \frac{b^2}{S^2} \, ;
 	</refsection>
 	<refsection>
 		<title>Credits</title>
-		<para>Most of the text and images are from Lohringer, H., "Fundamentals of Statistics", Oct, 10th, 2012, <ulink url="http://www.statistics4u.info/fundstat_eng/">http://www.statistics4u.info/fundstat_eng/</ulink></para>
+		<para>Most of the text and one image are from Lohringer, H., "Fundamentals of Statistics", Oct, 10th, 2012, <ulink url="http://www.statistics4u.info/fundstat_eng/">http://www.statistics4u.info/fundstat_eng/</ulink></para>
 	</refsection>
 	<refsection>
 		<title>Bibliography</title>
 		<para>Lohringer, H., "Grundlagen der Statistik", Oct, 10th, 2012, http://www.statistics4u.info/"</para>
-		<para>R. Kaiser, G. Gottschalk; "Elementare Tests zur Beurteilung von Meßdaten", BI Hochschultaschenbücher, Bd. 774, Mannheim 1972.</para>
+		<para>Shapiro, Wilk: "An Analysis of Variance Test for Normality", Biometrika, Vol. 52, No. 3/4. (Dec., 1965), pp. 591-611.</para>
 	</refsection>
 </refentry>

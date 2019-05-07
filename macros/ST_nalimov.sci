@@ -14,7 +14,7 @@
 // this program; if not, see <http://www.gnu.org/licenses/>.
 
 function [outlierfree, outlier] = ST_nalimov(v, p)
-    // Performs a Nalimov outlier test. 
+    // Nalimov outlier test 
     //
     // Calling Sequence
     //   [outlierfree] = ST_nalimov(v, p)

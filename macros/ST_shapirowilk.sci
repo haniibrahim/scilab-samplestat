@@ -1,4 +1,85 @@
-function [normal] = ST_shapirowilk(v, p)
+// Copyright (C) 2019 Hani Andreas Ibrahim
+//
+// This program is free software; you can redistribute it and/or modify it under
+// the terms of the GNU General Public License as published by the Free Software
+// Foundation; either version 3 of the License, or (at your option) any later
+// version.
+//
+// This program is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+// FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+// details.
+//
+// You should have received a copy of the GNU General Public License along with
+// this program; if not, see <http://www.gnu.org/licenses/>.
+
+function [normal] = ST_shapirowilk(v, p)   
+    // Shapiro-Wilk test of normality 
+    //
+    // Calling Sequence
+    //   [normal] = ST_shapirowilk(v, p)
+    //
+    // Parameters
+    // v: m-by-1 or 1-by-n matrix of doubles
+    // p: statistical confidence level (%) as a string or the level of significance (alpha) as a decimal value, "90%", "95%", "99%" or 0.1, 0.05, 0.01 resp. (see examples).
+    // normal: Returns %T if sample distribution is normally distributed or %F if not. 
+    //
+    // Description
+    // The Shapiro-Wilk test is a statistical significance test that tests the 
+    // hypothesis that the underlying population of a sample is normally 
+    // distributed.
+    //
+    // The Shapiro-Wilk test exhibiting high power, leading to good results 
+    // even with a small number of observations. In contrast to other comparison 
+    // tests the Shapiro-Wilk test is only applicable to check for normality. 
+    //
+    // The test can be used for sample sizes from 3 to 50 values.
+    //
+    // The theory behind Shapiro-Wilk can be find at 
+    // <link linkend="distribution_overview">Distribution Overview</link>.
+    //
+    // <caution><para>
+    // The test reacts very sensitively to outliers, both for one-sided and 
+    // two-sided ones. Outliers can strongly distort the distribution pattern so 
+    // that the normal distribution assumption could be erroneously rejected.
+    // </para><para>
+    // The test is relatively susceptible to Ties, i.e. if there are many identical 
+    // values, the test strength is strongly affected.
+    // </para></caution>
+    //
+    // <important><para>
+    // Although the Shapiro-Wilk test has a big test strength, especially for 
+    // smaller sample sizes, it should not be used blindfolded for the reasons 
+    // mentioned above. 
+    // </para>
+    // <para>
+    // Check the results graphically with histogram, QQ-plot or box-plot. The 
+    // latter two are provided in the toolbox STIXBOX.
+    // </para></important>
+    //
+    // Examples
+    // data1 = [200, 545, 290, 165, 190, 355, 185, 205, 175, 255];
+    // normal = ST_shapirowilk(data1, "95%") // normal = %F => non-normally distr.
+    // histplot(round(sqrt(length(data1))),data1); // histogram shows right skewed data
+    // xtitle("data1")
+    // scf();
+    // data2 = [-15.6, -21.6, -19.5, -19.1, -20.9, -20.7, -19.3, -18.3, -15.1]; 
+    // normal = ST_shapirowilk(data2, "95%") // normal = %T => normallly distributed
+    // histplot(round(sqrt(length(data2))),data2); 
+    // xtitle("data2")
+    //
+    // See also
+    //  ST_deandixon
+    //  ST_pearsonhartley
+    //  ST_nalimov
+    //  ST_strayarea
+    //  ST_trustarea
+    //
+    // Authors
+    //  Hani A. Ibrahim - hani.ibrahim@gmx.de
+    //
+    // Bibliography
+    // 
 
     // === FUNCTIONS ===========================================================
 
@@ -116,18 +197,25 @@ function [normal] = ST_shapirowilk(v, p)
     endfunction
 
     // === MAIN ================================================================
-    //  // Checking arguments
-    //  if (nargin < 2 || nargin > 2); print_usage(); endif
-    //  if (~isnumeric(v) || ~isvector(v)); error("First argument has to be a numeric vector\n"); endif
-    //  if ~(strcmp(p,"90%") || strcmp(p,"95%") || strcmp(p,"99%") || p != 0.10 || p != 0.05 || p != 0.01)
-    //    error("Second argument is the statistical confidence level and has to be a string, \
-    //as \"90%\", \"95%\", \"99%\" or as a alpha value: 0.10, 0.05, 0.01");
-    //  endif
+
+    // Check arguments
+    [lhs,rhs]=argn()
+    apifun_checkrhs("ST_shapirowilk", rhs, 2); // Input args
+    apifun_checklhs("ST_shapirowilk", lhs, 1:2); // Output args
+    apifun_checkvector("ST_shapirowilk", v, "v", 1); // Vector?
+    apifun_checktype ("ST_shapirowilk", v, "v", 1, "constant"); //Double?
+    apifun_checkscalar("ST_shapirowilk", p, "p", 1); // Scalar?
+    if string(p)~="90%" & string(p)~="95%" & string(p)~="99%" & p ~= 0.10 & p ~= 0.05 & p ~= 0.01
+        error(msprintf("%s: Second argument is the statistical confidence level and has to be a string, as 90%%, 95%% or 99%%" + ..
+        " or as alpha value: 0.1, 0.05, 0.01", "ST_shapirowilk"));
+    end
+
     n = length(v);
-    //  if (n < 3 || n > 50)
-    //    error("Shapiro-Wilk normal distribution test is just applicable for sample distributions \
-    //greater than 3 and lesser than 50 values."); 
-    //  end
+
+    if (n < 3 | n > 50) then
+        error(msprintf("Shapiro-Wilk normal distribution test is just applicable for " + ..
+        "sample distributions greater than 3 and lesser than 50 values.")); 
+    end
 
     // sort data ascendingly
     v = gsort(v);

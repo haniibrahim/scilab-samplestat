@@ -119,7 +119,9 @@ Description: Toolbox for statistics of normal distributed univariate samples.
  
    * ST_shapirowilk: 
      Shapiro-Wilk test for normality is powerful even on small
-	 sample sizes. 
+	 sample sizes.
+   * ST_ivplot:
+     Very basic individual value plot (EXPERIMENTAL) 
          
  ---------------------------------------------------------------------
    
@@ -128,6 +130,7 @@ Description: Toolbox for statistics of normal distributed univariate samples.
 	2.0.0  - Outlier tests (Dean-Dixon, Pearson-Hartley, Nalimov) and 
 	         a basic test added
 	       - Distribution tests (Shapiro-Wilk, Skewness) added
+           - Individual Value Plot added (EXPERIMENTAL)
    
  ---------------------------------------------------------------------
  

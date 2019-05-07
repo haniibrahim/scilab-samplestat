@@ -46,7 +46,7 @@ function [outlierfree, outlier] = ST_outlier(v, mod)
     //
     // IQR-MODES:Testing on outliers with interquartile range (IQR) distance is
     // recommended for skewed data in the first place. But it is also applicaple
-    // for normal distributed data.
+    // for normally distributed data.
     //
     // IQR15-MODE: It is common to consider a value an outlier when it is more 
     // than 1.5xIQR (inter-quartile range) off from the lower or upper quartile.  

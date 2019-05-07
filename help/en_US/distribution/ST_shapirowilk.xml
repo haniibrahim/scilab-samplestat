@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ *
+ * This help file was generated from ST_shapirowilk.sci using help_from_sci().
+ *
+ -->
+
+<refentry version="5.0-subset Scilab" xml:id="ST_shapirowilk" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns3="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:scilab="http://www.scilab.org"
+          xmlns:db="http://docbook.org/ns/docbook">
+
+  <refnamediv>
+    <refname>ST_shapirowilk</refname>
+    <refpurpose>Shapiro-Wilk test of normality</refpurpose>
+  </refnamediv>
+
+
+<refsynopsisdiv>
+   <title>Calling Sequence</title>
+   <synopsis>
+   [normal] = ST_shapirowilk(v, p)
+   
+   </synopsis>
+</refsynopsisdiv>
+
+<refsection>
+   <title>Parameters</title>
+   <variablelist>
+   <varlistentry><term>v:</term>
+      <listitem><para> m-by-1 or 1-by-n matrix of doubles</para></listitem></varlistentry>
+   <varlistentry><term>p:</term>
+      <listitem><para> statistical confidence level (%) as a string or the level of significance (alpha) as a decimal value, "90%", "95%", "99%" or 0.1, 0.05, 0.01 resp. (see examples).</para></listitem></varlistentry>
+   <varlistentry><term>normal:</term>
+      <listitem><para> Returns %T if sample distribution is normally distributed or %F if not.</para></listitem></varlistentry>
+   </variablelist>
+</refsection>
+
+<refsection>
+   <title>Description</title>
+   <para>
+The Shapiro-Wilk test is a statistical significance test that tests the
+hypothesis that the underlying population of a sample is normally
+distributed.
+   </para>
+   <para>
+The Shapiro-Wilk test exhibiting high power, leading to good results
+even with a small number of observations. In contrast to other comparison
+tests the Shapiro-Wilk test is only applicable to check for normality.
+   </para>
+   <para>
+The test can be used for sample sizes from 3 to 50 values.
+   </para>
+   <para>
+The theory behind Shapiro-Wilk can be find at
+<link linkend="distribution_overview">Distribution Overview</link>.
+   </para>
+   <para>
+<caution><para>
+The test reacts very sensitively to outliers, both for one-sided and
+two-sided ones. Outliers can strongly distort the distribution pattern so
+that the normal distribution assumption could be erroneously rejected.
+</para><para>
+The test is relatively susceptible to Ties, i.e. if there are many identical
+values, the test strength is strongly affected.
+</para></caution>
+   </para>
+   <para>
+<important><para>
+Although the Shapiro-Wilk test has a big test strength, especially for
+smaller sample sizes, it should not be used blindfolded for the reasons
+mentioned above.
+</para>
+<para>
+Check the results graphically with histogram, QQ-plot or box-plot. The
+latter two are provided in the toolbox STIXBOX.
+</para></important>
+   </para>
+   <para>
+</para>
+</refsection>
+
+<refsection>
+   <title>Examples</title>
+   <programlisting role="example"><![CDATA[
+data1 = [200, 545, 290, 165, 190, 355, 185, 205, 175, 255];
+normal = ST_shapirowilk(data1, "95%") // normal = %F => non-normally distr.
+histplot(round(sqrt(length(data1))),data1); // histogram shows right skewed data
+xtitle("data1")
+scf();
+data2 = [-15.6, -21.6, -19.5, -19.1, -20.9, -20.7, -19.3, -18.3, -15.1];
+normal = ST_shapirowilk(data2, "95%") // normal = %T => normallly distributed
+histplot(round(sqrt(length(data2))),data2);
+xtitle("data2")
+
+   ]]></programlisting>
+</refsection>
+
+<refsection>
+   <title>See also</title>
+   <simplelist type="inline">
+   <member><link linkend="ST_deandixon">ST_deandixon</link></member>
+   <member><link linkend="ST_pearsonhartley">ST_pearsonhartley</link></member>
+   <member><link linkend="ST_nalimov">ST_nalimov</link></member>
+   <member><link linkend="ST_strayarea">ST_strayarea</link></member>
+   <member><link linkend="ST_trustarea">ST_trustarea</link></member>
+   </simplelist>
+</refsection>
+
+<refsection>
+   <title>Authors</title>
+   <simplelist type="vert">
+   <member>Hani A. Ibrahim - hani.ibrahim@gmx.de</member>
+   </simplelist>
+</refsection>
+
+<refsection>
+   <title>Bibliography</title>
+</refsection>
+</refentry>

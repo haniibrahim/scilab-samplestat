@@ -36,8 +36,8 @@ function distribution_demo()
     
     // Check for normal distribution
     // -- Plot histogram
-    nclass = round(sqrt(n)) // number of classes for the histogram, Rule of thumb: sqrt(n)
-    histplot(nclass,dat1,style=2);
+    nbin = round(sqrt(n)) // number of bins for the histogram, Rule of thumb: sqrt(n)
+    histplot(nbin,dat1,style=2);
     // -- Perform Shapiro-Wilk test with 95% confidence level
     normality = ST_shapirowilk(dat1, "95%"); // %T=normal distributed %F=not normal distributed
     disp("Check for normality via Shapiro-Wilk: normality = " + string(normality))

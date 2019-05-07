@@ -5,6 +5,7 @@ samplestat (v2.0.0)
    - Nalimov
  * Distribution tests added
    - Shapiro-Wilk
+   - Very basic individual value plot added
 
 sampleStat (v1.0.0)
  * SS_ prefix changed to ST_

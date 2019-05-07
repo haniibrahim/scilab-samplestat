@@ -17,7 +17,7 @@
 
   <refnamediv>
     <refname>ST_nalimov</refname>
-    <refpurpose>Performs a Nalimov outlier test.</refpurpose>
+    <refpurpose>Nalimov outlier test</refpurpose>
   </refnamediv>
 
 

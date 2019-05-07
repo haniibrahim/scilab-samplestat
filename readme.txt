@@ -71,6 +71,8 @@
    * ST_shapirowilk: 
      Shapiro-Wilk test for normality is powerful even on small
 	 sample sizes.  
+   * ST_ivplot:
+     Very basic individual value plot (EXPERIMENTAL)
          
  ---------------------------------------------------------------------
    
@@ -78,8 +80,8 @@
  	
 	2.0.0  - Outlier tests (Dean-Dixon, Pearson-Hartley, Nalimov) and 
 	         a basic test added
-		   - Skewness calculation added
 	       - Distribution tests (Shapiro-Wilk, Skewness) added
+           - Individual Value Plot added (EXPERIMENTAL)
     
  LITERATURE:
  

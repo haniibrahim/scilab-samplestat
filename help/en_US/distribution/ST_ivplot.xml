@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ *
+ * This help file was generated from ST_ivplot.sci using help_from_sci().
+ *
+ -->
+
+<refentry version="5.0-subset Scilab" xml:id="ST_ivplot" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns3="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:scilab="http://www.scilab.org"
+          xmlns:db="http://docbook.org/ns/docbook">
+
+  <refnamediv>
+    <refname>ST_ivplot</refname>
+    <refpurpose>Very basic Individual Value Plot (EXPERIMENTAL)</refpurpose>
+  </refnamediv>
+
+
+<refsynopsisdiv>
+   <title>Calling Sequence</title>
+   <synopsis>
+   ST_ivplot(v)
+   ST_ivplot(v, datname)
+   
+   </synopsis>
+</refsynopsisdiv>
+
+<refsection>
+   <title>Parameters</title>
+   <variablelist>
+   <varlistentry><term>v:</term>
+      <listitem><para> n-by-1 or 1-by-m matrix of doubles, numerical values (n>10, better n>25)</para></listitem></varlistentry>
+   <varlistentry><term>datname:</term>
+      <listitem><para> 1-by-1 matrix of strings, name of the data, displayed unter the data set in the graph</para></listitem></varlistentry>
+   </variablelist>
+</refsection>
+
+<refsection>
+   <title>Description</title>
+   <para>
+Individual value plots (IVP) are well suited for evaluating and comparing
+distributions of sample data. A IVP displays a point for the actual value
+of each observation in a group, making it easy to identify outliers and
+see the dispersion of the distribution. A IVP is especially recommended
+for small sample sizes in comparison to histograms, box-plots and QQ-plots,
+which need at least 20 values to be significant.
+   </para>
+   <para>
+<inlinemediaobject>
+<imageobject>
+<imagedata fileref="../../images/ivplot.png" align="center" valign="middle"/>
+</imageobject>
+</inlinemediaobject>
+   </para>
+   <para>
+Therefore IVPs are well suited to test very small sample sizes on normal
+distribution when outliers or ties could be present and the Shapiro-Wilk
+distribution test cannot be reliably applied.
+   </para>
+   <para>
+<note><para>
+Please be advised that ST_ivplot is EXPERIMENTAL and very basic. It can
+just handle one data set at a time at the moment.
+</para><para>
+ST_ivplot uses Scilab's plot()-function and graphs can be adjusted with the
+well-known commands (e.g. title, ylabel, etc).
+</para></note>
+   </para>
+   <para>
+</para>
+</refsection>
+
+<refsection>
+   <title>Examples</title>
+   <programlisting role="example"><![CDATA[
+data1 = [9.999  9.998  10.002  10.  10.001  10.];
+data2 = [30.41 30.05 30.49 29.22 30.40 30.42];
+ST_ivplot(data1, "Normal Distribution")
+scf();
+ST_ivplot(data2, "Non-Normal Distribution")
+
+   ]]></programlisting>
+</refsection>
+
+<refsection>
+   <title>See also</title>
+   <simplelist type="inline">
+   <member><link linkend="ST_outlier">ST_outlier</link></member>
+   <member><link linkend="ST_deandixon">ST_deandixon</link></member>
+   <member><link linkend="ST_pearsonhartley">ST_pearsonhartley</link></member>
+   <member><link linkend="ST_nalimov">ST_nalimov</link></member>
+   <member><link linkend="ST_strayarea">ST_strayarea</link></member>
+   <member><link linkend="ST_trustarea">ST_trustarea</link></member>
+   <member><link linkend="ST_shapirowilk">ST_shapirowilk</link></member>
+   </simplelist>
+</refsection>
+
+<refsection>
+   <title>Authors</title>
+   <simplelist type="vert">
+   <member>Hani A. Ibrahim - hani.ibrahim@gmx.de</member>
+   </simplelist>
+</refsection>
+
+<refsection>
+   <title>Bibliography</title>
+   <para>Lohringer, H., "Grundlagen der Statistik", Oct, 10th, 2012, http://www.statistics4u.info/fundstat_germ/cc_outlier_tests_4sigma.html</para>
+</refsection>
+</refentry>

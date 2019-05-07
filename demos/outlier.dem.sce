@@ -21,15 +21,43 @@
 // License: GPL 3.0
 
 function outlier_demo()
-    
-    
+    clc;
+    dat1 = [ ..
+    30.41 30.05 30.49 29.22 30.40 30.42 ..
+    ]
+
+    n = length(dat1); // Sample size
+
+    // Plot individual value plot because of sample size
+    ST_ivplot(dat1,"values") // EXPERIMENTAL
+
+    // 6 values only => Dean-Dixon test is best
+    // of: oulier-free values
+    // o : outliers
+    [of095, o095] = ST_deandixon(dat1, "95%");
+    [of099, o099] = ST_deandixon(dat1, "99%");
+    [of999, o999] = ST_deandixon(dat1, "99.9%");
+
+    // Output
+
+    disp("Outliertest for a sample size of 6 values => Dean-Dixon test and individual value plot is recommended")
+
+    disp("Values:")
+    disp(dat1')
+
+    disp("Dean-Dixon-Outliers 95% confidence level  : " + string(o095) + " (probable outliers)")
+    disp("Dean-Dixon-Outliers 99% confidence level  : " + string(o099) + " (significant outliers)")
+    disp("Dean-Dixon-Outliers 99.9% confidence level: " + string(o999) + " (highly significant outliers")
+
+    disp("Outlier(s): " + string(o095) + " does show up at 95% confidence level only, therefore it is a probable outlier.")
+
     //
     // Load this script into the editor
     //
     filename = "outlier.dem.sce";
     dname = get_absolute_file_path(filename);
     editor ( fullfile(dname,filename) );
-    
+
 endfunction
 
 // Main
