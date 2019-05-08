@@ -5,7 +5,8 @@ function subdemolist = demo_gateway()
     demopath = get_absolute_file_path("samplestat.dem.gateway.sce");
 
     subdemolist = [
-	"SampleSTAT-Demo", "samplestat.dem.sce"; ..
+	"Range of dispersion (stray/trustarea)", "samplestat.dem.sce"; ..
+    "Outlier", "outlier.dem.sce"; ..
 	];
 
     subdemolist(:,2) = demopath + subdemolist(:,2);

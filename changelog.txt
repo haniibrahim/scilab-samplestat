@@ -1,3 +1,12 @@
+samplestat (v2.0.0)
+ * Outlier tests added:
+   - Dean-Dixon
+   - Pearson-Hartley
+   - Nalimov
+ * Distribution tests added
+   - Shapiro-Wilk
+   - Very basic individual value plot added
+
 sampleStat (v1.0.0)
  * SS_ prefix changed to ST_
  * help-files

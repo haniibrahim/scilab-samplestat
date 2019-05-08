@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ *
+ * This help file was generated from ST_deandixon.sci using help_from_sci().
+ *
+ -->
+
+<refentry version="5.0-subset Scilab" xml:id="ST_deandixon" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns3="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:scilab="http://www.scilab.org"
+          xmlns:db="http://docbook.org/ns/docbook">
+
+  <refnamediv>
+    <refname>ST_deandixon</refname>
+    <refpurpose>Basic Dean-Dixon outlier test</refpurpose>
+  </refnamediv>
+
+
+<refsynopsisdiv>
+   <title>Calling Sequence</title>
+   <synopsis>
+   [outlierfree] = ST_deandixon(v, p)
+   [outlierfree, outlier] = ST_deandixon(v, p)
+   
+   </synopsis>
+</refsynopsisdiv>
+
+<refsection>
+   <title>Parameters</title>
+   <variablelist>
+   <varlistentry><term>v:</term>
+      <listitem><para> vector of numerical values</para></listitem></varlistentry>
+   <varlistentry><term>p:</term>
+      <listitem><para> statistical confidence level (%) as a string or the level of significance (alpha) as a decimal value, "95%", "99%", "99.9%" or 0.05, 0.01, 0.001 resp (see examples).</para></listitem></varlistentry>
+   <varlistentry><term>outlierfree:</term>
+      <listitem><para> vector of outlier-free data</para></listitem></varlistentry>
+   <varlistentry><term>outlier:</term>
+      <listitem><para> vector of outliers</para></listitem></varlistentry>
+   </variablelist>
+</refsection>
+
+<refsection>
+   <title>Description</title>
+   <para>
+Performs the basic Dean-Dixon outlier test. It sorts the distribution in
+ascending or descending order, then takes the minimum and maximum values
+(xi) and calculates the respective Q value for both xi values. This is
+compared with the critical value from a table (Qcrit). If one of the two
+or both Q values greater than the corresponding Qcrit value, one orboth
+xi values are outliers.
+   </para>
+   <para>
+<latex>
+\begin{eqnarray}
+Q = \left | x_{i+1}-x_i \right |/\left | x_n-x_i \right | \quad ; \quad Q &gt; Q_{crit} \quad \Rightarrow \quad x_i = \text{outlier}
+\end{eqnarray}
+</latex>
+   </para>
+   <para>
+Only one outlier can be found on each side.
+   </para>
+   <para>
+<important><para>
+Apply this test ONLY one time to your data.
+</para></important>
+   </para>
+   <para>
+<important><para>
+Do use ST_deandixon ONLY with NORMAL distributed data and
+with more than 3 and less than 30 values! For more than 30 values use
+Pearson-Hartley test ""ST_pearsonhartley()"" instead.
+</para></important>
+   </para>
+   <para>
+</para>
+</refsection>
+
+<refsection>
+   <title>Examples</title>
+   <programlisting role="example"><![CDATA[
+data = [6 8 14 12 35 15];
+of = ST_deandixon(data, "95%")      // outlier-free values
+[of, o] = ST_deandixon(data, "95%") // outlier and outlier-free values
+[of, o] = ST_deandixon(data, 0.05)  // outlier and outlier-free values
+
+   ]]></programlisting>
+</refsection>
+
+<refsection>
+   <title>See also</title>
+   <simplelist type="inline">
+   <member><link linkend="ST_pearsonhartley">ST_pearsonhartley</link></member>
+   <member><link linkend="ST_nalimov">ST_nalimov</link></member>
+   <member><link linkend="ST_strayarea">ST_strayarea</link></member>
+   <member><link linkend="ST_trustarea">ST_trustarea</link></member>
+   <member><link linkend="ST_shapirowilk">ST_shapirowilk</link></member>
+   <member><link linkend="ST_ivplot">ST_ivplot</link></member>
+   </simplelist>
+</refsection>
+
+<refsection>
+   <title>Authors</title>
+   <simplelist type="vert">
+   <member>Hani A. Ibrahim - hani.ibrahim@gmx.de</member>
+   </simplelist>
+</refsection>
+
+<refsection>
+   <title>Bibliography</title>
+   <para>Lohringer, H., "Grundlagen der Statistik", Oct, 10th, 2012, http://www.statistics4u.info/fundstat_germ/cc_outlier_tests_4sigma.html</para>
+</refsection>
+</refentry>

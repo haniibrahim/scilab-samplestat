@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ *
+ * This help file was generated from ST_outlier.sci using help_from_sci().
+ *
+ -->
+
+<refentry version="5.0-subset Scilab" xml:id="ST_outlier" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns3="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:scilab="http://www.scilab.org"
+          xmlns:db="http://docbook.org/ns/docbook">
+
+  <refnamediv>
+    <refname>ST_outlier</refname>
+    <refpurpose>Basic outlier tests for normal distributions</refpurpose>
+  </refnamediv>
+
+
+<refsynopsisdiv>
+   <title>Calling Sequence</title>
+   <synopsis>
+   [outlierfree] = ST_outlier(v)
+   [outlierfree] = ST_outlier(v, mod)
+   [outlierfree, outlier] = ST_outlier(v)
+   [outlierfree, outlier] = ST_outlier(v, mod)
+   
+   </synopsis>
+</refsynopsisdiv>
+
+<refsection>
+   <title>Parameters</title>
+   <variablelist>
+   <varlistentry><term>v:</term>
+      <listitem><para> n-by-1 or 1-by-m matrix of doubles, numerical values (n>10, better n>25)</para></listitem></varlistentry>
+   <varlistentry><term>mod:</term>
+      <listitem><para> 1-by-1 matrix of strings, "sd" "iqr15"or "iqr30" mode</para></listitem></varlistentry>
+   <varlistentry><term>outlierfree:</term>
+      <listitem><para> n-by-1 or 1-by-m matrix of doubles, outlier-free data</para></listitem></varlistentry>
+   <varlistentry><term>outlier:</term>
+      <listitem><para> n-by-1 or 1-by-m matrix of doubles, outliers</para></listitem></varlistentry>
+   </variablelist>
+</refsection>
+
+<refsection>
+   <title>Description</title>
+   <para>
+Performs basic outlier tests.
+   </para>
+   <para>
+SD-MODE: If you have a normal, symetric and unimodal distribution you
+can use the "sd" mode (population standard deviation, S.D. or sigma). In this mode
+a value is presented as an outlier when it is more than 2.5xS.D. off
+the arithmetic mean in both directions.
+   </para>
+   <para>
+<latex>
+\begin{eqnarray}
+(\bar{x} - 2.5\sigma) &gt; x_i &gt; (\bar{x} + 2.5\sigma) \; \text{with} \quad \sigma = \sqrt{{1 \over n}\sum_{i=1}^{n}(x_i-\bar{x})^2} \quad \Rightarrow \quad x_i = \text{outlier}\\
+x_i: \text{value} \quad ; \quad \bar{x}: \text{arithmetic mean} \\
+\sigma: \text{population standard deviation} \quad ; \quad n: \text{number of values}
+\end{eqnarray}
+</latex>
+   </para>
+   <para>
+IQR-MODES:Testing on outliers with interquartile range (IQR) distance is
+recommended for skewed data in the first place. But it is also applicaple
+for normally distributed data.
+   </para>
+   <para>
+IQR15-MODE: It is common to consider a value an outlier when it is more
+than 1.5xIQR (inter-quartile range) off from the lower or upper quartile.
+The "iqr15"-mode make use of this.
+   </para>
+   <para>
+IQR30-MODE: But with a border of 1,5xIQR 0.7% of the distribution can be
+expected as an outlier automatically. This means that a distribution of 143
+values or more could have at least one outlier in any case. To avoid this,
+values between 1.5xIQR and 3.0xIQR from the lower or upper quartile are
+called extreme values or weak outliers and just values outside of 3.0xIQR
+are strong outliers. SampleSTAT toolbox take care of this by introducing
+the "iqr30" mode.
+   </para>
+   <para>
+<latex>
+\begin{eqnarray}
+IQR = x_{0.75} - x_{0.25} \\
+(x_{0.25} - 1.5 \cdot IQR)  &lt; x_i &lt; (x_{0.25} + 1.5 \cdot IQR)  \quad \Rightarrow \quad x_i = \text{outliers (iqr15 mode)} \\
+(x_{0.25} - 3.0 \cdot IQR)  &lt; x_i &lt; (x_{0.25} + 3.0 \cdot IQR)  \quad \Rightarrow \quad x_i = \text{strong outlier (iqr30 mode)}
+\end{eqnarray}
+</latex>
+   </para>
+   <para>
+<important><para>
+Do use ST_outlier "sd" mode ONLY with NORMAL distributed data and
+with more than 10 or better more than 25 values! Use ST_deandixon
+(or ST_nalimov) for distributions with lower number of values.
+</para></important>
+   </para>
+   <para>
+</para>
+</refsection>
+
+<refsection>
+   <title>Examples</title>
+   <programlisting role="example"><![CDATA[
+data = [
+0.4827129   0.3431706  -0.4127328    0.3843994 ..
+-0.7107495  -0.2547306   0.0290803    0.1386087 ..
+-0.7698385   1.0743628   1.0945652    0.4365680 ..
+-0.5913411  -0.7426987   1.609719     0.8079680 ..
+-2.1700554  -4.7361261   0.0069708    14.626386 ..
+-2.5036545  -2.9046385 ..
+];
+of = ST_outlier(data')      // outlier-free values with sd-mode
+[of, o] = ST_outlier(data', "sd")  // outlier and outlier-free values
+[of15, o15] = ST_outlier(data', "iqr15")  // outlier and outlier-free values
+[of30, o30] = ST_outlier(data', "iqr30")  // outlier and outlier-free values
+
+   ]]></programlisting>
+</refsection>
+
+<refsection>
+   <title>See also</title>
+   <simplelist type="inline">
+   <member><link linkend="ST_nalimov">ST_nalimov</link></member>
+   <member><link linkend="ST_deandixon">ST_deandixon</link></member>
+   <member><link linkend="ST_pearsonhartley">ST_pearsonhartley</link></member>
+   <member><link linkend="ST_strayarea">ST_strayarea</link></member>
+   <member><link linkend="ST_trustarea">ST_trustarea</link></member>
+   <member><link linkend="ST_shapirowilk">ST_shapirowilk</link></member>
+   </simplelist>
+</refsection>
+
+<refsection>
+   <title>Authors</title>
+   <simplelist type="vert">
+   <member>Hani A. Ibrahim - hani.ibrahim@gmx.de</member>
+   </simplelist>
+</refsection>
+
+<refsection>
+   <title>Bibliography</title>
+   <para>Lohringer, H., "Grundlagen der Statistik", Oct, 10th, 2012, http://www.statistics4u.info/fundstat_germ/cc_outlier_tests_4sigma.html</para>
+</refsection>
+</refentry>

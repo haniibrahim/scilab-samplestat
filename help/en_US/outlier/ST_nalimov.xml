@@ -2,11 +2,11 @@
 
 <!--
  *
- * This help file was generated from ST_trustarea.sci using help_from_sci().
+ * This help file was generated from ST_nalimov.sci using help_from_sci().
  *
  -->
 
-<refentry version="5.0-subset Scilab" xml:id="ST_trustarea" xml:lang="en"
+<refentry version="5.0-subset Scilab" xml:id="ST_nalimov" xml:lang="en"
           xmlns="http://docbook.org/ns/docbook"
           xmlns:xlink="http://www.w3.org/1999/xlink"
           xmlns:svg="http://www.w3.org/2000/svg"
@@ -16,15 +16,16 @@
           xmlns:db="http://docbook.org/ns/docbook">
 
   <refnamediv>
-    <refname>ST_trustarea</refname>
-    <refpurpose>Determines the range of dispersion of the mean.</refpurpose>
+    <refname>ST_nalimov</refname>
+    <refpurpose>Nalimov outlier test</refpurpose>
   </refnamediv>
 
 
 <refsynopsisdiv>
    <title>Calling Sequence</title>
    <synopsis>
-   trustval = ST_trustarea(v, p)
+   [outlierfree] = ST_nalimov(v, p)
+   [outlierfree, outlier] = ST_nalimov(v, p)
    
    </synopsis>
 </refsynopsisdiv>
@@ -36,33 +37,47 @@
       <listitem><para> vector of numerical values</para></listitem></varlistentry>
    <varlistentry><term>p:</term>
       <listitem><para> statistical confidence level (%) as a string or the level of significance (alpha) as a decimal value, "95%", "99%", "99.9%" or 0.05, 0.01, 0.001 resp (see examples).</para></listitem></varlistentry>
-   <varlistentry><term>trustval:</term>
-      <listitem><para> trust area, range of dispersion of the mean.</para></listitem></varlistentry>
+   <varlistentry><term>outlierfree:</term>
+      <listitem><para> vector of outlier-free data</para></listitem></varlistentry>
+   <varlistentry><term>outlier:</term>
+      <listitem><para> vector of outliers</para></listitem></varlistentry>
    </variablelist>
 </refsection>
 
 <refsection>
    <title>Description</title>
    <para>
-"ST_trustarea" determine the range of dispersion of the mean. It describes the
-quality of the mean and indicates the range of dispersion of the
-mean and not of the raw values as the stray area does.
+Performs Nalimov outlier test for small and larger sample sizes.
+It calculates for all values the test value "q".
+It compares these q-values with the appropriate qcrit value from a table.
    </para>
    <para>
 <latex>
 \begin{eqnarray}
-T = s \cdot t \\
-T_{\bar{x}} = T/ \sqrt{n}
+q = \left | \frac{1}{s}(x_i- \bar{x}) \right | \sqrt{\frac{n}{n-1}} \quad;\quad q>q_{crit}\;\Rightarrow \; x_i=\text{outlier} \\
+x_i: \text{test value} \quad ; \quad \bar{x}: \text{arithmetic mean} \\
+s: \text{sample standard deviation} \quad ; \quad n: \text{number of values}
 \end{eqnarray}
 </latex>
    </para>
    <para>
-T: stray area of values; s: sample standard deviation; t: student factor (dependent
-on statistical confidence level P% and degree of freedom f=n-1 with n: number of values)
+q-values of the sample values which are greater than the qcrit value are
+outliers
    </para>
    <para>
-E.g. if trustval = 1.4 at p = 95% with a mean = 10,0 the mean for
-the whole population will stray with a confidence of 95% at about 10.0 +/- 1.4.
+<important><para>
+Do use ST_nalimov ONLY with NORMAL distributed data and
+with more than 3 and less than 1000 values!
+</para></important>
+   </para>
+   <para>
+<caution><para>
+Do use ST_nalimov with care. It indicates outliers very strict and is
+controversially discussed in the scientific community. For a convervative
+outlier test substitute Nalimov with Dean-Dixon (ST_deandixon)
+small sample sizes (&lt;30) and Pearson-Hartley (ST-pearsonhartley) for
+larger ones (&gt;30).
+</para></caution>
    </para>
    <para>
 </para>
@@ -71,10 +86,10 @@ the whole population will stray with a confidence of 95% at about 10.0 +/- 1.4.
 <refsection>
    <title>Examples</title>
    <programlisting role="example"><![CDATA[
-v = [6 8 14 12 5 15];
-mean(v) // = 10.
-ST_trustarea(v, "95%") // = 4.4514
-ST_trustarea(v, 0.05)  // = 4.4514
+data = [6 8 14 12 35 15];
+of = ST_nalimov(data, "95%")      // outlier-free values
+[of, o] = ST_nalimov(data, "95%") // outlier and outlier-free values
+[of, o] = ST_nalimov(data, 0.05)  // outlier and outlier-free values
 
    ]]></programlisting>
 </refsection>
@@ -82,11 +97,10 @@ ST_trustarea(v, 0.05)  // = 4.4514
 <refsection>
    <title>See also</title>
    <simplelist type="inline">
-   <member><link linkend="ST_strayarea">ST_strayarea</link></member>
-   <member><link linkend="ST_studentfactor">ST_studentfactor</link></member>
-   <member><link linkend="ST_outlier">ST_outlier</link></member>
    <member><link linkend="ST_deandixon">ST_deandixon</link></member>
    <member><link linkend="ST_pearsonhartley">ST_pearsonhartley</link></member>
+   <member><link linkend="ST_strayarea">ST_strayarea</link></member>
+   <member><link linkend="ST_trustarea">ST_trustarea</link></member>
    <member><link linkend="ST_shapirowilk">ST_shapirowilk</link></member>
    <member><link linkend="ST_ivplot">ST_ivplot</link></member>
    </simplelist>

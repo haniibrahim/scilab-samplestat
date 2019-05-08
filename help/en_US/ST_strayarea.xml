@@ -47,6 +47,17 @@
 "ST_strayarea" determines the range of dispersion of the values. It describes the quality of the raw values.
    </para>
    <para>
+<latex>
+\begin{eqnarray}
+T = s \cdot t
+\end{eqnarray}
+</latex>
+   </para>
+   <para>
+T: stray area of values; s: sample standard deviation; t: student factor (dependent
+on statistical confidence level P% and degree of freedom f=n-1 with n: number of values)
+   </para>
+   <para>
 E.g. if strayval = 1.4 at p = 95% with a mean = 10,0 all raw
 values of the whole population will be expected with a confidence of 95% at
 about 10.0 +/- 1.4.
@@ -58,10 +69,10 @@ about 10.0 +/- 1.4.
 <refsection>
    <title>Examples</title>
    <programlisting role="example"><![CDATA[
-V = [6 8 14 12 5 15];
-mean(V) // = 10.
-strayval1 = ST_strayarea(V, "95%") // = 10.904
-strayval2 = ST_strayarea(V, 0.05)  // = 10.904
+v = [6 8 14 12 5 15];
+mean(v) // = 10.
+ST_strayarea(v, "95%") // = 10.904
+ST_strayarea(v, 0.05)  // = 10.904
 
    ]]></programlisting>
 </refsection>
@@ -71,6 +82,11 @@ strayval2 = ST_strayarea(V, 0.05)  // = 10.904
    <simplelist type="inline">
    <member><link linkend="ST_trustarea">ST_trustarea</link></member>
    <member><link linkend="ST_studentfactor">ST_studentfactor</link></member>
+   <member><link linkend="ST_outlier">ST_outlier</link></member>
+   <member><link linkend="ST_deandixon">ST_deandixon</link></member>
+   <member><link linkend="ST_pearsonhartley">ST_pearsonhartley</link></member>
+   <member><link linkend="ST_shapirowilk">ST_shapirowilk</link></member>
+   <member><link linkend="ST_ivplot">ST_ivplot</link></member>
    </simplelist>
 </refsection>
 

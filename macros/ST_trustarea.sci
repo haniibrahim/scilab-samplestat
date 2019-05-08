@@ -29,18 +29,33 @@ function trustval = ST_trustarea(v, p)
 // quality of the mean and indicates the range of dispersion of the 
 // mean and not of the raw values as the stray area does.
 //
+// <latex>
+// \begin{eqnarray}
+// T = s \cdot t \\
+// T_{\bar{x}} = T/ \sqrt{n} 
+// \end{eqnarray}
+// </latex>
+//
+// T: stray area of values; s: sample standard deviation; t: student factor (dependent 
+// on statistical confidence level P% and degree of freedom f=n-1 with n: number of values) 
+//
 // E.g. if trustval = 1.4 at p = 95% with a mean = 10,0 the mean for
 // the whole population will stray with a confidence of 95% at about 10.0 +/- 1.4.
 //
 // Examples
-// V = [6 8 14 12 5 15];
-// mean(V) // = 10.
-// trustval1 = ST_trustarea(V, "95%") // = 4.4514
-// trustval2 = ST_trustarea(V, 0.05)  // = 4.4514
+// v = [6 8 14 12 5 15];
+// mean(v) // = 10.
+// ST_trustarea(v, "95%") // = 4.4514
+// ST_trustarea(v, 0.05)  // = 4.4514
 //
 // See also
 //  ST_strayarea
 //  ST_studentfactor
+//  ST_outlier
+//  ST_deandixon
+//  ST_pearsonhartley
+//  ST_shapirowilk
+//  ST_ivplot
 //
 // Authors
 //  Hani A. Ibrahim - hani.ibrahim@gmx.de
