@@ -118,7 +118,7 @@ Description: Toolbox for statistics of normal distributed univariate samples.
    a powerful test is provided.
  
    * ST_shapirowilk: 
-     Shapiro-Wilk test for normality is powerful even on small
+     Shapiro-Wilk test for normality is powerful even for small
 	 sample sizes.
    * ST_ivplot:
      Very basic individual value plot (EXPERIMENTAL) 

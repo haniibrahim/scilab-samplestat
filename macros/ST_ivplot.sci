@@ -20,16 +20,18 @@
 // Author: Hani Andreas Ibrahim <hani.ibrahim@gmx.de>
 // License: GPL 3.0
 
-function ST_ivplot(v, datname)
+function ST_ivplot(v, datname, frmtpt)
     // Very basic Individual Value Plot (EXPERIMENTAL)
     //
     // Calling Sequence
     //   ST_ivplot(v)
     //   ST_ivplot(v, datname)
+    //   ST_ivplot(v, datname, frmtpt)
     //
     // Parameters
     // v: n-by-1 or 1-by-m matrix of doubles, numerical values (n>10, better n>25)
     // datname: 1-by-1 matrix of strings, name of the data, displayed unter the data set in the graph
+    // frmtpt: 1-by-1 matrix of charakter string, marker type of the values (".","o","x","*","+","s","d")
     //
     // Description
     // Individual value plots (IVP) are well suited for evaluating and comparing 
@@ -51,7 +53,8 @@ function ST_ivplot(v, datname)
     //
     // <note><para>
     // Please be advised that ST_ivplot is EXPERIMENTAL and very basic. It can 
-    // just handle one data set at a time at the moment. 
+    // just handle one data set at a time at the moment and ties (same values) 
+    // are not displayed side-by-site!
     // </para><para>
     // ST_ivplot uses Scilab's plot()-function and graphs can be adjusted with the
     // well-known commands (e.g. xtitle, ylabel, etc).
@@ -63,7 +66,7 @@ function ST_ivplot(v, datname)
     // scf();
     // ST_ivplot(data1, "Normal Distribution")
     // scf();
-    // ST_ivplot(data2, "Non-Normal Distribution")
+    // ST_ivplot(data2, "Non-Normal Distribution","o")
     //
     // See also
     //  ST_outlier
@@ -79,19 +82,28 @@ function ST_ivplot(v, datname)
 
     // Check arguments
     [lhs,rhs]=argn()
-    apifun_checkrhs("ST_ivplot", rhs, 1:2); // Input args
+    apifun_checkrhs("ST_ivplot", rhs, 1:3); // Input args
     apifun_checklhs("ST_ivplot", lhs, 1); // Output args
     apifun_checkvector("ST_ivplot", v, "v", 1); // Vector?
     apifun_checktype ("ST_ivplot", v, "v", 1, "constant"); //Double?
-    if rhs == 1 then datname=""; end
+    if rhs == 1 then 
+        datname=""; 
+    end
     if rhs == 2 then
         apifun_checkscalar("ST_ivplot", datname, "datname", 2); // Scalar?
         apifun_checktype("ST_ivplot", datname, "datname",2, "string");
     end
+    if rhs < 3 then
+        frmtpt=".";
+    end
+    if rhs ==3 then
+         apifun_checktype("ST_ivplot", frmtpt, "frmtpt",3,"string"); // String?
+         apifun_checkoption("ST_ivplot", frmtpt, "frmtpt",3,["." "o" "x" "*" "+" "s" "d"])
+    end
 
     n=length(v);
     x=ones(1,n);
-    plot(x,v, "o");
+    plot(x,v, frmtpt);
 
     a=gca()
     a.box="off" 

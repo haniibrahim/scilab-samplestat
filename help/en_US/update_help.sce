@@ -5,7 +5,6 @@ mprintf("Working dir = %s\n",cwd);
 mprintf("Updating root\n");
 helpdir = fullfile(cwd);
 funmat = [
-  "ST_getpath"
   "ST_strayarea"
   "ST_studentfactor"
   "ST_trustarea"
@@ -35,6 +34,16 @@ funmat = [
   "ST_nalimov"
   "ST_outlier"
   "ST_pearsonhartley"
+  ];
+macrosdir = cwd +"../../macros";
+demosdir = [];
+modulename = "samplestat";
+//
+// Generate the tool help
+mprintf("Updating outlier\n");
+helpdir = fullfile(cwd,"tool");
+funmat = [
+  "ST_getpath"
   ];
 macrosdir = cwd +"../../macros";
 demosdir = [];

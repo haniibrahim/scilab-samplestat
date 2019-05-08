@@ -129,6 +129,9 @@
 			<term>ST_ivplot (EXPERIMENTAL):</term>
 			<listitem>
 			<para>Very basic "Individual Value Plot" function. Graphic test on normal distribution for small sample sizes. Better alternatives to histograms or box-plots for this kind of sample sizes.</para>
+			<para><note><para>
+			ST_ivplot is experimental and not finished. Some important features are missing, e.g. displaying ties (duplicates).
+			</para></note></para>
 			</listitem>
 			</varlistentry>
 		</variablelist>
