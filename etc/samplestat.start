@@ -64,7 +64,7 @@ function samplestatlib = startModule()
 
 // ====================================================================
     // A Welcome message.
-    mprintf("\tType ""demo_gui()"" and search for "+TOOLBOX_TITLE+" for Demonstration.\n");
+    mprintf("\tType ""help"" and/or ""demo_gui()"" and search for "+TOOLBOX_TITLE+" for Demonstration.\n");
 
 endfunction
 
