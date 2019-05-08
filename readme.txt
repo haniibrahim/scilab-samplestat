@@ -1,4 +1,4 @@
- SampleSTAT - Toolbox for statistics of normal distributed univariate samples
+﻿ SampleSTAT - Toolbox for statistics of normal distributed univariate samples
  ============================================================================
  
  This toolbox provides elementary tests for the evaluation of univariate measuring 
@@ -28,6 +28,7 @@
  
  DEPENDENCIES:
  apifun >= 0.4.0
+ helptbx (just for the build)
  
  -------------------------------------------------------------------------------
  

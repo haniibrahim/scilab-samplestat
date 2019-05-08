@@ -68,7 +68,7 @@ Please be advised that ST_ivplot is EXPERIMENTAL and very basic. It can
 just handle one data set at a time at the moment.
 </para><para>
 ST_ivplot uses Scilab's plot()-function and graphs can be adjusted with the
-well-known commands (e.g. title, ylabel, etc).
+well-known commands (e.g. xtitle, ylabel, etc).
 </para></note>
    </para>
    <para>

@@ -54,7 +54,7 @@ function ST_ivplot(v, datname)
     // just handle one data set at a time at the moment. 
     // </para><para>
     // ST_ivplot uses Scilab's plot()-function and graphs can be adjusted with the
-    // well-known commands (e.g. title, ylabel, etc).
+    // well-known commands (e.g. xtitle, ylabel, etc).
     // </para></note>
     //
     // Examples
@@ -94,8 +94,9 @@ function ST_ivplot(v, datname)
     plot(x,v, "o");
 
     a=gca()
-    a.axes_visible=["off","on","off"]
-    a.box="off"    
+    a.box="off" 
+    a.axes_visible=["on","on","on"]
+    a.auto_ticks=["off","on","on"]   
 
     xlabel(datname);   
 endfunction

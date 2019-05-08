@@ -13,8 +13,9 @@
 	<refsection>
 		<title>Introduction</title>
 		<para>
-        The test for normality is a commonly needed procedure, since many of the statistical procedures are assumed to be applied to normally distributed data. SampleSTAT's routines require normally distributed data. The images below shows normally and non-normally distributed sample distributions as histograms/step charts
+        The test for normality is a commonly needed procedure, since many of the statistical procedures are assumed to be applied to normally distributed data. SampleSTAT's routines require normally distributed data. Measuring data in natural sciences are commonly naturally distributed. Therefore you can expect a normal distribution. 
 	</para>
+	<para>The images below shows normally and non-normally distributed sample distributions as histograms/step charts.</para>
 	<para>
 		<inlinemediaobject>
 			<imageobject>
@@ -46,7 +47,7 @@
 			</inlinemediaobject>
 		</para>
 	<para>
-		In general, the test for normality can be achieved by applying a goodness-of-fit method (i.e. chi-square test, or Kolmogorov-Smirnov test). These two tests, however, do not perform well (the power of these tests is not too high). Therefore some other tests have been developed, which have various advantages but also some drawbacks: the power of the Shapiro-Wilk test is good, but the calculation procedure is rather cumbersome but thanks to SampleSTAT easy to do now. It returns easy to interpret results: True (normal distribution) or false (non-normal distribution).
+		In general, the test for normality can be achieved by applying a goodness-of-fit method (i.e. chi-square test, or Kolmogorov-Smirnov test). These two tests, however, do not perform well (the power of these tests is not too high). Therefore some other tests have been developed, which have various advantages but also some drawbacks: the power of the Shapiro-Wilk test is good, but the calculation procedure is rather cumbersome but with computers it is easy to do now. It returns easy to interpret results: True (normal distribution) or false (non-normal distribution).
     </para>
 	</refsection>
 	<refsection>
@@ -68,7 +69,7 @@
 		<important><para>
 			Although the Shapiro-Wilk test has a big test strength, especially for smaller sample sizes, it should not be used blindfolded for the reasons mentioned above. 
 		</para>
-		<para>Check the results graphically with histogram, QQ-plot or box-plot. The latter two are provided in the toolbox STIXBOX.</para></important>
+		<para>Check the results graphically with histogram, QQ-plot or box-plot for sample sizes from 20 and up or with individual value plots for smaller sample sizes. Box-plots and QQ-plots are provided in the toolbox STIXBOX.</para></important>
 	</para> 
 		<para>
 The basis idea behind the Shapiro-Wilk test is to estimate the variance of the sample in two ways: (1) the regression line in the QQ-Plot allows to estimate the variance, and (2) the variance of the sample can also be regarded as an estimator of the population variance. Both estimated values should approximately equal in the case of a normal distribution and thus should result in a quotient of close to 1.0. If the quotient is significantly lower than 1.0 then the null hypothesis (of having a normal distribution) should be rejected.

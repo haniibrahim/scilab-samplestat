@@ -34,13 +34,17 @@ function main_builder()
 
     // Action
     // =============================================================================
+    
+    // Update help XML-files from sci-files
+    exec(fullfile(toolbox_dir,"/help/en_US/update_help.sce"),-1);
+    // ------------------------------------
 
     tbx_builder_macros(toolbox_dir);
  //   tbx_builder_src(toolbox_dir);
  //   tbx_builder_gateway(toolbox_dir);
  //   tbx_build_localization(toolbox_dir);
     tbx_builder_help(toolbox_dir);
-    if v(1) == 5  then
+    if v(1) == 5  then // For Scilab versions 5 and 6
         tbx_build_loader(TOOLBOX_NAME, toolbox_dir);
     else
         tbx_build_loader(toolbox_dir);
