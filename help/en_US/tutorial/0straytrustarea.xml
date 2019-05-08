@@ -20,10 +20,10 @@
 	<refsection>
 		<title>Introduction</title>
 		<para>
-        Tf you are collecting data on a process, it is important to determine not only the location of the mean, but also to look at the variation within the data. If you are, for example, interpreting the results of a chemical analysis, you may put much more emphasis on the obtained average value if you know that the individual samples vary only very little in comparison to the mean.
+        If you are collecting data on a process, it is important to determine not only the location of the mean, but also to look at the variation within the data. If you are, for example, interpreting the results of a chemical analysis, you may put much more emphasis on the obtained average value if you know that the individual samples vary only very little in comparison to the mean.
 	</para>
 		<para>
-In general, the spread of a distribution, both in absolute and in relative terms, is a good measure of the variability (and hence reliability) of the data. There are several ways to specify the variation in the data. SampleSTAT provides routines to give you more information of your dat as mean, median and standard deviation can do.
+In general, the spread of a distribution, both in absolute and in relative terms, is a good measure of the variability (and hence reliability) of the data. There are several ways to specify the variation in the data. SampleSTAT provides routines to give you more information of your data as mean, median and standard deviation can do.
     </para>
 		<para>
         These functions are good to extend the built-in functions mean(), stdev(), max(), min(), median().
@@ -36,19 +36,19 @@ In general, the spread of a distribution, both in absolute and in relative terms
     </para>
 		<variablelist>
 			<varlistentry>
-				<term>ST_strayarea:</term>
+				<term><link linkend="ST_strayarea">ST_strayarea</link>:</term>
 				<listitem>
 					<para> Calculates the stray area (range of dispersion of the values) of univariate data for a statistical confidence level (95%, 99%, 99.9%) and level of significance (0.5, 0.01, 0.001), resp. This is similar to the sample standard deviation but gives more confidence as the sample standard deviation (68%) can provide. </para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term>ST_trustarea:</term>
+				<term><link linkend="ST_trustarea">ST_trustarea</link>:</term>
 				<listitem>
 					<para>Calculates the trust area (range of dispersion of the mean) of univariate data and for a statistical confidence level (95%, 99%, 99.9%) and level of significance (0.5, 0.01, 0.001), resp. and is the sample standard deviation of the mean. Because specifying the sample standard deviation (s) is more or less useless without the additional specification of the mean (and of course the type of distribution). It makes a big difference if s = 5 with a mean of  = 100, with a mean of = 3. Relating the sample standard deviation to the mean resolves this problem. </para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term>ST_studentfactor:</term>
+				<term><link linkend="ST_studentfactor">ST_studentfactor</link>:</term>
 				<listitem>
 					<para>Determines the student factor for an amount of numbers and for a statistical confidence level (95%, 99%, 99.9%) and level of significance (0.5, 0.01, 0.001), resp.- service function for ST_strayarea and ST_trustarea</para>
 				</listitem>

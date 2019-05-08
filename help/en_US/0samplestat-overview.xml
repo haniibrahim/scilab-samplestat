@@ -54,19 +54,19 @@
 		<title>Functions - Measures of Variation</title>
 		<variablelist>
 			<varlistentry>
-				<term>ST_strayarea:</term>
+				<term><link linkend="ST_strayarea">ST_strayarea</link>:</term>
 				<listitem>
 					<para> Calculates the stray area (range of dispersion of the values) of univariate data for a statistical confidence level (95%, 99%, 99.9%) and level of significance (0.5, 0.01, 0.001), resp. </para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term>ST_trustarea:</term>
+				<term><link linkend="ST_trustarea">ST_trustarea</link>:</term>
 				<listitem>
 					<para>Calculates the trust area (range of dispersion of the mean) of univariate data and for a statistical confidence level (95%, 99%, 99.9%) and level of significance (0.5, 0.01, 0.001), resp. and is the standard deviation of the mean. </para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term>ST_studentfactor:</term>
+				<term><link linkend="ST_studentfactor">ST_studentfactor</link>:</term>
 				<listitem>
 					<para>Determines the student factor for an amount of numbers and for a statistical confidence level (95%, 99%, 99.9%) and level of significance (0.5, 0.01, 0.001), resp.- service function for ST_strayarea and ST_trustarea</para>
 				</listitem>
@@ -77,7 +77,7 @@
 		<title>Functions - Tests on Outliers</title>
 		<variablelist>
 			<varlistentry>
-				<term>ST_deandixon:</term>
+				<term><link linkend="ST_deandixon">ST_deandixon</link>:</term>
 				<listitem>
 					<para>
 		   This test for outliers is eminently suitable for small sample sizes; for samples having more than 30 observations the test for significance of Pearson and Hartley can be used as well.
@@ -85,14 +85,14 @@
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term>ST_pearsonhartley:</term>
+				<term><link linkend="ST_pearsonhartley">ST_pearsonhartley</link>:</term>
 				<listitem>
 					<para>For random samples larger than 30 objects possible outliers may be identified by using the significance thresholds of Pearson and Hartley. 
 	   </para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term>ST_nalimov:</term>
+				<term><link linkend="ST_nalimov">ST_nalimov</link>:</term>
 				<listitem>
 					<para>
 		   This test on outliers provides a quick hint for all sample sizes and is often used in German publications.
@@ -105,7 +105,7 @@
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term>ST_outlier:</term>
+				<term><link linkend="ST_outlier">ST_outlier</link>:</term>
 				<listitem>
 					<para>
 			  Provide two basic tests on outliers based on population standard deviation (S.D.) or inter-quartile range (IQR). It should be applied to sample sizes larger than 10 better more than 25. For small sample sizes the Dean-Dixon test is recommended.
@@ -118,7 +118,7 @@
 		<title>Functions - Distribution tests</title>
 		<variablelist>
 			<varlistentry>
-				<term>ST_shapirowilk:</term>
+				<term><link linkend="ST_shapirowilk">ST_shapirowilk</link>:</term>
 				<listitem>
 					<para> 
 		   The Shapiro-Wilk test is a statistical significance test that tests the hypothesis that the underlying population of a sample is normally distributed. It tests for normality exhibiting high power, leading to good results even with a small number of observations, especially in comparison to Chi-Square or Kolmogorov-Smirnov tests. 
@@ -126,7 +126,7 @@
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-			<term>ST_ivplot (EXPERIMENTAL):</term>
+			<term><link linkend="ST_ivplot">ST_ivplot</link> (EXPERIMENTAL):</term>
 			<listitem>
 			<para>Very basic "Individual Value Plot" function. Graphic test on normal distribution for small sample sizes. Better alternatives to histograms or box-plots for this kind of sample sizes.</para>
 			<para><note><para>
