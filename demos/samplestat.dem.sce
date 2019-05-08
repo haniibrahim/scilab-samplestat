@@ -53,7 +53,7 @@ function samplestat_demo()
     mprintf(..
     "Number of Values            : %i\n" + ..
     "Arithmetic Mean             : %f\n" + ..
-    "Sample standard Deviation   : %f\n" + ..
+    "Sample Standard Deviation   : %f\n" + ..
     "Confidence Level            : %s\n" + ..
     "Range of Dispersion (values): %f\n" + ..
     "Range of Dispersion (mean)  : %f\n" + ..
