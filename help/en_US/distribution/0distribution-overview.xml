@@ -13,7 +13,8 @@
 	<refsection>
 		<title>Introduction</title>
 		<para>
-        The test for normality is a commonly needed procedure, since many of the statistical procedures are assumed to be applied to normally distributed data. SampleSTAT's routines require normally distributed data. Measuring data in natural sciences are commonly naturally distributed. Therefore you can expect a normal distribution. 
+        The test for normality is a commonly needed procedure, since many of the statistical procedures are assumed to be applied to normally distributed data. SampleSTAT's routines require normally distributed data. </para>
+		<para><note><para>However measured data in natural sciences are commonly naturally distributed. Therefore, a normal distribution can be assumed in these cases. But it can make sense to check the normal distribution anyway.</para></note>
 	</para>
 	<para>The images below shows normally and non-normally distributed sample distributions as histograms/step charts.</para>
 	<para>
