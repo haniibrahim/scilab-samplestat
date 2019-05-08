@@ -60,10 +60,14 @@ x_i: \text{test value} \quad ; \quad \bar{x}: \text{arithmetic mean} \quad ; \qu
    </para>
    <para>
 <important><para>
-Do use ST_pearsonhartley ONLY with NORMAL distrinutions and
-with more than 30 values! For less than 30 values use
-Dean-Dixon test "ST_deandion()" instead.
+Do use ST_pearsonhartley ONLY with NORMAL distrinutions.
 </para></important>
+   </para>
+   <para>
+<note><para>
+Do use ST_pearsonhartley with more than 30 values! For less than 30
+values use Dean-Dixon test "ST_deandion()" instead.
+</para></note>
    </para>
    <para>
 </para>

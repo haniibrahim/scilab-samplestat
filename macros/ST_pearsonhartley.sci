@@ -23,10 +23,13 @@ function [outlierfree, outlier] = ST_pearsonhartley(v, p)
     // </latex>
     //
     // <important><para>
-    // Do use ST_pearsonhartley ONLY with NORMAL distrinutions and
-    // with more than 30 values! For less than 30 values use 
-    // Dean-Dixon test "ST_deandion()" instead. 
+    // Do use ST_pearsonhartley ONLY with NORMAL distrinutions. 
     // </para></important>
+    //
+    // <note><para>
+    // Do use ST_pearsonhartley with more than 30 values! For less than 30 
+    // values use Dean-Dixon test "ST_deandion()" instead. 
+    // </para></note>
     //
     // Examples
     // data = [..
@@ -156,11 +159,10 @@ function [outlierfree, outlier] = ST_pearsonhartley(v, p)
     end
 
     n = length(v);
-        if (n < 30 | n > 1000)
+        if (n < 3 | n > 1000)
             error(msprintf( ..
-    "Pearson-Hartley is just applicable for sample distributions greater than 30\n" + ..
-    "and less than 1000 values. Use the Dean-Dixon outlier test ""ST_deandixon()""\n" + ..
-    "or the Nalimov test ""ST_nalimov()"" for less than 30 samples")); 
+    "Pearson-Hartley is just applicable for sample distributions greater than 3\n" + ..
+    "and less than 1000 values.")); 
         end
 
     // Determine Q_crit
