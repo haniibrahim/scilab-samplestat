@@ -21,13 +21,19 @@
   </refnamediv>
 
 
+<refsynopsisdiv>
+   <title>Calling Sequence</title>
+   <synopsis>
+   path = ST_getpath()
+   
+   </synopsis>
+</refsynopsisdiv>
+
 <refsection>
    <title>Parameters</title>
    <variablelist>
-        <varlistentry>
-            <term>path :</term>
-            <listitem><para> a 1-by-1 matrix of strings, the path to the current module.</para></listitem>
-        </varlistentry>
+   <varlistentry><term>path :</term>
+      <listitem><para> a 1-by-1 matrix of strings, the path to the current module.</para></listitem></varlistentry>
    </variablelist>
 </refsection>
 

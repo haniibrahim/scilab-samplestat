@@ -21,21 +21,23 @@
   </refnamediv>
 
 
+<refsynopsisdiv>
+   <title>Calling Sequence</title>
+   <synopsis>
+   retval = studentfactor(n, p)
+   
+   </synopsis>
+</refsynopsisdiv>
+
 <refsection>
    <title>Parameters</title>
    <variablelist>
-        <varlistentry>
-            <term>n:</term>
-            <listitem><para> number of values in the sample distribution</para></listitem>
-        </varlistentry>
-        <varlistentry>
-            <term>p:</term>
-            <listitem><para> statistical confidence level (%) as a string or the level of significance (alpha) as a decimal value, "95%", "99%", "99.9%" or 0.05, 0.01, 0.001 resp (see examples).</para></listitem>
-        </varlistentry>
-        <varlistentry>
-            <term>retval:</term>
-            <listitem><para> student factor</para></listitem>
-        </varlistentry>
+   <varlistentry><term>n:</term>
+      <listitem><para> number of values in the sample distribution</para></listitem></varlistentry>
+   <varlistentry><term>p:</term>
+      <listitem><para> statistical confidence level (%) as a string or the level of significance (alpha) as a decimal value, "95%", "99%", "99.9%" or 0.05, 0.01, 0.001 resp (see examples).</para></listitem></varlistentry>
+   <varlistentry><term>retval:</term>
+      <listitem><para> student factor</para></listitem></varlistentry>
    </variablelist>
 </refsection>
 

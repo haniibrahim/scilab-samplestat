@@ -68,5 +68,5 @@ function samplestatlib = startModule()
 
 endfunction
 
-toolbox_skeletonlib = startModule();
+samplestatlib = startModule();
 clear startModule; // remove startModule on stack
