@@ -21,23 +21,21 @@
   </refnamediv>
 
 
-<refsynopsisdiv>
-   <title>Calling Sequence</title>
-   <synopsis>
-   [normal] = ST_shapirowilk(v, p)
-   
-   </synopsis>
-</refsynopsisdiv>
-
 <refsection>
    <title>Parameters</title>
    <variablelist>
-   <varlistentry><term>v:</term>
-      <listitem><para> m-by-1 or 1-by-n matrix of doubles</para></listitem></varlistentry>
-   <varlistentry><term>p:</term>
-      <listitem><para> statistical confidence level (%) as a string or the level of significance (alpha) as a decimal value, "90%", "95%", "99%" or 0.1, 0.05, 0.01 resp. (see examples).</para></listitem></varlistentry>
-   <varlistentry><term>normal:</term>
-      <listitem><para> Returns %T if sample distribution is normally distributed or %F if not.</para></listitem></varlistentry>
+        <varlistentry>
+            <term>v:</term>
+            <listitem><para> m-by-1 or 1-by-n matrix of doubles</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>p:</term>
+            <listitem><para> statistical confidence level (%) as a string or the level of significance (alpha) as a decimal value, "90%", "95%", "99%" or 0.1, 0.05, 0.01 resp. (see examples).</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>normal:</term>
+            <listitem><para> Returns %T if sample distribution is normally distributed or %F if not.</para></listitem>
+        </varlistentry>
    </variablelist>
 </refsection>
 

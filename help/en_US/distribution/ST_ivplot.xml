@@ -21,25 +21,21 @@
   </refnamediv>
 
 
-<refsynopsisdiv>
-   <title>Calling Sequence</title>
-   <synopsis>
-   ST_ivplot(v)
-   ST_ivplot(v, datname)
-   ST_ivplot(v, datname, frmtpt)
-   
-   </synopsis>
-</refsynopsisdiv>
-
 <refsection>
    <title>Parameters</title>
    <variablelist>
-   <varlistentry><term>v:</term>
-      <listitem><para> n-by-1 or 1-by-m matrix of doubles, numerical values (n>10, better n>25)</para></listitem></varlistentry>
-   <varlistentry><term>datname:</term>
-      <listitem><para> 1-by-1 matrix of strings, name of the data, displayed unter the data set in the graph</para></listitem></varlistentry>
-   <varlistentry><term>frmtpt:</term>
-      <listitem><para> 1-by-1 matrix of charakter string, marker type of the values (".","o","x","*","+","s","d")</para></listitem></varlistentry>
+        <varlistentry>
+            <term>v:</term>
+            <listitem><para> n-by-1 or 1-by-m matrix of doubles, numerical values (n>10, better n>25)</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>datname:</term>
+            <listitem><para> 1-by-1 matrix of strings, name of the data, displayed unter the data set in the graph</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>frmtpt:</term>
+            <listitem><para> 1-by-1 matrix of charakter string, marker type of the values (".","o","x","*","+","s","d")</para></listitem>
+        </varlistentry>
    </variablelist>
 </refsection>
 
