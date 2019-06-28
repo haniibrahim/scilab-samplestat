@@ -98,7 +98,7 @@ n, x, s, p, sa, ta, mi, ma);
 mprintf("\n"); // blank line
 
 mprintf( ..
-"68 percent of the values will stray arount %.3f +/- %.3f (sample standard \n" + .. 
+"68 percent of the values will stray around %.3f +/- %.3f (sample standard \n" + .. 
 "deviation). %s of the values will be expected around %.3f +/- %.3f (Range \n" + ..
 "of disp. of the values, stray area).\n" + ..
 "With a propability of %s the mean of %.3f will stray around %.3f +/- %.3f \n" + ..
@@ -128,12 +128,7 @@ Range of Dispersion (mean)  : 0.001484
 Minimum                     : 9.998000
 Maximum                     : 10.002000
 
-68 percent of the values will stray arount 10.000 +/- 0.001 (S.D.). 95% of the values
-will be expected around 10.000 +/- 0.004 (Range of disp. of the values, stray area).
-With a propability of 95% the mean of 10.000 will stray around 10.000 +/- 0.001 (Rage of 
-dispersion of the mean, trust area). 
-
-68 percent of the values will stray arount 10.000 +/- 0.001 (sample standard
+68 percent of the values will stray around 10.000 +/- 0.001 (sample standard
 deviation). 95% of the values will be expected around 10.000 +/- 0.004 (Range
 of disp. of the values, stray area).
 With a propability of 95% the mean of 10.000 will stray around 10.000 +/- 0.001

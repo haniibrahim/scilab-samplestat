@@ -44,10 +44,16 @@ function outlier_demo()
 
     disp("Values:")
     disp(dat1')
+    
+    // Avoid problems in Scilab 6 w/ empty matrices [] and the + in disp()
+    // => if +[] the whole string is []
+    if o095 == [] then o095 = "none"; end
+    if o099 == [] then o099 = "none"; end
+    if o999 == [] then o999 = "none"; end
 
-    disp("Dean-Dixon-Outliers 95% confidence level  : " + string(o095) + " (probable outliers)")
-    disp("Dean-Dixon-Outliers 99% confidence level  : " + string(o099) + " (significant outliers)")
-    disp("Dean-Dixon-Outliers 99.9% confidence level: " + string(o999) + " (highly significant outliers")
+    disp("Dean-Dixon-Outliers at 95% confidence level  : " + string(o095) + " (probable outliers)")
+    disp("Dean-Dixon-Outliers at 99% confidence level  : " + string(o099) + " (significant outliers)")
+    disp("Dean-Dixon-Outliers at 99.9% confidence level: " + string(o999) + " (highly significant outliers")
 
     disp("Outlier(s): " + string(o095) + " does show up at 95% confidence level only, therefore it is a probable outlier.")
 
