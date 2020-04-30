@@ -38,6 +38,7 @@ funmat = [
 macrosdir = cwd +"../../macros";
 demosdir = [];
 modulename = "samplestat";
+helptbx_helpupdate ( funmat , helpdir , macrosdir , demosdir , modulename , %t );
 //
 // Generate the tool help
 mprintf("Updating outlier\n");

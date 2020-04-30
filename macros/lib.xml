@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<scilablib name="samplestatlib">
+  <macro name="ST_deandixon" file="ST_deandixon.bin" md5="8b9ad0d244faa740a71c76aa1fb34c20"/>
+  <macro name="ST_getpath" file="ST_getpath.bin" md5="9b1d2e467a6e3f2afc1a209ad7da620e"/>
+  <macro name="ST_ivplot" file="ST_ivplot.bin" md5="d41e3abf2d50f9b27fa3183d89167707"/>
+  <macro name="ST_nalimov" file="ST_nalimov.bin" md5="f9e7daa3803f9d3c8943ffd33034ec86"/>
+  <macro name="ST_outlier" file="ST_outlier.bin" md5="018ab950c2a35fe8370c253c44d83e1b"/>
+  <macro name="ST_pearsonhartley" file="ST_pearsonhartley.bin" md5="df077d2b5ac8cf3e5080e3b21959a008"/>
+  <macro name="ST_shapirowilk" file="ST_shapirowilk.bin" md5="05b179657044285174ce36d07d2648b5"/>
+  <macro name="ST_strayarea" file="ST_strayarea.bin" md5="4e5a324ef84fac89ad2bbdfb449644e4"/>
+  <macro name="ST_studentfactor" file="ST_studentfactor.bin" md5="1e5f0a86022895f1bfe1f442e9fbc8b0"/>
+  <macro name="ST_trustarea" file="ST_trustarea.bin" md5="6cfe12a5a00aec76403de8f91a09d361"/>
+</scilablib>

@@ -1,3 +1,9 @@
+samplestat (v2.0.2)
+ * Help-Bugfix
+
+samplestat (v2.0.1)
+ * Bug and compatibility fixes related to Scilab 6
+
 samplestat (v2.0.0)
  * Outlier tests added:
    - Dean-Dixon

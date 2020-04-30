@@ -83,7 +83,6 @@ function ST_ivplot(v, datname, frmtpt)
     // Check arguments
     [lhs,rhs]=argn()
     apifun_checkrhs("ST_ivplot", rhs, 1:3); // Input args
-    apifun_checklhs("ST_ivplot", lhs, 1); // Output args
     apifun_checkvector("ST_ivplot", v, "v", 1); // Vector?
     apifun_checktype ("ST_ivplot", v, "v", 1, "constant"); //Double?
     if rhs == 1 then 

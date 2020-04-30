@@ -79,6 +79,8 @@
    
  CHANGELOG:
  	
+    2.0.1  - Bug and compatibility fixes related to Scilab 6
+
 	2.0.0  - Outlier tests (Dean-Dixon, Pearson-Hartley, Nalimov) and 
 	         a basic test added
 	       - Distribution tests (Shapiro-Wilk) added

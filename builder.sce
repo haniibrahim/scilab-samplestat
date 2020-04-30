@@ -35,7 +35,7 @@ function main_builder()
     // Action
     // =============================================================================
     
-    // Update help XML-files from sci-files
+    // Update help XML-files from sci-files but only with Scilab <6 because of Syntax/Calling Sequence problem
     if v(1) < 6 then
         exec(fullfile(toolbox_dir,"/help/en_US/update_help.sce"),-1);
     end

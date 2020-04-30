@@ -26,7 +26,7 @@ Summary: SampleSTAT is a tiny toolbox for statistics of normal distributed univa
 // 'major.minor.patch', where all fields are numbers.
 // If you are just starting your toolbox, you should use '0.1' or '0.1.0'.
 // Use '1.0' or '1.0.0' for a tested, good quality first version.
-Version: 2.0.0
+Version: 2.0.2
 
 // Name(s) of the author(s) of this toolbox.
 // They are usually the original copyright holders
@@ -66,7 +66,7 @@ ScilabVersion: >= 5.5
 Depends: >= apifun 0.4.0
 
 // Creation date
-Date: 2019-05-05
+Date: 2020-0
 
 Description: Toolbox for statistics of normal distributed univariate samples.
  
@@ -127,11 +127,15 @@ Description: Toolbox for statistics of normal distributed univariate samples.
    
  CHANGELOG:
  	
+    2.0.2  - Help-Bugfix
+    
+    2.0.1  - Bug and compatibility fixes related to Scilab 6
+
 	2.0.0  - Outlier tests (Dean-Dixon, Pearson-Hartley, Nalimov) and 
 	         a basic test added
 	       - Distribution tests (Shapiro-Wilk, Skewness) added
            - Individual Value Plot added (EXPERIMENTAL)
-   
+ 
  ---------------------------------------------------------------------
  
  DEPENDENCIES:
