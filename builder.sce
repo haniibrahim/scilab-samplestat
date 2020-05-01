@@ -6,6 +6,9 @@
 mode(-1);
 lines(0);
 
+// Uncomment this line to make a debug version of the Toolbox
+//setenv("DEBUG_SCILAB_DYNAMIC_LINK","YES")
+
 function main_builder()
     TOOLBOX_NAME  = "samplestat";
     TOOLBOX_TITLE = "SampleSTAT";
@@ -55,11 +58,12 @@ function main_builder()
     tbx_builder_help(toolbox_dir);
     if v(1) == 5  then // For Scilab versions 5 and 6
         tbx_build_loader(TOOLBOX_NAME, toolbox_dir);
+        tbx_build_cleaner(TOOLBOX_NAME, toolbox_dir);
     else
         tbx_build_loader(toolbox_dir);
+        tbx_build_cleaner(toolbox_dir);
     end
-    tbx_build_cleaner(toolbox_dir);
-
+    
 endfunction
 // =============================================================================
 main_builder();
