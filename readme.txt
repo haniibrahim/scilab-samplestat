@@ -12,7 +12,7 @@
  -------------------------------------------------------------------------------
  
  COMPATIBILITY
- Can be build, installed and run with Scilab 5.5.x and 6.0.x
+ Can be build, installed and run with Scilab 5.5.x, 6.0.x and 6.1.x
  
  BUILD:
    * Decompress the source distribution file: samplestat-x.x.x_5.5_6.0_src.zip
@@ -82,10 +82,10 @@
     
     2.0.1  - Bug and compatibility fixes related to Scilab 6
 
-	2.0.0  - Outlier tests (Dean-Dixon, Pearson-Hartley, Nalimov) and 
-	         a basic test added
-	       - Distribution tests (Shapiro-Wilk) added
-               - Individual Value Plot added (EXPERIMENTAL)
+    2.0.0  - Outlier tests (Dean-Dixon, Pearson-Hartley, Nalimov) and 
+             a basic test added
+           - Distribution tests (Shapiro-Wilk) added
+           - Individual Value Plot added (EXPERIMENTAL)
     
  LITERATURE:
  

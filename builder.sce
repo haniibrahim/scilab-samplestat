@@ -35,7 +35,14 @@ function main_builder()
     // Action
     // =============================================================================
     
-    // Update help XML-files from sci-files but only with Scilab <6 because of Syntax/Calling Sequence problem
+    // Update help XML-files from sci-files but only with Scilab <6 because of 
+    // Syntax/Calling Sequence problem w/ v5 and v6. Means, you have to compile
+    // sampeSTAT w/ Scilab 5 first to produce the XML-help files even if you 
+    // uss v6.
+    // This workaround was made to keep compatibility to v5 w/ just one code 
+    // base. If you use the downloaded src distribution od sampleSTAT the XML-
+    // help-files are already provided. As long as you do not edit the macro
+    // sci-files you can compile this distribution w/ v6 directly. 
     if v(1) < 6 then
         exec(fullfile(toolbox_dir,"/help/en_US/update_help.sce"),-1);
     end
