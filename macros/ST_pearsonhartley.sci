@@ -15,12 +15,6 @@ function [outlierfree, outlier] = ST_pearsonhartley(v, p)
     // Performs the Pearson-Hartley outlier test. It should be used for distributions 
     // with more than 30 values.
     //
-    // <latex>
-    // \begin{eqnarray}
-    // q=\left| \frac{1}{s}(x_i - \bar{x}) \right| \quad ; \quad q >q_{crit} \quad  \Rightarrow \quad x_i = \text{outlier} \\
-    // x_i: \text{test value} \quad ; \quad \bar{x}: \text{arithmetic mean} \quad ; \quad s: \text{sample standard deviation}
-    // \end{eqnarray}
-    // </latex>
     //
     // <important><para>
     // Do use ST_pearsonhartley ONLY with NORMAL distrinutions. 

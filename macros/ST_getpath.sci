@@ -16,7 +16,7 @@
 function path = ST_getpath()
 // Returns the path to the current module.
 //
-// Calling Sequence
+// Syntax
 //   path = ST_getpath()
 //
 // Parameters

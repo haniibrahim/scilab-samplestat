@@ -17,16 +17,18 @@
 
   <refnamediv>
     <refname>ST_ivplot</refname>
-    <refpurpose>Very basic Individual Value Plot (EXPERIMENTAL)</refpurpose>
+    <refpurpose>Individual value plot for one or more data sets.</refpurpose>
   </refnamediv>
 
 
 <refsynopsisdiv>
-   <title>Calling Sequence</title>
+   <title>Syntax</title>
    <synopsis>
-   ST_ivplot(v)
-   ST_ivplot(v, datname)
-   ST_ivplot(v, datname, frmtpt)
+   ST_ivplot(data)
+   ST_ivplot(data, names)
+   ST_ivplot(data, names, marker)
+   ST_ivplot(data, names, marker, offset)
+   ST_ivplot(data, names, marker, offset, tolerance)
    
    </synopsis>
 </refsynopsisdiv>
@@ -34,12 +36,26 @@
 <refsection>
    <title>Parameters</title>
    <variablelist>
-   <varlistentry><term>v:</term>
-      <listitem><para> n-by-1 or 1-by-m matrix of doubles, numerical values (n>10, better n>25)</para></listitem></varlistentry>
-   <varlistentry><term>datname:</term>
-      <listitem><para> 1-by-1 matrix of strings, name of the data, displayed unter the data set in the graph</para></listitem></varlistentry>
-   <varlistentry><term>frmtpt:</term>
-      <listitem><para> 1-by-1 matrix of charakter string, marker type of the values (".","o","x","*","+","s","d")</para></listitem></varlistentry>
+        <varlistentry>
+            <term>data:</term>
+            <listitem><para>   numeric vector, list of numeric vectors or</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>names:</term>
+            <listitem><para>  Labels of the data sets as a string vector.</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>marker:</term>
+            <listitem><para> Scilab marker, for example ".", "o", "x", "+", "*", "s", or "d".</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>offset:</term>
+            <listitem><para> Horizontal distance between identical values.</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>tolerance:</term>
+            <listitem><para> Two values are considered equal if their difference is less</para></listitem>
+        </varlistentry>
    </variablelist>
 </refsection>
 
@@ -50,30 +66,20 @@ Individual value plots (IVP) are well suited for evaluating and comparing
 distributions of sample data. A IVP displays a point for the actual value
 of each observation in a group, making it easy to identify outliers and
 see the dispersion of the distribution. A IVP is especially recommended
-for small sample sizes in comparison to histograms, box-plots and QQ-plots,
-which need at least 20 values to be significant.
-   </para>
-   <para>
-<inlinemediaobject>
-<imageobject>
-<imagedata fileref="../../images/ivplot.png" align="center" valign="middle"/>
-</imageobject>
-</inlinemediaobject>
+for small sample sizes in comparison to histograms, box-plots and
+QQ-plots, which need at least 20 values to be significant.
+<itemizedlist>
+<listitem>Displays multiple data sets side by side</listitem>
+<listitem>Displays identical values side by side using a symmetric offset</listitem>
+<listitem>Supports different sample sizes</listitem>
+<listitem>Accepts input data as a list or matrix</listitem>
+<listitem>Optionally detects practically identical values using a tolerance</listitem>
+</itemizedlist>
    </para>
    <para>
 Therefore IVPs are well suited to test very small sample sizes on normal
-distribution when outliers or ties could be present and the Shapiro-Wilk
-distribution test cannot be reliably applied.
-   </para>
-   <para>
-<note><para>
-Please be advised that ST_ivplot is EXPERIMENTAL and very basic. It can
-just handle one data set at a time at the moment and ties (same values)
-are not displayed side-by-site!
-</para><para>
-ST_ivplot uses Scilab's plot()-function and graphs can be adjusted with the
-well-known commands (e.g. xtitle, ylabel, etc).
-</para></note>
+distribution when outliers or ties could be present and the
+Shapiro-Wilk distribution test cannot be reliably applied.
    </para>
    <para>
 </para>
@@ -82,33 +88,69 @@ well-known commands (e.g. xtitle, ylabel, etc).
 <refsection>
    <title>Examples</title>
    <programlisting role="example"><![CDATA[
-data1 = [9.999  9.998  10.002  10.  10.001  10.];
-data2 = [30.41 30.05 30.49 29.22 30.40 30.42];
+// Single data record
+data = [9.999 9.998 10.002 10.000 10.001 10.000];
 scf();
-ST_ivplot(data1, "Normal Distribution")
+clf();
+ST_ivplot(data, "Charge A");
+ylabel("Sample");
+title("Individual-Value-Plot from single data record");
+
+// Multi data records in a list & different sample sizes
+data1 = [9.999 9.998 10.002 10.000 10.001 10.000 10. 10. 10. 10. 10. 10. ];
+data2 = [10.003 10.001 10.001 10.004 9.997];
+data3 = [9.995 10.000 10.000 10.000 10.002 10.004 10.006];
 scf();
-ST_ivplot(data2, "Non-Normal Distribution","o")
+clf();
+ST_ivplot( ..
+list(data1, data2, data3), ..
+["Lot A", "Lot B", "Lot C"], ..
+"d");
+ylabel("Concentration [mg/L]");
+title("Multi data records in a list & different sample sizes"]);
+
+//  Multi data record in a matrix
+data4 = [
+10.1  10.4  10.0;
+10.2  10.3  10.1;
+10.2  10.5  10.1;
+10.4  10.4  10.2;
+10.3  10.6  10.3
+];
+scf();
+clf();
+ST_ivplot(data4, ["1", "2", "3"], ".", 0.04);
+ylabel("Samples");
+title("Multi data record in a matrix")
+
+// Tolerance limit specified for nearly identical values
+// tolerance=0.000001
+data5 = [
+10.0000000
+10.0000001
+9.9999999
+10.1000000
+];
+scf();
+clf();
+ST_ivplot(data5, "Sample", "o", 0.02, 0.000001);
+title("Tolerance limit specified for nearly identical values")
 
    ]]></programlisting>
 </refsection>
 
-<refsection>
+<refsection role="see also">
    <title>See also</title>
    <simplelist type="inline">
-   <member><link linkend="ST_outlier">ST_outlier</link></member>
-   <member><link linkend="ST_deandixon">ST_deandixon</link></member>
+   <member><link linkend="ST_shapirowilk">ST_shapirowilk</link></member>
    <member><link linkend="ST_pearsonhartley">ST_pearsonhartley</link></member>
    <member><link linkend="ST_nalimov">ST_nalimov</link></member>
+   <member><link linkend="ST_grubbs">ST_grubbs</link></member>
+   <member><link linkend="ST_esd">ST_esd</link></member>
+   <member><link linkend="ST_deandixon">ST_deandixon</link></member>
+   <member><link linkend="ST_outlier">ST_outlier</link></member>
    <member><link linkend="ST_strayarea">ST_strayarea</link></member>
    <member><link linkend="ST_trustarea">ST_trustarea</link></member>
-   <member><link linkend="ST_shapirowilk">ST_shapirowilk</link></member>
-   </simplelist>
-</refsection>
-
-<refsection>
-   <title>Authors</title>
-   <simplelist type="vert">
-   <member>Hani A. Ibrahim - hani.ibrahim@gmx.de</member>
    </simplelist>
 </refsection>
 </refentry>

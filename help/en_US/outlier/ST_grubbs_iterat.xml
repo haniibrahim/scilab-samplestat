@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ *
+ * This help file was generated from ST_grubbs_iterat.sci using help_from_sci().
+ *
+ -->
+
+<refentry version="5.0-subset Scilab" xml:id="ST_grubbs_iterat" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns3="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:scilab="http://www.scilab.org"
+          xmlns:db="http://docbook.org/ns/docbook">
+
+  <refnamediv>
+    <refname>ST_grubbs_iterat</refname>
+    <refpurpose>Iterative Grubbs outlier test without adapting critical value (Not recommended)</refpurpose>
+  </refnamediv>
+
+
+<refsynopsisdiv>
+   <title>Syntax</title>
+   <synopsis>
+   [outlierfree, outlier] = ST_grubbs_iterat(v, p)
+   [outlierfree, outlier] = ST_grubbs_iterat(v, p, side)
+   [outlierfree] = ST_grubbs_iterat(v, p)
+   [outlierfree] = ST_grubbs_iterat(v, p, side)
+   
+   
+   </synopsis>
+</refsynopsisdiv>
+
+<refsection>
+   <title>Parameters</title>
+   <variablelist>
+        <varlistentry>
+            <term>v :</term>
+            <listitem><para> vector of numerical values</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>p :</term>
+            <listitem><para> statistical confidence level (%) as a string or the level of significance (α) as a decimal value, "95%", "99%", "99.9%" or 0.05, 0.01, 0.001 resp (see examples).</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>side:</term>
+            <listitem><para> one-or two-sided "both" (default), "left", "right"</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>outlierfree :</term>
+            <listitem><para> input vector with the detected outlier removed; unchanged if</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>outlier :</term>
+            <listitem><para> detected outliers as a scalar vector; [] if no outlier is detected</para></listitem>
+        </varlistentry>
+   </variablelist>
+</refsection>
+
+<refsection>
+   <title>Description</title>
+   <para>
+Performs an INTERACTIVE Grubbs outlier test. The classic Grubbs test detects just one outlier at a time. This function
+applies the test iteratively on the same data record until no further outlier is found.
+   </para>
+   <para>
+<caution><para>IMPORTANT: When ST_grubbs_iterat() repeatedly used its interative algorithm on the same data it does not adapting the critical value.
+After each iterative run, the statistical confidence decreases. This means that even if a confidence level of 99% was
+specified, the result does not correspond to that level of statistical confidence. It is lower and increases the probability of removing valid observations.</para>
+<para> </para>
+<para>For statistically reliable outlier removal, the classic Grubbs test (ST_grubbs) is recommended. However, it can only
+detect one outlier in a data record. If more than one outlier is expected, Roesner-ESD (ST_esd) is the statistically clean alternative.</para>
+<para>A warning is displayed on very output of ST_grubbs_iterat()</para>
+<para> </para>
+<para>It is implemented for comparison purposes because it is often used this way in lab practice. Use it with care.</para></caution>
+   </para>
+   <para>
+Confidence levels 95%, 99% or 99.9% (α: 0.05, 0.01 or 0.001) are available.
+   </para>
+   <para>
+The test can be applied one- or two-sided.  If “side” is set to “left,” the outliers are determined
+one-sided from the minimum side; if “side” is set to “right,” from the maximum side. If "side" is set to "both" or
+omitted the test is performed two-sided and determine outliers from the minimum and the maximum side.
+   </para>
+   <para>
+The test statistic
+   </para>
+   <para>
+<latex>
+\begin{eqnarray}
+G_{two-sided} &amp;=&amp; \frac{\underset{i..n}{max} \left| x_i - \overline{x} \right|}{s} \\
+G_{left-sided(min)} &amp;=&amp; \frac{\overline{x} - x_{min}}{s} \\
+G_{right-sided(max)} &amp;=&amp; \frac{x_{max} - \overline{x}}{s} \\
+\end{eqnarray}
+</latex>
+   </para>
+   <para>
+Critical value:
+   </para>
+   <para>
+<latex>
+\begin{eqnarray}
+G_{crit} &amp;=&amp; \frac{n-1}{\sqrt{n}} \sqrt{\frac{t^2}{n-2+t^2}} \\
+\text{with} \\
+t       &amp;=&amp; t_{\frac{1-\alpha}{2n}, n-2} \quad : \quad \text{ Student t quantile for two-sided test} \\
+t       &amp;=&amp; t_{\frac{1-\alpha}{n}, n-2} \quad : \quad \text{ Student t quantile for on-sided test} \\
+\text{and} \\
+x_i     &amp;:&amp; \text{test value} \\
+n       &amp;:&amp; \text{number of values} \\
+s       &amp;:&amp; \text{sample standard deviation} \\
+\bar{x} &amp;:&amp; \text{arithmetic mean} \\
+x_{max} &amp;:&amp; \text{max. value} \\
+x_{min} &amp;:&amp; \text{min value} \\
+\alpha  &amp;:&amp; \text{statistical confidence level}
+\end{eqnarray}
+</latex>
+   </para>
+   <para>
+</para>
+</refsection>
+
+<refsection>
+   <title>Examples</title>
+   <programlisting role="example"><![CDATA[
+data = [
+0.4827129   0.3431706  -0.4127328    0.3843994 ..
+-0.7107495  -0.2547306   0.0290803    0.1386087 ..
+-0.7698385   1.0743628   1.0945652    0.4365680 ..
+-0.5913411  -0.7426987   1.609719     0.8079680 ..
+-2.1700554  -4.7361261   0.0069708    14.626386 ..
+-2.5036545  -2.9046385 ..
+];
+
+// two-sided & confidence-level 95%
+of = ST_grubbs_iterat(data, "95%")              // Output: outlier-free values, only
+[of, o] = ST_grubbs_iterat(data, "95%", "both") // Output: outlier and outlier-free values
+[of, o] = ST_grubbs_iterat(data, 0.05)
+
+// left-sided & confidence-level 99%, outlier and outlier-free values output
+[of, o] = ST_grubbs_iterat(data, "99%", "left")
+
+// right-sided & confidence-level 99.9%, outlier and outlier-free values output
+[of, o] = ST_grubbs_iterat(data, 0.001, "right")
+
+   ]]></programlisting>
+</refsection>
+
+<refsection role="see also">
+   <title>See also</title>
+   <simplelist type="inline">
+   <member><link linkend="ST_grubbs">ST_grubbs</link></member>
+   <member><link linkend="ST_esd">ST_esd</link></member>
+   <member><link linkend="ST_pearsonhartley">ST_pearsonhartley</link></member>
+   <member><link linkend="ST_nalimov">ST_nalimov</link></member>
+   <member><link linkend="ST_deandixon">ST_deandixon</link></member>
+   <member><link linkend="ST_outlier">ST_outlier</link></member>
+   <member><link linkend="ST_strayarea">ST_strayarea</link></member>
+   <member><link linkend="ST_trustarea">ST_trustarea</link></member>
+   <member><link linkend="ST_shapirowilk">ST_shapirowilk</link></member>
+   <member><link linkend="ST_ivplot">ST_ivplot</link></member>
+   </simplelist>
+</refsection>
+
+<refsection>
+   <title>Authors</title>
+   <simplelist type="vert">
+   <member>Hani A. Ibrahim - hani.ibrahim@gmx.de</member>
+   </simplelist>
+</refsection>
+
+<refsection>
+   <title>Bibliography</title>
+   <para>Lohringer, H., "Grundlagen der Statistik", Oct, 10th, 2012, http://www.statistics4u.info/fundstat_germ/cc_outlier_tests_4sigma.html</para>
+</refsection>
+</refentry>

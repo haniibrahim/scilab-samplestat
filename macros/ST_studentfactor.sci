@@ -16,12 +16,12 @@
 function [retval] = ST_studentfactor(n, p)
 // Determine the student factor
 //
-// Calling Sequence
+// Syntax
 //  retval = studentfactor(n, p)
 //
 // Parameters
 // n: number of values in the sample distribution
-// p: statistical confidence level (%) as a string or the level of significance (alpha) as a decimal value, "95%", "99%", "99.9%" or 0.05, 0.01, 0.001 resp (see examples).
+// p: statistical confidence level (%) as a string or the level of significance (α) as a decimal value, "95%", "99%", "99.9%" or 0.05, 0.01, 0.001 resp (see examples).
 // retval: student factor
 //
 // Description

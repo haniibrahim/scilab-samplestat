@@ -22,7 +22,7 @@
 
 
 <refsynopsisdiv>
-   <title>Calling Sequence</title>
+   <title>Syntax</title>
    <synopsis>
    [outlierfree] = ST_outlier(v)
    [outlierfree] = ST_outlier(v, mod)
@@ -35,14 +35,22 @@
 <refsection>
    <title>Parameters</title>
    <variablelist>
-   <varlistentry><term>v:</term>
-      <listitem><para> n-by-1 or 1-by-m matrix of doubles, numerical values (n>10, better n>25)</para></listitem></varlistentry>
-   <varlistentry><term>mod:</term>
-      <listitem><para> 1-by-1 matrix of strings, "sd" "iqr15"or "iqr30" mode</para></listitem></varlistentry>
-   <varlistentry><term>outlierfree:</term>
-      <listitem><para> n-by-1 or 1-by-m matrix of doubles, outlier-free data</para></listitem></varlistentry>
-   <varlistentry><term>outlier:</term>
-      <listitem><para> n-by-1 or 1-by-m matrix of doubles, outliers</para></listitem></varlistentry>
+        <varlistentry>
+            <term>v:</term>
+            <listitem><para> n-by-1 or 1-by-m matrix of doubles, numerical values (n>10, better n>25)</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>mod:</term>
+            <listitem><para> 1-by-1 matrix of strings, "sd" "iqr15"or "iqr30" mode</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>outlierfree :</term>
+            <listitem><para> input vector with all detected outliers removed; unchanged if</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>outlier :</term>
+            <listitem><para> detected outliers in their original input order; [] if no outlier</para></listitem>
+        </varlistentry>
    </variablelist>
 </refsection>
 
@@ -61,8 +69,8 @@ the arithmetic mean in both directions.
 <latex>
 \begin{eqnarray}
 (\bar{x} - 2.5\sigma) &gt; x_i &gt; (\bar{x} + 2.5\sigma) \; \text{with} \quad \sigma = \sqrt{{1 \over n}\sum_{i=1}^{n}(x_i-\bar{x})^2} \quad \Rightarrow \quad x_i = \text{outlier}\\
-x_i: \text{value} \quad ; \quad \bar{x}: \text{arithmetic mean} \\
-\sigma: \text{population standard deviation} \quad ; \quad n: \text{number of values}
+x_i: \text{value} \quad                            &amp;;&amp; \quad \bar{x}: \text{arithmetic mean} \\
+\sigma: \text{population standard deviation} \quad &amp;;&amp; \quad       n: \text{number of values}
 \end{eqnarray}
 </latex>
    </para>
@@ -98,7 +106,7 @@ IQR = x_{0.75} - x_{0.25} \\
 <important><para>
 Do use ST_outlier "sd" mode ONLY with NORMAL distributed data and
 with more than 10 or better more than 25 values! Use ST_deandixon
-(or ST_nalimov) for distributions with lower number of values.
+(or ST_grubbs, ST_esd) for distributions with lower number of values.
 </para></important>
    </para>
    <para>
@@ -124,9 +132,11 @@ of = ST_outlier(data')      // outlier-free values with sd-mode
    ]]></programlisting>
 </refsection>
 
-<refsection>
+<refsection role="see also">
    <title>See also</title>
    <simplelist type="inline">
+   <member><link linkend="ST_grubbs">ST_grubbs</link></member>
+   <member><link linkend="ST_esd">ST_esd</link></member>
    <member><link linkend="ST_nalimov">ST_nalimov</link></member>
    <member><link linkend="ST_deandixon">ST_deandixon</link></member>
    <member><link linkend="ST_pearsonhartley">ST_pearsonhartley</link></member>

@@ -16,7 +16,7 @@
 function [outlierfree, outlier] = ST_outlier(v, mod)
     // Basic outlier tests for normal distributions
     //
-    // Calling Sequence
+    // Syntax
     //   [outlierfree] = ST_outlier(v)
     //   [outlierfree] = ST_outlier(v, mod)
     //   [outlierfree, outlier] = ST_outlier(v)
@@ -25,8 +25,10 @@ function [outlierfree, outlier] = ST_outlier(v, mod)
     // Parameters
     // v: n-by-1 or 1-by-m matrix of doubles, numerical values (n>10, better n>25)
     // mod: 1-by-1 matrix of strings, "sd" "iqr15"or "iqr30" mode
-    // outlierfree: n-by-1 or 1-by-m matrix of doubles, outlier-free data
-    // outlier: n-by-1 or 1-by-m matrix of doubles, outliers
+    // outlierfree : input vector with all detected outliers removed; unchanged if
+    //               the test does not identify an outlier
+    // outlier : detected outliers in their original input order; [] if no outlier
+    //           is detected
     //
     // Description
     // Performs basic outlier tests. 
@@ -39,8 +41,8 @@ function [outlierfree, outlier] = ST_outlier(v, mod)
     // <latex>
     // \begin{eqnarray}
     // (\bar{x} - 2.5\sigma) > x_i > (\bar{x} + 2.5\sigma) \; \text{with} \quad \sigma = \sqrt{{1 \over n}\sum_{i=1}^{n}(x_i-\bar{x})^2} \quad \Rightarrow \quad x_i = \text{outlier}\\
-    // x_i: \text{value} \quad ; \quad \bar{x}: \text{arithmetic mean} \\
-    // \sigma: \text{population standard deviation} \quad ; \quad n: \text{number of values}
+    // x_i: \text{value} \quad                            &;& \quad \bar{x}: \text{arithmetic mean} \\
+    // \sigma: \text{population standard deviation} \quad &;& \quad       n: \text{number of values}
     //\end{eqnarray}
     //</latex>
     //
@@ -71,7 +73,7 @@ function [outlierfree, outlier] = ST_outlier(v, mod)
     // <important><para>
     // Do use ST_outlier "sd" mode ONLY with NORMAL distributed data and
     // with more than 10 or better more than 25 values! Use ST_deandixon 
-    // (or ST_nalimov) for distributions with lower number of values.
+    // (or ST_grubbs, ST_esd) for distributions with lower number of values.
     // </para></important>
     //
     // Examples
@@ -89,6 +91,8 @@ function [outlierfree, outlier] = ST_outlier(v, mod)
     // [of30, o30] = ST_outlier(data', "iqr30")  // outlier and outlier-free values
     //
     // See also
+    //  ST_grubbs
+    //  ST_esd
     //  ST_nalimov
     //  ST_deandixon
     //  ST_pearsonhartley
@@ -106,7 +110,7 @@ function [outlierfree, outlier] = ST_outlier(v, mod)
     function q = ST_quantile(v, p)
         // Quantile
         //
-        // Calling Sequence
+        // Syntax
         //   q=ST_quantile(x,p)
         //
         // Parameters

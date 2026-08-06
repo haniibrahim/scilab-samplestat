@@ -22,7 +22,7 @@
 
 
 <refsynopsisdiv>
-   <title>Calling Sequence</title>
+   <title>Syntax</title>
    <synopsis>
    [outlierfree] = ST_deandixon(v, p)
    [outlierfree, outlier] = ST_deandixon(v, p)
@@ -33,14 +33,22 @@
 <refsection>
    <title>Parameters</title>
    <variablelist>
-   <varlistentry><term>v:</term>
-      <listitem><para> vector of numerical values</para></listitem></varlistentry>
-   <varlistentry><term>p:</term>
-      <listitem><para> statistical confidence level (%) as a string or the level of significance (alpha) as a decimal value, "95%", "99%", "99.9%" or 0.05, 0.01, 0.001 resp (see examples).</para></listitem></varlistentry>
-   <varlistentry><term>outlierfree:</term>
-      <listitem><para> vector of outlier-free data</para></listitem></varlistentry>
-   <varlistentry><term>outlier:</term>
-      <listitem><para> vector of outliers</para></listitem></varlistentry>
+        <varlistentry>
+            <term>v:</term>
+            <listitem><para> vector of numerical values</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>p:</term>
+            <listitem><para> statistical confidence level (%) as a string or the level of significance (α) as a decimal value, "95%", "99%", "99.9%" or 0.05, 0.01, 0.001 resp (see examples).</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>outlierfree :</term>
+            <listitem><para> input vector with the detected outlier removed; unchanged if</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>outlier :</term>
+            <listitem><para> detected outliers as a scalar vector; [] if no outlier is detected</para></listitem>
+        </varlistentry>
    </variablelist>
 </refsection>
 
@@ -50,14 +58,15 @@
 Performs the basic Dean-Dixon outlier test. It sorts the distribution in
 ascending or descending order, then takes the minimum and maximum values
 (xi) and calculates the respective Q value for both xi values. This is
-compared with the critical value from a table (Qcrit). If one of the two
-or both Q values greater than the corresponding Qcrit value, one orboth
+compared with the critical value from a table (Q<subscript>crit</subscript>). If one of the two
+or both Q values greater than the corresponding (Q<subscript>crit</subscript> value, one or both
 xi values are outliers.
    </para>
    <para>
 <latex>
 \begin{eqnarray}
-Q = \left | x_{i+1}-x_i \right |/\left | x_n-x_i \right | \quad ; \quad Q &gt; Q_{crit} \quad \Rightarrow \quad x_i = \text{outlier}
+Q = \frac{\left | x_{i+1}-x_i \right |}{\left | x_n-x_i \right |} \quad ; \quad Q &gt; Q_{crit} \quad \Rightarrow
+\quad x_i = \text{outlier} \quad ; \quad x = \text{values}
 \end{eqnarray}
 </latex>
    </para>
@@ -73,7 +82,8 @@ Apply this test ONLY one time to your data.
 <important><para>
 Do use ST_deandixon ONLY with NORMAL distributed data and
 with more than 3 and less than 30 values! For more than 30 values use
-Pearson-Hartley test ""ST_pearsonhartley()"" instead.
+Pearson-Hartley "ST_pearsonhartley()" or better the generalized Extreme Studentized
+Deviate test according to Rosner "ST_esd()" instead.
 </para></important>
    </para>
    <para>
@@ -91,7 +101,7 @@ of = ST_deandixon(data, "95%")      // outlier-free values
    ]]></programlisting>
 </refsection>
 
-<refsection>
+<refsection role="see also">
    <title>See also</title>
    <simplelist type="inline">
    <member><link linkend="ST_pearsonhartley">ST_pearsonhartley</link></member>

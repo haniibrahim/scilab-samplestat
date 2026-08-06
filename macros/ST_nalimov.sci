@@ -16,30 +16,32 @@
 function [outlierfree, outlier] = ST_nalimov(v, p)
     // Nalimov outlier test 
     //
-    // Calling Sequence
+    // Syntax
     //   [outlierfree] = ST_nalimov(v, p)
     //   [outlierfree, outlier] = ST_nalimov(v, p)
     //
     // Parameters
     // v: vector of numerical values
-    // p: statistical confidence level (%) as a string or the level of significance (alpha) as a decimal value, "95%", "99%", "99.9%" or 0.05, 0.01, 0.001 resp (see examples).
-    // outlierfree: vector of outlier-free data
-    // outlier: vector of outliers
+    // p: statistical confidence level (%) as a string or the level of significance (α) as a decimal value, "95%", "99%", "99.9%" or 0.05, 0.01, 0.001 resp (see examples).
+    // outlierfree : input vector with all detected outliers removed; unchanged if
+    //               the test does not identify an outlier
+    // outlier : detected outliers in their original input order; [] if no outlier
+    //           is detected
     //
     // Description
     // Performs Nalimov outlier test for small and larger sample sizes. 
     // It calculates for all values the test value "q". 
-    // It compares these q-values with the appropriate qcrit value from a table.
+    // It compares these q-values with the appropriate q<subscript>crit</subscript> value from a table.
     //
     // <latex>
     // \begin{eqnarray}
-    // q = \left | \frac{1}{s}(x_i- \bar{x}) \right | \sqrt{\frac{n}{n-1}} \quad;\quad q>q_{crit}\;\Rightarrow \; x_i=\text{outlier} \\
-    // x_i: \text{test value} \quad ; \quad \bar{x}: \text{arithmetic mean} \\
-    // s: \text{sample standard deviation} \quad ; \quad n: \text{number of values}
+    // q = \left | \frac{1}{s}(x_i- \bar{x}) \right | \sqrt{\frac{n}{n-1}} \quad &;& \quad q>q_{crit}\;\Rightarrow \; x_i=\text{outlier} \\ \\
+    // x_i : \text{test value} \quad                &;& \quad \bar{x} : \text{arithmetic mean} \\
+    // s   : \text{sample standard deviation} \quad &;& \quad        n: \text{number of values}
     // \end{eqnarray}
     // </latex>
     //
-    // q-values of the sample values which are greater than the qcrit value are 
+    // q-values of the sample values which are greater than the q<subscript>crit</subscript> value are 
     // outliers
     //
     // <important><para>
@@ -52,7 +54,8 @@ function [outlierfree, outlier] = ST_nalimov(v, p)
     // controversially discussed in the scientific community. For a convervative
     // outlier test substitute Nalimov with Dean-Dixon (ST_deandixon)
     // small sample sizes (<30) and Pearson-Hartley (ST-pearsonhartley) for 
-    // larger ones (>30).
+    // larger ones (>30) or better the generalized Extreme Studentized 
+    // Deviate test according to Rosner "ST_esd()" instead.
     // </para></caution>
     //
     // Examples

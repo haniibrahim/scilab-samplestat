@@ -22,7 +22,7 @@
 
 
 <refsynopsisdiv>
-   <title>Calling Sequence</title>
+   <title>Syntax</title>
    <synopsis>
    strayval = ST_strayarea(v, p)
    
@@ -32,12 +32,18 @@
 <refsection>
    <title>Parameters</title>
    <variablelist>
-   <varlistentry><term>v:</term>
-      <listitem><para> vector of numerical values</para></listitem></varlistentry>
-   <varlistentry><term>p:</term>
-      <listitem><para> statistical confidence level (%) as a string or the level of significance (alpha) as a decimal value, "95%", "99%", "99.9%" or 0.05, 0.01, 0.001 resp (see examples).</para></listitem></varlistentry>
-   <varlistentry><term>strayval:</term>
-      <listitem><para> stray area, range of dispersion of the values.</para></listitem></varlistentry>
+        <varlistentry>
+            <term>v:</term>
+            <listitem><para> vector of numerical values</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>p:</term>
+            <listitem><para> statistical confidence level (%) as a string or the level of significance (α) as a decimal value, "95%", "99%", "99.9%" or 0.05, 0.01, 0.001 resp (see examples).</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>strayval:</term>
+            <listitem><para> stray area, range of dispersion of the values.</para></listitem>
+        </varlistentry>
    </variablelist>
 </refsection>
 
@@ -77,7 +83,7 @@ ST_strayarea(v, 0.05)  // = 10.904
    ]]></programlisting>
 </refsection>
 
-<refsection>
+<refsection role="see also">
    <title>See also</title>
    <simplelist type="inline">
    <member><link linkend="ST_trustarea">ST_trustarea</link></member>

@@ -16,7 +16,7 @@
 function [normal] = ST_shapirowilk(v, p)   
     // Shapiro-Wilk test of normality 
     //
-    // Calling Sequence
+    // Syntax
     //   [normal] = ST_shapirowilk(v, p)
     //
     // Parameters

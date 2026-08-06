@@ -1,0 +1,18 @@
+To-Do Grubbs-Zweig => v2.1.0
+[x] Grubbs, klassisch Funktion erstellen
+[x] Grubbs, iterativ Funktion erstellen
+[x] IVP Funktion erweitern
+[x] ESD-Roesner Funktion erstellen
+[ ] Spalten-/Zeilenvektor erhalten => alte Funktione
+[ ] Auf NaN testen => alte Funktione
+[ ] Dokumentation erweitern
+[ ] Grafiken für ivplot-Doku machen
+[ ] Changelog, Readme.txt ergänzen
+[ ] Demos für ivplot erstellen
+[ ] Demos für Außreißer überarbeiten & ergänzen
+[ ] Toolbox bauen
+[ ] Testen auf Windows
+[ ] Testen auf Linux
+[ ] Testen auf macOS
+[ ] Grubbs-Zweig auf master mergen und Version 2.1.0 taggen & pushen
+[ ] Auf ATOMS veröffentlichen

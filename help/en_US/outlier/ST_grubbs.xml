@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ *
+ * This help file was generated from ST_grubbs.sci using help_from_sci().
+ *
+ -->
+
+<refentry version="5.0-subset Scilab" xml:id="ST_grubbs" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns3="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:scilab="http://www.scilab.org"
+          xmlns:db="http://docbook.org/ns/docbook">
+
+  <refnamediv>
+    <refname>ST_grubbs</refname>
+    <refpurpose>Classical non-iterative Grubbs test for a single outlier</refpurpose>
+  </refnamediv>
+
+
+<refsynopsisdiv>
+   <title>Syntax</title>
+   <synopsis>
+   [outlierfree, outlier] = ST_grubbs(v, p)
+   [outlierfree, outlier] = ST_grubbs(v, p, side)
+   outlierfree = ST_grubbs(v, p)
+   outlierfree = ST_grubbs(v, p, side)
+   
+   </synopsis>
+</refsynopsisdiv>
+
+<refsection>
+   <title>Parameters</title>
+   <variablelist>
+        <varlistentry>
+            <term>v :</term>
+            <listitem><para> real vector of numerical sample values; at least three values are required</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>p :</term>
+            <listitem><para> statistical confidence level as a string or significance level α</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>side :</term>
+            <listitem><para> test direction, "both" (default), "left" or "right"</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>outlierfree :</term>
+            <listitem><para> input vector with the detected outlier removed; unchanged if</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>outlier :</term>
+            <listitem><para> detected outlier as a scalar vector; [] if no outlier is detected</para></listitem>
+        </varlistentry>
+   </variablelist>
+</refsection>
+
+<refsection>
+   <title>Description</title>
+   <para>
+ST_grubbs performs the classical, non-iterative Grubbs test and can detect
+at most one outlier in a sample. The test is performed exactly once on the
+complete input vector. It is therefore not affected by the changing critical
+limits and accumulated type-I error associated with repeated application.
+   </para>
+   <para>
+The test assumes that the observations are independent and approximately
+normally distributed. A minimum sample size of n &gt;= 3 is required. The test
+has limited power for very small samples, and a non-significant result must
+not be interpreted as proof that the sample contains no outlier.
+   </para>
+   <para>
+Test directions:
+"both"  tests the observation with the largest absolute deviation from
+the sample mean. The critical probability uses α/(2*n).
+"left"  tests only the minimum observation. The critical probability
+uses α/n.
+"right" tests only the maximum observation. The critical probability
+uses α/n.
+   </para>
+   <para>
+The sample standard deviation is calculated with denominator n-1.
+If all sample values are identical, the standard deviation is zero and no
+outlier is returned.
+   </para>
+   <para>
+Test statistic
+   </para>
+   <para>
+<latex>
+\begin{eqnarray}
+G_{two-sided} &amp;=&amp; \frac{\max_i |x_i-\overline{x}|}{s} \\
+G_{left} &amp;=&amp; \frac{\overline{x}-x_{min}}{s} \\
+G_{right} &amp;=&amp; \frac{x_{max}-\overline{x}}{s}
+\end{eqnarray}
+</latex>
+   </para>
+   <para>
+Critical value
+   </para>
+   <para>
+<latex>
+\begin{eqnarray}
+G_{crit} &amp;=&amp; \frac{n-1}{\sqrt{n}}
+\sqrt{\frac{t^2}{n-2+t^2}} \\
+t &amp;=&amp; t_{1-\alpha/(2n),\,n-2}\quad\text{Student t quantile for a two-sided test} \\
+t &amp;=&amp; t_{1-\alpha/n,\,n-2}\quad\text{Student t quantile for a one-sided test} \\
+\text{with} \\
+x_i     &amp;:&amp; \text{test value} \\
+n       &amp;:&amp; \text{number of values} \\
+s       &amp;:&amp; \text{sample standard deviation} \\
+\bar{x} &amp;:&amp; \text{arithmetic mean} \\
+x_{max} &amp;:&amp; \text{max. value} \\
+x_{min} &amp;:&amp; \text{min value} \\
+\alpha  &amp;:&amp; \text{statistical confidence level}
+\end{eqnarray}
+</latex>
+   </para>
+   <para>
+Decision rule
+The selected observation is classified as an outlier when G &gt; G<subscript>crit</subscript>.
+Equality does not lead to rejection.
+   </para>
+   <para>
+</para>
+</refsection>
+
+<refsection>
+   <title>Examples</title>
+   <programlisting role="example"><![CDATA[
+data = [0.4827129 0.3431706 -0.4127328 0.3843994 ..
+-0.7107495 -0.2547306 0.0290803 0.1386087 ..
+-0.7698385 1.0743628 1.0945652 0.4365680 ..
+-0.5913411 -0.7426987 1.609719 0.8079680 ..
+-2.1700554 -4.7361261 0.0069708 14.626386 ..
+-2.5036545 -2.9046385];
+
+// Two-sided test at 95% confidence
+[of, o] = ST_grubbs(data, "95%")
+[of, o] = ST_grubbs(data, 0.05, "both")
+
+// Test only the minimum at 99% confidence
+[of, o] = ST_grubbs(data, "99%", "left")
+
+// Test only the maximum at 99.9% confidence
+[of, o] = ST_grubbs(data, 0.001, "right")
+
+   ]]></programlisting>
+</refsection>
+
+<refsection role="see also">
+   <title>See also</title>
+   <simplelist type="inline">
+   <member><link linkend="ST_grubbs_iterat">ST_grubbs_iterat</link></member>
+   <member><link linkend="ST_esd">ST_esd</link></member>
+   <member><link linkend="ST_pearsonhartley">ST_pearsonhartley</link></member>
+   <member><link linkend="ST_nalimov">ST_nalimov</link></member>
+   <member><link linkend="ST_deandixon">ST_deandixon</link></member>
+   <member><link linkend="ST_outlier">ST_outlier</link></member>
+   <member><link linkend="ST_strayarea">ST_strayarea</link></member>
+   <member><link linkend="ST_trustarea">ST_trustarea</link></member>
+   <member><link linkend="ST_shapirowilk">ST_shapirowilk</link></member>
+   <member><link linkend="ST_ivplot">ST_ivplot</link></member>
+   </simplelist>
+</refsection>
+
+<refsection>
+   <title>Authors</title>
+   <simplelist type="vert">
+   <member>Hani A. Ibrahim - hani.ibrahim@gmx.de</member>
+   </simplelist>
+</refsection>
+
+<refsection>
+   <title>Bibliography</title>
+   <para>Grubbs, F. E. (1950). Sample criteria for testing outlying observations.</para>
+   <para>Annals of Mathematical Statistics, 21(1), 27-58.</para>
+   <para>Grubbs, F. E. (1969). Procedures for detecting outlying observations in</para>
+   <para>samples. Technometrics, 11(1), 1-21.</para>
+   <para>NIST/SEMATECH e-Handbook of Statistical Methods, Grubbs' Test for Outliers.</para>
+</refsection>
+</refentry>

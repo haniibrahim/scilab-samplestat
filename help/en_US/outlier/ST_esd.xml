@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ *
+ * This help file was generated from ST_esd.sci using help_from_sci().
+ *
+ -->
+
+<refentry version="5.0-subset Scilab" xml:id="ST_esd" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns3="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:scilab="http://www.scilab.org"
+          xmlns:db="http://docbook.org/ns/docbook">
+
+  <refnamediv>
+    <refname>ST_esd</refname>
+    <refpurpose>Generalized Extreme Studentized Deviate test according to Rosner</refpurpose>
+  </refnamediv>
+
+
+<refsynopsisdiv>
+   <title>Syntax</title>
+   <synopsis>
+   [outlierfree, outlier] = ST_esd(v, p, maxoutliers)
+   [outlierfree, outlier] = ST_esd(v, p, maxoutliers, side)
+   outlierfree = ST_esd(v, p, maxoutliers)
+   outlierfree = ST_esd(v, p, maxoutliers, side)
+   
+   </synopsis>
+</refsynopsisdiv>
+
+<refsection>
+   <title>Parameters</title>
+   <variablelist>
+        <varlistentry>
+            <term>v :</term>
+            <listitem><para> real vector of numerical sample values; at least three values are required</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>p :</term>
+            <listitem><para> statistical confidence level as a string or significance level alpha</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>maxoutliers :</term>
+            <listitem><para> positive integer specifying the maximum number of suspected</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>side :</term>
+            <listitem><para> test direction, "both" (default), "left" or "right"</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>outlierfree :</term>
+            <listitem><para> input vector with all detected outliers removed; unchanged if</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>outlier :</term>
+            <listitem><para> detected outliers in their original input order; [] if no outlier</para></listitem>
+        </varlistentry>
+   </variablelist>
+</refsection>
+
+<refsection>
+   <title>Description</title>
+   <para>
+ST_esd performs Rosner's generalized Extreme Studentized Deviate (ESD)
+test for one or more outliers. Unlike repeatedly applying the classical
+Grubbs test, the generalized ESD procedure evaluates a sequence of test
+statistics and matching critical values while controlling the overall
+significance level for up to maxoutliers suspected observations.
+   </para>
+   <para>
+The procedure first removes the most extreme remaining observation and
+calculates R<subscript>i</subscript> and λ<subscript>i</subscript> for i = 1,...,maxoutliers. The number of
+outliers is then the largest index k for which R<subscript>k</subscript> &gt; λ<subscript>k</subscript>. The first
+k observations removed during the sequence are classified as outliers.
+Observations removed only for calculating later test statistics are restored
+when their index is greater than k.
+   </para>
+   <para>
+The test assumes that the non-outlying observations are independent and
+approximately normally distributed. A minimum sample size of n &gt;= 3 is
+required. Rosner's critical-value approximation is most reliable for
+moderate and large samples; test power and calibration are restricted for
+very small samples. maxoutliers should be chosen before inspecting the
+results and should normally be small relative to the sample size.
+   </para>
+   <para>
+Test directions:
+"both"  removes the observation with the largest absolute deviation from
+the current sample mean. The critical probability uses
+α/(2*n<subscript>i</subscript>). This is Rosner's standard two-sided procedure.
+"left"  removes only the current minimum. The critical probability uses
+α/n<subscript>i</subscript>.
+"right" removes only the current maximum. The critical probability uses
+α/n<subscript>i</subscript>.
+   </para>
+   <para>
+The sample standard deviation is calculated with denominator n<subscript>i-1</subscript>.
+If all remaining values are identical at any step, no additional test
+statistic can be calculated and the sequence stops.
+   </para>
+   <para>
+Test statistic at step i
+   </para>
+   <para>
+<latex>
+\begin{eqnarray}
+n_i &amp;=&amp; n-i+1 \\
+R_i &amp;=&amp; \frac{\max_j |x_j-\overline{x}_i|}{s_i}
+\quad\text{for a two-sided test} \\
+R_i &amp;=&amp; \frac{\overline{x}_i-x_{min,i}}{s_i}
+\quad\text{for a left-sided test} \\
+R_i &amp;=&amp; \frac{x_{max,i}-\overline{x}_i}{s_i}
+\quad\text{for a right-sided test}
+\end{eqnarray}
+</latex>
+   </para>
+   <para>
+Critical value at step i
+   </para>
+   <para>
+<latex>
+\begin{eqnarray}
+\lambda_i &amp;=&amp; \frac{(n_i-1)t_i}{\sqrt{(n_i-2+t_i^2)n_i}} \\
+t_i &amp;=&amp; t_{1-\alpha/(2n_i),\,n_i-2} \quad \text{for a two-sided test} \\
+t_i &amp;=&amp; t_{1-\alpha/n_i,\,n_i-2} \quad \text{for a one-sided test} \\
+\text{with} \\
+x_i     &amp;:&amp; \text{test value} \\
+n       &amp;:&amp; \text{number of values} \\
+s       &amp;:&amp; \text{sample standard deviation} \\
+\bar{x} &amp;:&amp; \text{arithmetic mean} \\
+x_{max} &amp;:&amp; \text{max. value} \\
+x_{min} &amp;:&amp; \text{min value} \\
+t       &amp;:&amp; \text{student factor} \\
+\alpha  &amp;:&amp; \text{statistical confidence level}
+\end{eqnarray}
+</latex>
+   </para>
+   <para>
+Decision rule:
+Let k be the largest index i for which R<subscript>i</subscript> &gt; λ<subscript>i</subscript>. The first k
+observations removed during the calculation sequence are classified as
+outliers. Equality does not lead to rejection. If no such index exists,
+no outlier is returned.
+   </para>
+   <para>
+</para>
+</refsection>
+
+<refsection>
+   <title>Examples</title>
+   <programlisting role="example"><![CDATA[
+data = [0.4827129 0.3431706 -0.4127328 0.3843994 ..
+-0.7107495 -0.2547306 0.0290803 0.1386087 ..
+-0.7698385 1.0743628 1.0945652 0.4365680 ..
+-0.5913411 -0.7426987 1.609719 0.8079680 ..
+-2.1700554 -9.7361261 0.0069708 14.626386 ..
+-2.5036545 -2.9046385];
+
+// Test for up to three two-sided outliers at 95% confidence
+[of, o] = ST_esd(data, "95%", 3)
+// Expected outliers in original input order: [-9.7361261 14.626386]
+
+// Test for up to three low outliers at 99% confidence
+[of, o] = ST_esd(data, "99%", 3, "left")
+
+// Test for up to two high outliers at 99.9% confidence
+[of, o] = ST_esd(data, 0.001, 2, "right")
+
+   ]]></programlisting>
+</refsection>
+
+<refsection role="see also">
+   <title>See also</title>
+   <simplelist type="inline">
+   <member><link linkend="ST_grubbs">ST_grubbs</link></member>
+   <member><link linkend="ST_pearsonhartley">ST_pearsonhartley</link></member>
+   <member><link linkend="ST_nalimov">ST_nalimov</link></member>
+   <member><link linkend="ST_deandixon">ST_deandixon</link></member>
+   <member><link linkend="ST_outlier">ST_outlier</link></member>
+   <member><link linkend="ST_strayarea">ST_strayarea</link></member>
+   <member><link linkend="ST_trustarea">ST_trustarea</link></member>
+   <member><link linkend="ST_shapirowilk">ST_shapirowilk</link></member>
+   <member><link linkend="ST_ivplot">ST_ivplot</link></member>
+   </simplelist>
+</refsection>
+
+<refsection>
+   <title>Authors</title>
+   <simplelist type="vert">
+   <member>Hani A. Ibrahim - hani.ibrahim@gmx.de</member>
+   </simplelist>
+</refsection>
+
+<refsection>
+   <title>Bibliography</title>
+   <para>Rosner, B. (1983). Percentage Points for a Generalized ESD Many-Outlier</para>
+   <para>Procedure. Technometrics, 25(2), 165-172.</para>
+   <para>NIST/SEMATECH e-Handbook of Statistical Methods, Generalized ESD Test</para>
+   <para>for Outliers.</para>
+</refsection>
+</refentry>

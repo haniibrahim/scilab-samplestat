@@ -16,12 +16,12 @@
 function trustval = ST_trustarea(v, p)
 // Determines the range of dispersion of the mean.
 //
-// Calling Sequence
+// Syntax
 //  trustval = ST_trustarea(v, p)
 //
 // Parameters
 // v: vector of numerical values
-// p: statistical confidence level (%) as a string or the level of significance (alpha) as a decimal value, "95%", "99%", "99.9%" or 0.05, 0.01, 0.001 resp (see examples).
+// p: statistical confidence level (%) as a string or the level of significance (α) as a decimal value, "95%", "99%", "99.9%" or 0.05, 0.01, 0.001 resp (see examples).
 // trustval: trust area, range of dispersion of the mean.
 //
 // Description

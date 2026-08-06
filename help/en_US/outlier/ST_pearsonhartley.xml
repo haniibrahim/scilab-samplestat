@@ -21,26 +21,25 @@
   </refnamediv>
 
 
-<refsynopsisdiv>
-   <title>Calling Sequence</title>
-   <synopsis>
-   [outlierfree] = ST_pearsonhartley(v, p)
-   [outlierfree, outlier] = ST_pearsonhartley(v, p)
-   
-   </synopsis>
-</refsynopsisdiv>
-
 <refsection>
    <title>Parameters</title>
    <variablelist>
-   <varlistentry><term>v:</term>
-      <listitem><para> vector of numerical values</para></listitem></varlistentry>
-   <varlistentry><term>p:</term>
-      <listitem><para> statistical confidence level (%) as a string or the level of significance (alpha) as a decimal value, "95%", "99%" or 0.05, 0.01 resp (see examples).</para></listitem></varlistentry>
-   <varlistentry><term>outlierfree:</term>
-      <listitem><para> vector of outlier-free data</para></listitem></varlistentry>
-   <varlistentry><term>outlier:</term>
-      <listitem><para> vector of outliers</para></listitem></varlistentry>
+        <varlistentry>
+            <term>v:</term>
+            <listitem><para> vector of numerical values</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>p:</term>
+            <listitem><para> statistical confidence level (%) as a string or the level of significance (alpha) as a decimal value, "95%", "99%" or 0.05, 0.01 resp (see examples).</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>outlierfree:</term>
+            <listitem><para> vector of outlier-free data</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>outlier:</term>
+            <listitem><para> vector of outliers</para></listitem>
+        </varlistentry>
    </variablelist>
 </refsection>
 
@@ -51,12 +50,6 @@ Performs the Pearson-Hartley outlier test. It should be used for distributions
 with more than 30 values.
    </para>
    <para>
-<latex>
-\begin{eqnarray}
-q=\left| \frac{1}{s}(x_i - \bar{x}) \right| \quad ; \quad q &gt;q_{crit} \quad  \Rightarrow \quad x_i = \text{outlier} \\
-x_i: \text{test value} \quad ; \quad \bar{x}: \text{arithmetic mean} \quad ; \quad s: \text{sample standard deviation}
-\end{eqnarray}
-</latex>
    </para>
    <para>
 <important><para>
@@ -89,7 +82,7 @@ of = ST_pearsonhartley(data, "95%")      // outlier-free values
    ]]></programlisting>
 </refsection>
 
-<refsection>
+<refsection role="see also">
    <title>See also</title>
    <simplelist type="inline">
    <member><link linkend="ST_outlier">ST_outlier</link></member>

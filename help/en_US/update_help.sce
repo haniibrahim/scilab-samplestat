@@ -31,6 +31,9 @@ mprintf("Updating outlier\n");
 helpdir = fullfile(cwd,"outlier");
 funmat = [
   "ST_deandixon"
+  "ST_grubbs"
+  "ST_grubbs_iterat"
+  "ST_esd"
   "ST_nalimov"
   "ST_outlier"
   "ST_pearsonhartley"

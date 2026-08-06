@@ -16,27 +16,29 @@
 function [outlierfree, outlier] = ST_deandixon(v, p)
     // Basic Dean-Dixon outlier test
     //
-    // Calling Sequence
+    // Syntax
     //   [outlierfree] = ST_deandixon(v, p)
     //   [outlierfree, outlier] = ST_deandixon(v, p)
     //
     // Parameters
     // v: vector of numerical values
-    // p: statistical confidence level (%) as a string or the level of significance (alpha) as a decimal value, "95%", "99%", "99.9%" or 0.05, 0.01, 0.001 resp (see examples).
-    // outlierfree: vector of outlier-free data
-    // outlier: vector of outliers
+    // p: statistical confidence level (%) as a string or the level of significance (α) as a decimal value, "95%", "99%", "99.9%" or 0.05, 0.01, 0.001 resp (see examples).
+    // outlierfree : input vector with the detected outlier removed; unchanged if
+    //               the test does not identify an outlier
+    // outlier : detected outliers as a scalar vector; [] if no outlier is detected
     //
     // Description
     // Performs the basic Dean-Dixon outlier test. It sorts the distribution in
     //  ascending or descending order, then takes the minimum and maximum values 
     // (xi) and calculates the respective Q value for both xi values. This is 
-    // compared with the critical value from a table (Qcrit). If one of the two 
-    // or both Q values greater than the corresponding Qcrit value, one orboth
+    // compared with the critical value from a table (Q<subscript>crit</subscript>). If one of the two 
+    // or both Q values greater than the corresponding (Q<subscript>crit</subscript> value, one or both
     // xi values are outliers.
     //
     // <latex>
     // \begin{eqnarray}
-    // Q = \left | x_{i+1}-x_i \right |/\left | x_n-x_i \right | \quad ; \quad Q > Q_{crit} \quad \Rightarrow \quad x_i = \text{outlier}
+    // Q = \frac{\left | x_{i+1}-x_i \right |}{\left | x_n-x_i \right |} \quad ; \quad Q > Q_{crit} \quad \Rightarrow 
+    //     \quad x_i = \text{outlier} \quad ; \quad x = \text{values}
     // \end{eqnarray}
     // </latex>
     //
@@ -49,7 +51,8 @@ function [outlierfree, outlier] = ST_deandixon(v, p)
     // <important><para>
     // Do use ST_deandixon ONLY with NORMAL distributed data and
     // with more than 3 and less than 30 values! For more than 30 values use 
-    // Pearson-Hartley test ""ST_pearsonhartley()"" instead.
+    // Pearson-Hartley "ST_pearsonhartley()" or better the generalized Extreme Studentized 
+    // Deviate test according to Rosner "ST_esd()" instead.
     // </para></important>
     //
     // Examples
