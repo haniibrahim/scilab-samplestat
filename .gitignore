@@ -1,6 +1,8 @@
 *.bin
 *.png
 *.jpg
+*.bak
+*~
 lib
 names
 cleaner.sce

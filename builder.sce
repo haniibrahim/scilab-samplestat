@@ -3,8 +3,8 @@
 
 // This file is released under the 3-clause BSD license. See COPYING-BSD.
 
-// Uncomment this line to make a debug version of the Toolbox
-//setenv("DEBUG_SCILAB_DYNAMIC_LINK","YES")
+mode(-1);
+lines(0);
 
 function main_builder()
     TOOLBOX_NAME  = "samplestat";

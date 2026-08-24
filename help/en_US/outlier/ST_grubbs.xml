@@ -121,6 +121,8 @@ x_{min} &amp;:&amp; \text{min value} \\
    </para>
    <para>
 Decision rule
+   </para>
+   <para>
 The selected observation is classified as an outlier when G &gt; G<subscript>crit</subscript>.
 Equality does not lead to rejection.
    </para>

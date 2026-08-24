@@ -140,7 +140,9 @@ t       &amp;:&amp; \text{student factor} \\
 </latex>
    </para>
    <para>
-Decision rule:
+Decision rule
+   </para>
+   <para>
 Let k be the largest index i for which R<subscript>i</subscript> &gt; λ<subscript>i</subscript>. The first k
 observations removed during the calculation sequence are classified as
 outliers. Equality does not lead to rejection. If no such index exists,

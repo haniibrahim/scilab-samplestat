@@ -102,8 +102,7 @@ Critical value:
    <para>
 <latex>
 \begin{eqnarray}
-G_{crit} &amp;=&amp; \frac{n-1}{\sqrt{n}} \sqrt{\frac{t^2}{n-2+t^2}} \\
-\text{with} \\
+G_{crit} &amp;=&amp; \frac{n-1}{\sqrt{n}} \sqrt{\frac{t^2}{n-2+t^2}} \\ \\
 t       &amp;=&amp; t_{\frac{1-\alpha}{2n}, n-2} \quad : \quad \text{ Student t quantile for two-sided test} \\
 t       &amp;=&amp; t_{\frac{1-\alpha}{n}, n-2} \quad : \quad \text{ Student t quantile for on-sided test} \\
 \text{and} \\
