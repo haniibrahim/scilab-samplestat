@@ -124,12 +124,8 @@ function [outlierfree, outlier] = ST_grubbs(v, p, side)
     //   Hani A. Ibrahim - hani.ibrahim@gmx.de
     //
     // Bibliography
-    //   Grubbs, F. E. (1950). Sample criteria for testing outlying observations.
-    //   Annals of Mathematical Statistics, 21(1), 27-58.
-    //
-    //   Grubbs, F. E. (1969). Procedures for detecting outlying observations in
-    //   samples. Technometrics, 11(1), 1-21.
-    //
+    //   Grubbs, F. E. (1950). Sample criteria for testing outlying observations. Annals of Mathematical Statistics, 21(1), 27-58.
+    //   Grubbs, F. E. (1969). Procedures for detecting outlying observations in samples. Technometrics, 11(1), 1-21.
     //   NIST/SEMATECH e-Handbook of Statistical Methods, Grubbs' Test for Outliers.
     //
 

@@ -199,9 +199,7 @@ data = [0.4827129 0.3431706 -0.4127328 0.3843994 ..
 
 <refsection>
    <title>Bibliography</title>
-   <para>Rosner, B. (1983). Percentage Points for a Generalized ESD Many-Outlier</para>
-   <para>Procedure. Technometrics, 25(2), 165-172.</para>
-   <para>NIST/SEMATECH e-Handbook of Statistical Methods, Generalized ESD Test</para>
-   <para>for Outliers.</para>
+   <para>Rosner, B. (1983). Percentage Points for a Generalized ESD Many-Outlier Procedure. Technometrics, 25(2), 165-172.</para>
+   <para>NIST/SEMATECH e-Handbook of Statistical Methods, Generalized ESD Test for Outliers.</para>
 </refsection>
 </refentry>

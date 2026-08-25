@@ -168,9 +168,4 @@ of = ST_grubbs_iterat(data, "95%")              // Output: outlier-free values, 
    <member>Hani A. Ibrahim - hani.ibrahim@gmx.de</member>
    </simplelist>
 </refsection>
-
-<refsection>
-   <title>Bibliography</title>
-   <para>Lohringer, H., "Grundlagen der Statistik", Oct, 10th, 2012, http://www.statistics4u.info/fundstat_germ/cc_outlier_tests_4sigma.html</para>
-</refsection>
 </refentry>

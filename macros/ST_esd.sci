@@ -141,11 +141,8 @@ function [outlierfree, outlier] = ST_esd(v, p, maxoutliers, side)
     //   Hani A. Ibrahim - hani.ibrahim@gmx.de
     //
     // Bibliography
-    //   Rosner, B. (1983). Percentage Points for a Generalized ESD Many-Outlier
-    //   Procedure. Technometrics, 25(2), 165-172.
-    //
-    //   NIST/SEMATECH e-Handbook of Statistical Methods, Generalized ESD Test
-    //   for Outliers.
+    //   Rosner, B. (1983). Percentage Points for a Generalized ESD Many-Outlier Procedure. Technometrics, 25(2), 165-172.
+    //   NIST/SEMATECH e-Handbook of Statistical Methods, Generalized ESD Test for Outliers.
     //
 
     [lhs, rhs] = argn();

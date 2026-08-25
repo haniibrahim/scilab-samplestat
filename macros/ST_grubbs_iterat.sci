@@ -115,9 +115,6 @@ function [outlierfree, outlier] = ST_grubbs_iterat(v, p, side)
     // Authors
     //  Hani A. Ibrahim - hani.ibrahim@gmx.de
     //
-    // Bibliography
-    //   Lohringer, H., "Grundlagen der Statistik", Oct, 10th, 2012, http://www.statistics4u.info/fundstat_germ/cc_outlier_tests_4sigma.html
-    //
 
     [lhs,rhs]=argn();
 
