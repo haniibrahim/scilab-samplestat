@@ -1,6 +1,4 @@
 *.bin
-*.png
-*.jpg
 *.bak
 *~
 lib
@@ -11,6 +9,5 @@ unloader.sce
 *.jar
 .DS_Store
 scilab_en_US_help/
-internals/
 TODO
 help/en_US/master_help.xml
