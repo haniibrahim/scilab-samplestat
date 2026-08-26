@@ -155,7 +155,7 @@ function [outlierfree, outlier] = ST_deandixon(v, p)
         error(msprintf("%s: Second argument is the statistical confidence level and has to be a string, as 95%%, 99%% or 99.9%%" + ..
         " or as alpha value: 0.05, 0.01, 0.001", "ST_deandixon"));
     end
-
+    
     n = length(v);
     if (n < 3 | n > 30)
         error("Dean-Dixon Outliertest is just applicable for sample distributions greater than 3 and lesser than 30 values. For more than 30 values use Pearson-Hartley test ""ST_pearsonhartley()"" instead."); 

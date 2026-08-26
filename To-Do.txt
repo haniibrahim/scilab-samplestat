@@ -3,7 +3,7 @@ To-Do Grubbs-Zweig => v2.1.0
 [x] Grubbs, iterativ Funktion erstellen
 [x] IVP Funktion erweitern
 [x] ESD-Roesner Funktion erstellen
-[ ] Spalten-/Zeilenvektor erhalten => alte Funktione
+[x] Spalten-/Zeilenvektor erhalten => alte Funktione
 [ ] Auf NaN testen => alte Funktione
 [ ] Dokumentation erweitern
 [ ] Grafiken für ivplot-Doku machen

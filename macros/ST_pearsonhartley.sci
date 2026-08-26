@@ -151,13 +151,16 @@ function [outlierfree, outlier] = ST_pearsonhartley(v, p)
         error(msprintf("%s: Second argument is the statistical confidence level \nand has to be a string, as 95%% or 99%%" + ..
         " or as alpha value: 0.05, 0.01.", "ST_pearsonhartley"));
     end
+    
+    // Check the orientation of the input vector
+    rowvector = (size(v, 1) == 1);
 
     n = length(v);
         if (n < 3 | n > 1000)
             error(msprintf( ..
     "Pearson-Hartley is just applicable for sample distributions greater than 3\n" + ..
     "and less than 1000 values.")); 
-        end
+    end
 
     // Determine Q_crit
     qcritval = pearsonhartley_crit(n, p);
@@ -180,9 +183,11 @@ function [outlierfree, outlier] = ST_pearsonhartley(v, p)
         k = k + 1;
     end
 
-    // make column vectors
-    outlierfree = outlierfree';
-    outlier = outlier';
+    // Preserve vector orientation
+    if (size(outlier, 1) == 1) ~= rowvector then
+        outlier = outlier';
+        outlierfree = outlierfree';
+    end;
 
     return;
 

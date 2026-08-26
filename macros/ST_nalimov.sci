@@ -211,6 +211,9 @@ function [outlierfree, outlier] = ST_nalimov(v, p)
     end
 
     n = length(v);
+    
+    // Check the orientation of the input vector
+    rowvector = (size(v, 1) == 1);
 
     // Determine Q_crit
     qcritval = nalimov_crit(n, p);
@@ -228,6 +231,12 @@ function [outlierfree, outlier] = ST_nalimov(v, p)
         else
             outlierfree = [outlierfree, v(i)];
         end
+    end
+    
+    // Preserve vector orientation
+    if ~rowvector then
+        outlier = outlier';
+        outlierfree = outlierfree';
     end
 
     return;
