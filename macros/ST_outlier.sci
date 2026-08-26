@@ -165,6 +165,10 @@ function [outlierfree, outlier] = ST_outlier(v, mod)
     if length(v) < 10 then
         warning("ST_outlier: Number of values should be >10, better >25");
     end
+    
+    if or(isnan(v)) | or(isinf(v)) then
+        error("ST_outlier: First argument v must not contain NaN or Inf values.");
+    end
 
     // Quantiles and inter-quartile range
     x25 = ST_quantile(v, 0.25);

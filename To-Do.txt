@@ -4,7 +4,7 @@ To-Do Grubbs-Zweig => v2.1.0
 [x] IVP Funktion erweitern
 [x] ESD-Roesner Funktion erstellen
 [x] Spalten-/Zeilenvektor erhalten => alte Funktione
-[ ] Auf NaN testen => alte Funktione
+[x] Auf NaN testen => alte Funktione
 [ ] Dokumentation erweitern
 [ ] Grafiken für ivplot-Doku machen
 [ ] Changelog, Readme.txt ergänzen

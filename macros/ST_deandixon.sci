@@ -160,6 +160,11 @@ function [outlierfree, outlier] = ST_deandixon(v, p)
     if (n < 3 | n > 30)
         error("Dean-Dixon Outliertest is just applicable for sample distributions greater than 3 and lesser than 30 values. For more than 30 values use Pearson-Hartley test ""ST_pearsonhartley()"" instead."); 
     end
+    
+    // Check for NaNs & infinit values
+    if or(isnan(v)) | or(isinf(v)) then
+        error("ST_deandixon: First argument v must not contain NaN or Inf values.");
+    end
 
     // Determine Q_crit
     qcritval = deandixon_crit(n, p);

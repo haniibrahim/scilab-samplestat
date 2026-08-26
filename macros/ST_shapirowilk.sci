@@ -209,6 +209,10 @@ function [normal] = ST_shapirowilk(v, p)
         error(msprintf("%s: Second argument is the statistical confidence level and has to be a string, as 90%%, 95%% or 99%%" + ..
         " or as alpha value: 0.1, 0.05, 0.01", "ST_shapirowilk"));
     end
+    
+    if or(isnan(v)) | or(isinf(v)) then
+        error("ST_shapirowilk: First argument v must not contain NaN or Inf values.");
+    end
 
     n = length(v);
 

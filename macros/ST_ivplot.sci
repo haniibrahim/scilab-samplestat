@@ -128,6 +128,10 @@ function ST_ivplot(data, names, marker, offset, tolerance)
         error(msprintf( ..
         "ST_ivplot: Es werden 1 bis 5 Eingabeargumente erwartet."));
     end
+    
+    if or(isnan(data)) | or(isinf(data)) then
+        error("ST_ivplot: First argument v must not contain NaN or Inf values.");
+    end
 
     // -------------------------------------------------------------------------
     // Default values

@@ -154,6 +154,10 @@ function [outlierfree, outlier] = ST_pearsonhartley(v, p)
     
     // Check the orientation of the input vector
     rowvector = (size(v, 1) == 1);
+    
+    if or(isnan(v)) | or(isinf(v)) then
+        error("ST_pearsonhartley: First argument v must not contain NaN or Inf values.");
+    end
 
     n = length(v);
         if (n < 3 | n > 1000)

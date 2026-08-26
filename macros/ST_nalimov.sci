@@ -209,6 +209,10 @@ function [outlierfree, outlier] = ST_nalimov(v, p)
         error(msprintf("%s: Second argument is the statistical confidence level and has to be a string, as 95%%, 99%% or 99.9%%" + ..
         " or as alpha value: 0.05, 0.01, 0.001", "ST_nalimov"));
     end
+    
+    if or(isnan(v)) | or(isinf(v)) then
+        error("ST_nalimov: First argument v must not contain NaN or Inf values.");
+    end
 
     n = length(v);
     
