@@ -62,6 +62,8 @@ function [outlierfree, outlier] = ST_deandixon(v, p)
     // [of, o] = ST_deandixon(data, 0.05)  // outlier and outlier-free values
     //
     // See also
+    //  ST_grubbs
+    //  ST_esd
     //  ST_pearsonhartley
     //  ST_nalimov
     //  ST_strayarea

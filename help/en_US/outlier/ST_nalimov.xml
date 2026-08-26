@@ -106,6 +106,8 @@ of = ST_nalimov(data, "95%")      // outlier-free values
 <refsection role="see also">
    <title>See also</title>
    <simplelist type="inline">
+   <member><link linkend="ST_grubbs">ST_grubbs</link></member>
+   <member><link linkend="ST_esd">ST_esd</link></member>
    <member><link linkend="ST_deandixon">ST_deandixon</link></member>
    <member><link linkend="ST_pearsonhartley">ST_pearsonhartley</link></member>
    <member><link linkend="ST_strayarea">ST_strayarea</link></member>

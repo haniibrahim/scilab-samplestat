@@ -25,20 +25,11 @@ function ST_ivplot(data, names, marker, offset, tolerance)
     //   ST_ivplot(data, names, marker, offset, tolerance)
     //
     // Parameters
-    //   data:   numeric vector, list of numeric vectors or
-    //           numeric matrix which each column represents one data set
-    //   names:  Labels of the data sets as a string vector.
-    //   marker: Scilab marker, optionally combined with a standard color code.
-    //           Markers: ".", ",", "o", "x", "+", "*", "s", or "d".
-    //           Colors: "r", "g", "b", "c", "m", "y", "k", or "w".
-    //           Marker and color may be given in either order, e.g. ".r",
-    //           "r.", "oc", or "co". A color alone uses the default marker ".".
-    //           "," is accepted as an alias for the point marker ".".
-    //   offset: Horizontal distance between identical values.
-    //           Recommended range 0.02 to 0.12. Default 0.02.
-    //   tolerance: Two values are considered equal if their difference is less 
-    //           than or equal to tolerance.
-    //           Default 0, meaning only exactly identical values.
+    //   data:   numeric vector, list of numeric vectors or numeric matrix which each column represents one data set
+    //   names:  Labels of the data sets as a string vector, e.g. "Sample 1" or ["Lot 1", "Lot 2"]
+    //   marker: Scilab marker, optionally combined with a standard color code. Markers ".", ",", "o", "x", "+", "*", "s", or "d". Colors "r", "g", "b", "c", "m", "y", "k", or "w". Marker and color may be given in either order, e.g. ".r", "r.", "oc", or "co". A color alone uses the default marker ".". "," is accepted as an alias for the point marker ".".
+    //   offset: Horizontal distance between identical values. Recommended range 0.02 to 0.12. Default 0.02.
+    //   tolerance: Two values are considered equal if their difference is less than or equal to tolerance. Default 0, meaning only exactly identical values.
     //
     // Description
     // Individual value plots (IVP) are well suited for evaluating and comparing 

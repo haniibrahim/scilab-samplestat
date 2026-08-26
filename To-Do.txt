@@ -7,7 +7,7 @@ To-Do Grubbs-Zweig => v2.1.0
 [x] Auf NaN testen => alte Funktione
 [ ] Dokumentation erweitern
 [ ] Grafiken für ivplot-Doku machen
-[ ] Changelog, Readme.txt ergänzen
+[x] Changelog, Readme.txt ergänzen
 [ ] Demos für ivplot erstellen
 [ ] Demos für Außreißer überarbeiten & ergänzen
 [ ] Toolbox bauen

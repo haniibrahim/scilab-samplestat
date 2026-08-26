@@ -37,6 +37,8 @@ function [outlierfree, outlier] = ST_pearsonhartley(v, p)
     // [of, o] = ST_pearsonhartley(data, 0.05)  // outlier and outlier-free values
     //
     // See also
+    //  ST_grubbs
+    //  ST_esd
     //  ST_outlier
     //  ST_nalimov
     //  ST_strayarea

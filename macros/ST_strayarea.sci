@@ -49,6 +49,8 @@ function strayval = ST_strayarea(v, p)
 // See also
 //  ST_trustarea
 //  ST_studentfactor
+//  ST_grubbs
+//  ST_esd
 //  ST_outlier
 //  ST_deandixon
 //  ST_pearsonhartley

@@ -1,27 +1,35 @@
-samplestat (v2.0.2)
- * Help-Bugfix
+ChangeLog of sampleSTAT for Scilab
+==================================
 
-samplestat (v2.0.1)
- * Bug and compatibility fixes related to Scilab 6
+2.1.0  - Grubbs outlier test (classic and iterated) added
+       - Generalized Extreme Studentized Deviate (ESD) outlier test added
+         according to Rosner
+       - Individual Value Plot ST_ivplot completed & extended
+         - Multiple dataset capability 
+         - Same or similar values are plotted beside each others
+         - Tolerance threshold for similar values
+         - Setting markers and colors
+       - Checks for NaN and INF in the input data 
+       - More demos added
+       - Bug fix
+         - Preserve orientation of imput vectors in the output in ST_nalinv
+           and ST_personhartley
 
-samplestat (v2.0.0)
- * Outlier tests added:
-   - Dean-Dixon
-   - Pearson-Hartley
-   - Nalimov
- * Distribution tests added
-   - Shapiro-Wilk
-   - Very basic individual value plot added
+2.0.2  - Help-Bugfix
 
-sampleStat (v1.0.0)
- * SS_ prefix changed to ST_
- * help-files
+2.0.1  - Bug and compatibility fixes related to Scilab 6
 
-samplestat (v0.9.1)
- * Updated to Scilab 6.0
+2.0.0  - Outlier tests (Dean-Dixon, Pearson-Hartley, Nalimov) and 
+         a basic test added
+       - Distribution tests (Shapiro-Wilk, Skewness) added
+       - Individual Value Plot added (EXPERIMENTAL)
 
-samplestat (v0.9.0)
- * SS_studentfactor
- * SS_trustarea
- * SS_strayarea
- * No help-files yet
+1.0.0  - SS_ prefix changed to ST_
+       - help-files
+
+0.9.1  - Updated to Scilab 6.0
+
+0.9.0  - SS_studentfactor
+       - SS_trustarea
+       - SS_strayarea
+       - No help-files yet

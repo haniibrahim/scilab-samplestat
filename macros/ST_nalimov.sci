@@ -65,6 +65,8 @@ function [outlierfree, outlier] = ST_nalimov(v, p)
     // [of, o] = ST_nalimov(data, 0.05)  // outlier and outlier-free values
     //
     // See also
+    //  ST_grubbs
+    //  ST_esd
     //  ST_deandixon
     //  ST_pearsonhartley
     //  ST_strayarea

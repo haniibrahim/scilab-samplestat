@@ -51,6 +51,8 @@ function trustval = ST_trustarea(v, p)
 // See also
 //  ST_strayarea
 //  ST_studentfactor
+//  ST grubbs
+//  ST_esd
 //  ST_outlier
 //  ST_deandixon
 //  ST_pearsonhartley
