@@ -28,7 +28,12 @@ function ST_ivplot(data, names, marker, offset, tolerance)
     //   data:   numeric vector, list of numeric vectors or
     //           numeric matrix which each column represents one data set
     //   names:  Labels of the data sets as a string vector.
-    //   marker: Scilab marker, for example ".", "o", "x", "+", "*", "s", or "d".
+    //   marker: Scilab marker, optionally combined with a standard color code.
+    //           Markers: ".", ",", "o", "x", "+", "*", "s", or "d".
+    //           Colors: "r", "g", "b", "c", "m", "y", "k", or "w".
+    //           Marker and color may be given in either order, e.g. ".r",
+    //           "r.", "oc", or "co". A color alone uses the default marker ".".
+    //           "," is accepted as an alias for the point marker ".".
     //   offset: Horizontal distance between identical values.
     //           Recommended range 0.02 to 0.12. Default 0.02.
     //   tolerance: Two values are considered equal if their difference is less 
@@ -74,7 +79,7 @@ function ST_ivplot(data, names, marker, offset, tolerance)
     //    ["Lot A", "Lot B", "Lot C"], ..
     //    "d");
     // ylabel("Concentration [mg/L]");
-    // title("Multi data records in a list & different sample sizes"]);
+    // title("Multi data records in a list & different sample sizes");
     // 
     // //  Multi data record in a matrix
     // data4 = [
@@ -86,7 +91,7 @@ function ST_ivplot(data, names, marker, offset, tolerance)
     // ];
     // scf();
     // clf();
-    // ST_ivplot(data4, ["1", "2", "3"], ".", 0.04);
+    // ST_ivplot(data4, ["1", "2", "3"], "o", 0.04);
     // ylabel("Samples");
     // title("Multi data record in a matrix")
     // 
@@ -100,7 +105,7 @@ function ST_ivplot(data, names, marker, offset, tolerance)
     // ];
     // scf();
     // clf();
-    // ST_ivplot(data5, "Sample", "o", 0.02, 0.000001);
+    // ST_ivplot(data5, "Sample", "x", 0.02, 0.000001);
     // title("Tolerance limit specified for nearly identical values")
     //
     // See also
@@ -126,18 +131,14 @@ function ST_ivplot(data, names, marker, offset, tolerance)
 
     if rhs < 1 | rhs > 5 then
         error(msprintf( ..
-        "ST_ivplot: Es werden 1 bis 5 Eingabeargumente erwartet."));
+        "ST_ivplot: 1 to 5 input arguments are expected."));
     end
     
-    if or(isnan(data)) | or(isinf(data)) then
-        error("ST_ivplot: First argument v must not contain NaN or Inf values.");
-    end
-
     // -------------------------------------------------------------------------
     // Default values
     // -------------------------------------------------------------------------
     if rhs < 3 then
-        marker = "o";
+        marker = ".";
     end
 
     if rhs < 4 then
@@ -161,6 +162,11 @@ function ST_ivplot(data, names, marker, offset, tolerance)
         if size(data, "*") == 0 then
             error("ST_ivplot: Data record is empty.");
         end
+        
+        if or(isnan(data)) | or(isinf(data)) then
+            error("ST_ivplot: First argument v must not contain NaN or Inf values.");
+        end
+
 
         [nr, nc] = size(data);
 
@@ -238,17 +244,54 @@ function ST_ivplot(data, names, marker, offset, tolerance)
     end
 
     // -------------------------------------------------------------------------
-    // Validate marker
+    // Validate marker and optional color
     // -------------------------------------------------------------------------
     if type(marker) <> 10 | size(marker, "*") <> 1 then
         error("ST_ivplot: marker must be a single string.");
     end
 
-    validMarkers = [".", "o", "x", "*", "+", "s", "d"];
+    validMarkers = [".", ",", "o", "x", "*", "+", "s", "d"];
+    validColors  = ["r", "g", "b", "c", "m", "y", "k", "w"];
 
-    if and(marker <> validMarkers) then
-        error("ST_ivplot: Invalid marker. The following are allowed: ""."", ""o"", ""x"", ""*"", ""+"", ""s"" und ""d"".");
+    markerSymbol = "";
+    colorSymbol  = "";
+
+    // Parse every character so that marker and color may be specified
+    // in either order, e.g. ".r", "r.", "oc", or "co".
+    for characterIndex = 1:length(marker)
+        currentCharacter = part(marker, characterIndex);
+
+        if or(currentCharacter == validMarkers) then
+            if markerSymbol <> "" then
+                error("ST_ivplot: Only one marker may be specified.");
+            end
+            markerSymbol = currentCharacter;
+        elseif or(currentCharacter == validColors) then
+            if colorSymbol <> "" then
+                error("ST_ivplot: Only one color may be specified.");
+            end
+            colorSymbol = currentCharacter;
+        else
+            error(["ST_ivplot: Invalid marker/color specification. " + ..
+            "Allowed markers are ""."", "","", ""o"", ""x"", ""*"", ""+"", ""s"", ""d""; " + ..
+            "allowed colors are ""r"", ""g"", ""b"", ""c"", ""m"", ""y"", ""k"", ""w""."]);
+        end
     end
+
+    // A color without an explicit marker uses the default point marker.
+    if markerSymbol == "" then
+        if colorSymbol == "" then
+            error("ST_ivplot: marker must not be empty.");
+        end
+        markerSymbol = ".";
+    end
+
+    // Accept comma as an alias for the point marker.
+    if markerSymbol == "," then
+        markerSymbol = ".";
+    end
+
+    plotSpec = markerSymbol + colorSymbol;
 
     // -------------------------------------------------------------------------
     // Validate offset and tolerance
@@ -373,7 +416,7 @@ function ST_ivplot(data, names, marker, offset, tolerance)
     // -------------------------------------------------------------------------
     // Plot data
     // -------------------------------------------------------------------------
-    plot(plotX, plotY, marker);
+    plot(plotX, plotY, plotSpec);
 
     plotHandle = gce();
 
