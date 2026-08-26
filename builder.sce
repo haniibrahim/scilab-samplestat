@@ -26,9 +26,9 @@ function main_builder()
     // Check modules_manager module availability
     // =============================================================================
 
-//    if ~isdef("tbx_build_loader") then
-//        error(msprintf(gettext("%s module not installed."), "modules_manager"));
-//    end
+    if ~isdef("tbx_build_loader") then
+        error(msprintf(gettext("%s module not installed."), "modules_manager"));
+    end
 
     // Action ----------------------------------------------------------------------
 
