@@ -190,7 +190,7 @@ function [outlierfree, outlier] = ST_pearsonhartley(v, p)
     end
 
     // Preserve vector orientation
-    if (size(outlier, 1) == 1) ~= rowvector then
+    if (size(outlier, 1) == 1) == rowvector then
         outlier = outlier';
         outlierfree = outlierfree';
     end;

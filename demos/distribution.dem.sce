@@ -44,12 +44,12 @@ function distribution_demo()
     
    
     // Distribution test ===========================================
-    [sw1_90, w1_90] = ST_shapirowilk(data1,"99%"); // probably normally distributed ...
-    [sw1_95, w1_95] = ST_shapirowilk(data2,"99%"); // ... with 90% confidence
-    [sw1_99, w1_99] = ST_shapirowilk(data1,"95%"); // siginficantly normally distributed ...
-    [sw2_90, w2_90] = ST_shapirowilk(data2,"95%"); // ... with 95% confidence
-    [sw2_95, w2_95] = ST_shapirowilk(data1,"99%"); // definitly normally distributed ...
-    [sw2_99, w2_99] = ST_shapirowilk(data2,"99%"); // ... with 99% confidence
+    [sw1_90, w1_90] = ST_shapirowilk(data1,"90%"); 
+    [sw1_95, w1_95] = ST_shapirowilk(data1,"95%"); 
+    [sw1_99, w1_99] = ST_shapirowilk(data1,"99%"); 
+    [sw2_90, w2_90] = ST_shapirowilk(data2,"90%"); 
+    [sw2_95, w2_95] = ST_shapirowilk(data2,"95%"); 
+    [sw2_99, w2_99] = ST_shapirowilk(data2,"99%"); 
 
     // Output ======================================================
     // Console output
