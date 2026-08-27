@@ -148,11 +148,13 @@ Description: Toolbox for statistics of normal distributed univariate samples for
              - Same or similar values are plotted beside each others
              - Tolerance threshold for similar values
              - Setting markers and colors
+           - Shapiro-Wilk test extended (test statistic output added)
            - Checks for NaN and INF in the input data 
            - More demos added
            - Bug fix
              - Preserve orientation of imput vectors in the output in ST_nalinv
                and ST_personhartley
+             - ST_shapirowilk typos fixed
  
     2.0.2  - Help-Bugfix
     
