@@ -44,12 +44,12 @@ function distribution_demo()
     
    
     // Distribution test ===========================================
-    [sw1_90, w1_90] = ST_shapirowilk(data1,"90%"); 
-    [sw1_95, w1_95] = ST_shapirowilk(data1,"95%"); 
-    [sw1_99, w1_99] = ST_shapirowilk(data1,"99%"); 
-    [sw2_90, w2_90] = ST_shapirowilk(data2,"90%"); 
-    [sw2_95, w2_95] = ST_shapirowilk(data2,"95%"); 
-    [sw2_99, w2_99] = ST_shapirowilk(data2,"99%"); 
+    [sw1_90, w1] = ST_shapirowilk(data1,"90%"); 
+    [sw1_95]     = ST_shapirowilk(data1,"95%"); 
+    [sw1_99]     = ST_shapirowilk(data1,"99%"); 
+    [sw2_90, w2] = ST_shapirowilk(data2,"90%"); 
+    [sw2_95]     = ST_shapirowilk(data2,"95%"); 
+    [sw2_99]     = ST_shapirowilk(data2,"99%"); 
 
     // Output ======================================================
     // Console output
@@ -65,17 +65,20 @@ function distribution_demo()
     mprintf("\n" + ..
             "SHAPIRO-WILK TEST FOR NORMAL DISTRIBUTIONS\n" + ..
             "==========================================\n")
-    mprintf("Data record 1 normally distributed with 90%% confidence? => %s   W = %g\n", sw1_90, w1_90);
-    mprintf("Data record 1 normally distributed with 95%% confidence? => %s   W = %g\n", sw1_95, w1_95);
-    mprintf("Data record 1 normally distributed with 99%% confidence? => %s   W = %g\n\n", sw1_99,w1_99);
+    mprintf("Data record 1 normally distributed with 90%% confidence? => %s \n", sw1_90);
+    mprintf("Data record 1 normally distributed with 95%% confidence? => %s \n", sw1_95);
+    mprintf("Data record 1 normally distributed with 99%% confidence? => %s \n", sw1_99);
+    mprintf("Data record 1 test statistic                            => W = %g \n\n", w1);
     
-    mprintf("Data record 2 normally distributed with 90%% confidence? => %s   W = %g\n", sw2_90, w2_90);
-    mprintf("Data record 2 normally distributed with 95%% confidence? => %s   W = %g\n", sw2_95, w2_95);
-    mprintf("Data record 2 normally distributed with 99%% confidence? => %s   W = %g\n\n", sw2_99, w2_99);
+    mprintf("Data record 2 normally distributed with 90%% confidence? => %s \n", sw2_90);
+    mprintf("Data record 2 normally distributed with 95%% confidence? => %s \n", sw2_95);
+    mprintf("Data record 2 normally distributed with 99%% confidence? => %s \n", sw2_99);
+    mprintf("Data record 2 test statistic                            => W = %g \n\n", w2);
     
     mprintf("The value W allows to see exactly how well or poorly a dataset passes\n " + ..
-            "or fails the normality test, rather than just seeing %%T or %%F. \n" + ..
-            "The closer W is to 1, the more clearly the distribution follows a normal distribution");
+            "or fails the normality test, rather than just seeing %%T or %%F. \n"      + ..
+            "The closer W is to 1, the more clearly the distribution follows \n"       + ..
+            "a normal distribution");
 
     //
     // Load this script into the editor
