@@ -52,12 +52,12 @@ In general, the test for normality can be achieved by applying a goodness-of-fit
 	</para>
 	</refsection>
 	<refsection>
-		<title><link linked="ST_shapirowilk">Shapiro-Wilk (ST_shapirowilk)</link></title>
+		<title><link linkend="ST_shapirowilk">Shapiro-Wilk (ST_shapirowilk)</link></title>
 		<para>
 The Shapiro-Wilk test is a statistical significance test that tests the hypothesis that the underlying population of a sample is normally distributed. The Shapiro-Wilk test exhibiting high power, leading to good results even with a small number of observations. In contrast to other comparison tests the Shapiro-Wilk test is only applicable to check for normality. 
 		</para>
 		<para>
-<link linked="ST_shapiriwilk">ST_shapirowilk</link> can be used for sample sizes from 3 to 50 values. It returns a boolean (%T or %F) whether the dataset is normally distributed or not and as a second return value the test statistic. The last is particularly useful because it allows to see exactly how well or poorly a dataset passes or fails the normality test, rather than just seeing %T or %F.
+<link linkend="ST_shapiriwilk">ST_shapirowilk</link> can be used for sample sizes from 3 to 50 values. It returns a boolean (%T or %F) whether the dataset is normally distributed or not and as a second return value W the test statistic. The last (W) is particularly useful because it allows to see exactly how well or poorly a dataset passes or fails the normality test, rather than just seeing %T or %F.
 		</para>
 		<para>
 		<caution>
@@ -149,7 +149,7 @@ Therefore IVPs are well suited to test very small sample sizes on normal distrib
 	<para>
 			<inlinemediaobject>
 				<imageobject>
-					<imagedata fileref="../../images/ivplot_single.png" align="center" valign="middle"/>
+					<imagedata fileref="../../images/ivp_2x.png" align="center" valign="middle"/>
 				</imageobject>
 			</inlinemediaobject>
 		</para>

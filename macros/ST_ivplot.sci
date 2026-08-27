@@ -46,6 +46,12 @@ function ST_ivplot(data, names, marker, offset, tolerance)
     //   <listitem>Optionally detects practically identical values using a tolerance</listitem>
     // </itemizedlist>
     //
+    // <inlinemediaobject>
+    //  <imageobject>
+    //      <imagedata fileref="../../images/ivp_2x.png" align="center" valign="middle"/>
+    //  </imageobject>
+    // </inlinemediaobject>
+    //
     // Therefore IVPs are well suited to test very small sample sizes on normal 
     // distribution when outliers or ties could be present and the 
     // Shapiro-Wilk distribution test cannot be reliably applied.

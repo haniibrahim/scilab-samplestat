@@ -25,6 +25,7 @@
    <title>Syntax</title>
    <synopsis>
    [normal] = ST_shapirowilk(v, p)
+   [normal, W] = ST_shapirowilk(v, p)
    
    </synopsis>
 </refsynopsisdiv>
@@ -42,7 +43,11 @@
         </varlistentry>
         <varlistentry>
             <term>normal:</term>
-            <listitem><para> Returns %T if sample distribution is normally distributed or %F if not.</para></listitem>
+            <listitem><para> Returns %T if the null hypothesis of normality is not rejected, otherwise %F.</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>W:</term>
+            <listitem><para> Shapiro-Wilk W test statistic (optional second output).</para></listitem>
         </varlistentry>
    </variablelist>
 </refsection>
@@ -60,7 +65,11 @@ even with a small number of observations. In contrast to other comparison
 tests the Shapiro-Wilk test is only applicable to check for normality.
    </para>
    <para>
-The test can be used for sample sizes from 3 to 50 values.
+The test can be used for sample sizes from 3 to 50 values. It returns a boolean
+(%T or %F) whether the dataset is normally distributed or not and as a second
+return value (W) the test statistic. The value W is particularly useful because it allows
+to see exactly how well or poorly a dataset passes or fails the normality test,
+rather than just seeing %T or %F.
    </para>
    <para>
 The theory behind Shapiro-Wilk can be find at
@@ -127,5 +136,7 @@ ST_ivplot(data2,"data2");
 
 <refsection>
    <title>Bibliography</title>
+   <para>Shapiro, S.S. &amp; Wilk, M.B. (1965). An Analysis of Variance Test for</para>
+   <para>Normality (Complete Samples). Biometrika 52(3/4), 591-611.</para>
 </refsection>
 </refentry>

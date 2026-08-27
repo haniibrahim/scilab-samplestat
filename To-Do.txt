@@ -6,9 +6,9 @@ To-Do Grubbs-Zweig => v2.1.0
 [x] Spalten-/Zeilenvektor erhalten => alte Funktione
 [x] Auf NaN testen => alte Funktione
 [x] Dokumentation erweitern
-[ ] Grafiken für ivplot-Doku machen
+[x] Grafiken für ivplot-Doku machen
 [x] Changelog, Readme.txt ergänzen
-[ ] Demos für ivplot erstellen
+[x] Demos für ivplot erstellen
 [x] Demos für Außreißer überarbeiten & ergänzen
 [ ] Toolbox bauen
 [ ] Testen auf Windows
