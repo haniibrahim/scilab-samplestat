@@ -50,13 +50,13 @@ The outlier tests of SampleSTAT are applicable for normally distributed data ONL
 				<varlistentry>
 					<term><link linkend="ST_grubbs">Grubbs (ST_grubbs)</link>:</term>
 					<listitem>
-						<para> Standard test for small samples sizes (&lt;30) and just one outlier expected which is not a problem for small data sets. An iterative version of Grubbs (<link linkend="ST_grubbs_iterat">ST_grubbs_iterat</link>) is also available. It identifies more than one outlier per data set. This version is sometimes used, but is not recommended as the statistical confidence deteriorates with each iteration step. </para>
+						<para> Standard test for small samples sizes (&lt;30) and just one outlier expected which is not a problem for small sample sizes. An iterative version of Grubbs (<link linkend="ST_grubbs_iterat">ST_grubbs_iterat</link>) is also available. It identifies more than one outlier per data record. This iterated version is sometimes used in labs, but it is not recommended as the statistical confidence deteriorates with each iteration step. </para>
 					</listitem>
 				</varlistentry>
 				<varlistentry>
 					<term><link linkend="ST_esd">Generalized Extreme Studentized Deviate - ESD (ST_esd)</link>:</term>
 					<listitem>
-						<para> The Generalized Extreme Studentized Deviate (ESD) test for outliers is eminently suitable for medium to big sample sizes (&gt;25) and also widly used and accepted. It can detect more than one outlier per data set.</para>
+						<para> The Generalized Extreme Studentized Deviate (ESD) test for outliers is eminently suitable for medium to big sample sizes (&gt;25) and also widely used and accepted. It can detect more than one outlier per data set.</para>
 					</listitem>
 				</varlistentry>
 				<varlistentry>
@@ -68,7 +68,7 @@ The outlier tests of SampleSTAT are applicable for normally distributed data ONL
 				<varlistentry>
 					<term><link linkend="ST_personhardley">Pearson-Hartley's Significance of Extreme Values (ST_personhardley)</link>:</term>
 					<listitem>
-						<para> For larger sample sizes (more than 30). The Generalized Extreme Studentized Deviate (ESD) is the standard test dor bigger sample sozes today.</para>
+						<para> For larger sample sizes (more than 30). The Generalized Extreme Studentized Deviate (ESD) is the standard test for bigger sample sizes today.</para>
 					</listitem>
 				</varlistentry>
 				<varlistentry>
@@ -86,19 +86,35 @@ The outlier tests of SampleSTAT are applicable for normally distributed data ONL
 				</varlistentry>
 			</variablelist>
 		<para>
-			<note>
-				<para>Note:</para>
-				<para>
-					<latex><![CDATA[
-\begin{eqnarray}
-\bar{x}: \text{arithmetic mean} \quad \Rightarrow \quad \bar{x} = {1 \over{n}}\sum_{i=1}^{n}x_i \\
-s: \text{sample standard deviation} \quad \Rightarrow \quad s = \sqrt{{1 \over{n-1}}\sum_{i=1}^{n}(x_i-\bar{x})^2} \\
-\sigma: \text{population standard deviation, S.D.} \quad \Rightarrow \quad \sigma = \sqrt{{1 \over{n}}\sum_{i=1}^{n}(x_i-\bar{x})^2}
-\end{eqnarray}
-]]></latex>
-				</para>
-			</note>
+		<note>
+		<para>
+For SMALL sample sizes - less than 10 or 30 - where only one outlier is expected, the classic Grubbs test is recommended. 
+For LARGER data sets (>25) and also when more than one outlier is expected, the ESD test is appropriate.
 		</para>
+		<para> </para>
+		<para>
+In QUALITY CONTROL or LAB ANALYSIS, the Nalimov test is often the standard.
+		</para>
+		<para> </para>
+		<para>
+The Dean-Dixon and Pearson-Hartley tests are used less frequently today and have been largely replaced by the Grubbs and ESD tests.
+The basic outlier test rounds out the portfolio and is only practical for use with medium to large sample sizes.
+		</para>
+		</note>
+		</para>
+	<refsection>
+		<title>Statistical Fundamentals</title>
+			<para>
+			<latex><![CDATA[
+\begin{eqnarray}
+\bar{x} &:& \text{arithmetic mean} \quad \Rightarrow \quad \bar{x} = {1 \over{n}}\sum_{i=1}^{n}x_i \\
+s &:& \text{sample standard deviation} \quad \Rightarrow \quad s = \sqrt{{1 \over{n-1}}\sum_{i=1}^{n}(x_i-\bar{x})^2} \\
+\sigma &:& \text{population standard deviation, S.D.} \quad \Rightarrow \quad \sigma = \sqrt{{1 \over{n}}\sum_{i=1}^{n}(x_i-\bar{x})^2}
+\end{eqnarray}
+			]]></latex>
+			</para>
+	</refsection>
+
 	</refsection>
 	<refsection>
 		<title><link linkend="ST_grubbs">Grubbs (ST_grubbs)</link></title>

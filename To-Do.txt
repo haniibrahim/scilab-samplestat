@@ -9,7 +9,7 @@ To-Do Grubbs-Zweig => v2.1.0
 [ ] Grafiken für ivplot-Doku machen
 [x] Changelog, Readme.txt ergänzen
 [ ] Demos für ivplot erstellen
-[ ] Demos für Außreißer überarbeiten & ergänzen
+[x] Demos für Außreißer überarbeiten & ergänzen
 [ ] Toolbox bauen
 [ ] Testen auf Windows
 [ ] Testen auf Linux
