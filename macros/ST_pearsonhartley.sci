@@ -1,7 +1,7 @@
 function [outlierfree, outlier] = ST_pearsonhartley(v, p)
     // Pearson-Hartley outlier test
     //
-    // Calling Sequence
+    // Syntax
     //   [outlierfree] = ST_pearsonhartley(v, p)
     //   [outlierfree, outlier] = ST_pearsonhartley(v, p)
     //
