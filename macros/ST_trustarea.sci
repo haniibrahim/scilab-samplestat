@@ -25,7 +25,7 @@ function trustval = ST_trustarea(v, p)
 // trustval: trust area, range of dispersion of the mean.
 //
 // Description
-// "ST_trustarea" determine the range of dispersion of the mean. It describes the
+// "ST_trustarea" determines the range of dispersion of the mean. It describes the
 // quality of the mean and indicates the range of dispersion of the 
 // mean and not of the raw values as the stray area does.
 //
@@ -39,8 +39,9 @@ function trustval = ST_trustarea(v, p)
 // T: stray area of values; s: sample standard deviation; t: student factor (dependent 
 // on statistical confidence level P% and degree of freedom f=n-1 with n: number of values) 
 //
-// E.g. if trustval = 1.4 at p = 95% with a mean = 10,0 the mean for
-// the whole population will stray with a confidence of 95% at about 10.0 +/- 1.4.
+// E.g. if trustval = 1.4 at p = 95% and mean(v) = 10.0, the confidence
+// interval for the population mean according to this formulation is
+// approximately 10.0 +/- 1.4.
 //
 // Examples
 // v = [6 8 14 12 5 15];
@@ -51,7 +52,7 @@ function trustval = ST_trustarea(v, p)
 // See also
 //  ST_strayarea
 //  ST_studentfactor
-//  ST grubbs
+//  ST_grubbs
 //  ST_esd
 //  ST_outlier
 //  ST_deandixon
@@ -67,18 +68,18 @@ function trustval = ST_trustarea(v, p)
 
   // Check arguments
   [lhs,rhs]=argn()
-  apifun_checkrhs("ST_strayarea", rhs, 2); // Input args
-  apifun_checklhs("ST_strayarea", lhs, 1); // Output args
-  apifun_checkvector("ST_strayarea", v, "v", 1); // Vector?
-  apifun_checktype ("ST_strayarea", v, "v", 1, "constant"); //Double?
-  apifun_checkscalar("ST_strayarea", p, "p", 1); // Scalar?
+  apifun_checkrhs("ST_trustarea", rhs, 2); // Input args
+  apifun_checklhs("ST_trustarea", lhs, 1); // Output args
+  apifun_checkvector("ST_trustarea", v, "v", 1); // Vector?
+  apifun_checktype ("ST_trustarea", v, "v", 1, "constant"); //Double?
+  apifun_checkscalar("ST_trustarea", p, "p", 1); // Scalar?
   if string(p)~="95%" & string(p)~="99%" & string(p)~="99.9%" & p ~= 0.05 & p ~= 0.01 & p ~= 0.001
     error(msprintf("%s: Second argument is the statistical confidence level and has to be a string, as 95%%, 99%% or 99.9%%" + ..
     " or as alpha value: 0.05, 0.01, 0.001", "ST_trustarea"));
   end
   
   if or(isnan(v)) | or(isinf(v)) then
-        error("ST_strayarea: First argument v must not contain NaN or Inf values.");
+        error("ST_trustarea: First argument v must not contain NaN or Inf values.");
     end
   
  
@@ -90,11 +91,13 @@ function trustval = ST_trustarea(v, p)
 //  end
   
   n = length(v); // Number of values
-  
-  if (ST_strayarea(v,p) < 0) then
-    error("Wrong studenfactor t was committed. Here is something serously wrong!");
-  else
-   trustval = ST_strayarea(v,p)/sqrt(n);
+  if n < 2 then
+    error("ST_trustarea: First argument v must contain at least two values.");
   end
+
+  // Calculate the stray area only once. ST_strayarea performs the
+  // remaining consistency and confidence-level checks.
+  strayval = ST_strayarea(v, p);
+  trustval = strayval / sqrt(n);
   
 endfunction

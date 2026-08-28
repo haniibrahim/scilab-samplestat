@@ -24,7 +24,7 @@
 <refsynopsisdiv>
    <title>Syntax</title>
    <synopsis>
-   retval = studentfactor(n, p)
+   retval = ST_studentfactor(n, p)
    
    </synopsis>
 </refsynopsisdiv>
@@ -34,7 +34,7 @@
    <variablelist>
         <varlistentry>
             <term>n:</term>
-            <listitem><para> number of values in the sample distribution</para></listitem>
+            <listitem><para> number of values in the sample distribution (2 &lt;= n &lt;= 1000)</para></listitem>
         </varlistentry>
         <varlistentry>
             <term>p:</term>

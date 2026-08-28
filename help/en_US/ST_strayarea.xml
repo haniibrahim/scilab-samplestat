@@ -42,7 +42,7 @@
         </varlistentry>
         <varlistentry>
             <term>strayval:</term>
-            <listitem><para> stray area, range of dispersion of the values.</para></listitem>
+            <listitem><para> historical stray area (Streubereich), calculated as s*t.</para></listitem>
         </varlistentry>
    </variablelist>
 </refsection>
@@ -50,7 +50,10 @@
 <refsection>
    <title>Description</title>
    <para>
-"ST_strayarea" determines the range of dispersion of the values. It describes the quality of the raw values.
+"ST_strayarea" calculates the historical stray area (German: Streubereich)
+according to Kaiser/Gottschalk as T = s*t. This quantity must not be
+confused with a modern prediction interval for a future individual
+observation, which is defined differently.
    </para>
    <para>
 <latex>
@@ -64,9 +67,8 @@ T: stray area of values; s: sample standard deviation; t: student factor (depend
 on statistical confidence level P% and degree of freedom f=n-1 with n: number of values)
    </para>
    <para>
-E.g. if strayval = 1.4 at p = 95% with a mean = 10,0 all raw
-values of the whole population will be expected with a confidence of 95% at
-about 10.0 +/- 1.4.
+E.g. if strayval = 1.4 at p = 95% and mean(v) = 10.0, the historical
+Kaiser/Gottschalk stray area is reported as approximately 10.0 +/- 1.4.
    </para>
    <para>
 </para>

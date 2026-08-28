@@ -22,10 +22,13 @@ function strayval = ST_strayarea(v, p)
 // Parameters
 // v: vector of numerical values
 // p: statistical confidence level (%) as a string or the level of significance (α) as a decimal value, "95%", "99%", "99.9%" or 0.05, 0.01, 0.001 resp (see examples).
-// strayval: stray area, range of dispersion of the values.
+// strayval: historical stray area (Streubereich), calculated as s*t.
 //
 // Description
-// "ST_strayarea" determines the range of dispersion of the values. It describes the quality of the raw values.
+// "ST_strayarea" calculates the historical stray area (German: Streubereich)
+// according to Kaiser/Gottschalk as T = s*t. This quantity must not be
+// confused with a modern prediction interval for a future individual
+// observation, which is defined differently.
 //
 // <latex>
 // \begin{eqnarray}
@@ -36,9 +39,8 @@ function strayval = ST_strayarea(v, p)
 // T: stray area of values; s: sample standard deviation; t: student factor (dependent 
 // on statistical confidence level P% and degree of freedom f=n-1 with n: number of values)
 //
-// E.g. if strayval = 1.4 at p = 95% with a mean = 10,0 all raw 
-// values of the whole population will be expected with a confidence of 95% at 
-// about 10.0 +/- 1.4.
+// E.g. if strayval = 1.4 at p = 95% and mean(v) = 10.0, the historical
+// Kaiser/Gottschalk stray area is reported as approximately 10.0 +/- 1.4.
 //
 // Examples
 // v = [6 8 14 12 5 15];
@@ -89,11 +91,13 @@ function strayval = ST_strayarea(v, p)
   
   // Number of values
   n = length(v);
-
-  if ST_studentfactor(n, p) < 0
-    error("Wrong studenfactor t was committed. Here is something serously wrong!");
+  if n < 2 then
+    error("ST_strayarea: First argument v must contain at least two values.");
   end
-  
-  strayval = stdev(v) * ST_studentfactor(n, p);
+
+  // Calculate the Student factor only once. ST_studentfactor performs
+  // the remaining range and confidence-level checks.
+  t = ST_studentfactor(n, p);
+  strayval = stdev(v) * t;
 
 endfunction

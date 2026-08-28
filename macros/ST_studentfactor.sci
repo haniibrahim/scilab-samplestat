@@ -17,10 +17,10 @@ function [retval] = ST_studentfactor(n, p)
 // Determine the student factor
 //
 // Syntax
-//  retval = studentfactor(n, p)
+//  retval = ST_studentfactor(n, p)
 //
 // Parameters
-// n: number of values in the sample distribution
+// n: number of values in the sample distribution (2 <= n <= 1000)
 // p: statistical confidence level (%) as a string or the level of significance (α) as a decimal value, "95%", "99%", "99.9%" or 0.05, 0.01, 0.001 resp (see examples).
 // retval: student factor
 //
@@ -51,7 +51,15 @@ function [retval] = ST_studentfactor(n, p)
   apifun_checkflint("ST_studentfactor", n, "n", 1); // Integer?
   apifun_checkscalar("ST_studentfactor", n, "n", 1); // Scalar?
   apifun_checkscalar("ST_studentfactor", p, "p", 1); // Scalar?
-  if string(p)~="95%" & string(p)~="99%" & string(p)~="99.9%" & p ~= 0.05 & p ~= 0.01 & p ~= 0.001
+
+  // The internal table covers f = 1 ... 999 degrees of freedom,
+  // therefore n = f + 1 must be in the range 2 ... 1000.
+  if n < 2 | n > 1000 then
+    error("ST_studentfactor: First argument n must be an integer between 2 and 1000.");
+  end
+
+  // Validate the supported two-sided confidence levels / alpha values.
+  if string(p)~="95%" & string(p)~="99%" & string(p)~="99.9%" & p ~= 0.05 & p ~= 0.01 & p ~= 0.001 then
     error(msprintf("%s: Second argument is the statistical confidence level and has to be a string, as 95%%, 99%% or 99.9%%" + ..
     " or as alpha value: 0.05, 0.01, 0.001", "ST_studentfactor"));
   end
@@ -125,7 +133,7 @@ function [retval] = ST_studentfactor(n, p)
     case(0.001) then
       j = 4;
     else
-      error('Second argument is the statistical confidence level and has to be a string, as 95%, 99% or 99.9% or as alpha value: 0.05, 0.01, 0.001');
+      error("ST_studentfactor: Second argument is the statistical confidence level and has to be 95%, 99% or 99.9%, or alpha = 0.05, 0.01 or 0.001.");
   end
   
   // Pick the correct studentfactor out of the t-table and interpolate if necessary
@@ -154,7 +162,7 @@ function [retval] = ST_studentfactor(n, p)
   elseif (f == 999) then
     retval = ttable(35,j);
   else
-    error("To many numbers of values. Must be less than 1000");
+    error("ST_studentfactor: First argument n must be an integer between 2 and 1000.");
   end
   
 endfunction
