@@ -15,6 +15,7 @@
 
 function [outlierfree, outlier] = ST_deandixon(v, p)
     // Basic Dean-Dixon outlier test
+    // This implementation retains the original basic Q (r10) approach for N = 3..30.
     //
     // Syntax
     //   [outlierfree] = ST_deandixon(v, p)
@@ -50,7 +51,7 @@ function [outlierfree, outlier] = ST_deandixon(v, p)
     //
     // <important><para>
     // Do use ST_deandixon ONLY with NORMAL distributed data and
-    // with more than 3 and less than 30 values! For more than 30 values use 
+    // with sample sizes from 3 through 30 values! For more than 30 values use 
     // Pearson-Hartley "ST_pearsonhartley()" or better the generalized Extreme Studentized 
     // Deviate test according to Rosner "ST_esd()" instead.
     // </para></important>
@@ -96,18 +97,18 @@ function [outlierfree, outlier] = ST_deandixon(v, p)
         // Column 3 : Q_crit, 99% confidence level, alpha = 0.01
         // Column 4 : Q_crit, 99.9% confidence level, alpha = 0.001
         qtable = [ ...
-        3 0.941 0.994 0.999; ...
-        4 0.766 0.921 0.964; ...
-        5 0.643 0.824 0.895; ...
-        6 0.563 0.744 0.822; ...
-        7 0.507 0.681 0.763; ...
-        8 0.467 0.633 0.716; ...
-        9 0.436 0.596 0.675; ...
-        10 0.412 0.568 0.647; ...
-        15 0.338 0.473 0.544; ...
-        20 0.300 0.426 0.491; ...
-        25 0.277 0.395 0.455; ...
-        30 0.260 0.371 0.430  ...
+        3 0.941 0.988 0.999; ...
+        4 0.766 0.889 0.964; ...
+        5 0.643 0.782 0.895; ...
+        6 0.563 0.698 0.822; ...
+        7 0.507 0.636 0.763; ...
+        8 0.467 0.591 0.716; ...
+        9 0.436 0.555 0.675; ...
+        10 0.412 0.527 0.647; ...
+        15 0.338 0.438 0.544; ...
+        20 0.300 0.393 0.491; ...
+        25 0.277 0.364 0.455; ...
+        30 0.260 0.342 0.430  ...
         ];
 
         // Set the proper column of the t-table, depending on confidence level
@@ -160,7 +161,7 @@ function [outlierfree, outlier] = ST_deandixon(v, p)
     
     n = length(v);
     if (n < 3 | n > 30)
-        error("Dean-Dixon Outliertest is just applicable for sample distributions greater than 3 and lesser than 30 values. For more than 30 values use Pearson-Hartley test ""ST_pearsonhartley()"" instead."); 
+        error("Dean-Dixon outlier test is only applicable for sample sizes from 3 through 30 values. For more than 30 values use Pearson-Hartley test ""ST_pearsonhartley()"" instead."); 
     end
     
     // Check for NaNs & infinit values
@@ -173,6 +174,15 @@ function [outlierfree, outlier] = ST_deandixon(v, p)
 
     // Calculate Q for the smallest value
     vasc = gsort(v, "g", "i");
+
+    // If all values are identical, the range is zero and Q would be undefined.
+    // In this case there is no extreme value to classify as an outlier.
+    if vasc(n) == vasc(1) then
+        outlierfree = v;
+        outlier = [];
+        return;
+    end
+
     qsmall = abs(vasc(2)-vasc(1))/abs(vasc(n)-vasc(1));
 
     // Calculate Q for the biggest value
@@ -192,19 +202,27 @@ function [outlierfree, outlier] = ST_deandixon(v, p)
         obig = %F;
     end
 
-    // Output
-    if osmall & obig
-        outlierfree = vasc(2:n-1);
+    // Output. Preserve the original order of the input vector.
+    outlierfree = v;
+    outlier = []; // empty vector
+
+    if osmall & obig then
         outlier = [vasc(1), vasc(n)];
-    elseif osmall & ~obig
-        outlierfree = vasc(2:n);
+
+        // Remove one occurrence of the smallest and one occurrence of the
+        // largest value while preserving the original order.
+        idxsmall = find(outlierfree == vasc(1));
+        outlierfree(idxsmall(1)) = [];
+        idxbig = find(outlierfree == vasc(n));
+        outlierfree(idxbig(1)) = [];
+    elseif osmall & ~obig then
         outlier = vasc(1);
-    elseif ~osmall & obig
-        outlierfree = vasc(1:n-1);
+        idx = find(outlierfree == vasc(1));
+        outlierfree(idx(1)) = [];
+    elseif ~osmall & obig then
         outlier = vasc(n);
-    else
-        outlierfree = vasc;
-        outlier = []; // empty vector
+        idx = find(outlierfree == vasc(n));
+        outlierfree(idx(1)) = [];
     end
     return;
 endfunction

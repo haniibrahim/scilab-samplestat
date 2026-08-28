@@ -13,22 +13,23 @@
 // You should have received a copy of the GNU General Public License along with
 // this program; if not, see <http://www.gnu.org/licenses/>.
 
-function [outlierfree, outlier] = ST_outlier(v, mod)
+function [outlierfree, outlier] = ST_outlier(v, mod, q)
     // Basic outlier tests for normal distributions
     //
     // Syntax
     //   [outlierfree] = ST_outlier(v)
     //   [outlierfree] = ST_outlier(v, mod)
+    //   [outlierfree] = ST_outlier(v, mod, q)
     //   [outlierfree, outlier] = ST_outlier(v)
     //   [outlierfree, outlier] = ST_outlier(v, mod)
+    //   [outlierfree, outlier] = ST_outlier(v, mod, q)
     //
     // Parameters
     // v: n-by-1 or 1-by-m matrix of doubles, numerical values (n>10, better n>25)
-    // mod: 1-by-1 matrix of strings, "sd" "iqr15"or "iqr30" mode
-    // outlierfree : input vector with all detected outliers removed; unchanged if
-    //               the test does not identify an outlier
-    // outlier : detected outliers in their original input order; [] if no outlier
-    //           is detected
+    // mod: 1-by-1 matrix of strings, "sd", "iqr15" or "iqr30" mode
+    // q: 1-by-1 matrix of doubles. OPTIONAL. Quantile interpolation type for IQR modes 7 = Hyndman-Fan type 7, 8 = Hyndman-Fan type 8 (default)
+    // outlierfree : input vector with all detected outliers removed; unchanged if the test does not identify an outlier
+    // outlier : detected outliers in their original input order; [] if no outlier is detected
     //
     // Description
     // Performs basic outlier tests. 
@@ -39,8 +40,8 @@ function [outlierfree, outlier] = ST_outlier(v, mod)
     // the arithmetic mean in both directions.
     //
     // <latex>
+    // x_i < (\bar{x} - 2.5\sigma) \; \text{or} \; x_i > (\bar{x} + 2.5\sigma) \; \text{with} \quad \sigma = \sqrt{{1 \over n}\sum_{i=1}^{n}(x_i-\bar{x})^2} \quad \Rightarrow \quad x_i = \text{outlier}\\
     // \begin{eqnarray}
-    // (\bar{x} - 2.5\sigma) > x_i > (\bar{x} + 2.5\sigma) \; \text{with} \quad \sigma = \sqrt{{1 \over n}\sum_{i=1}^{n}(x_i-\bar{x})^2} \quad \Rightarrow \quad x_i = \text{outlier}\\
     // x_i: \text{value} \quad                            &;& \quad \bar{x}: \text{arithmetic mean} \\
     // \sigma: \text{population standard deviation} \quad &;& \quad       n: \text{number of values}
     //\end{eqnarray}
@@ -62,12 +63,14 @@ function [outlierfree, outlier] = ST_outlier(v, mod)
     // are strong outliers. SampleSTAT toolbox take care of this by introducing  
     // the "iqr30" mode.
     //
+    // For quantile interpolation (IQR) two types are optionally available. 
+    // Hyndman-Fan type 7- widely used, e.g. in the statistic software R and 
+    // Hyndman-Fan type 8 - distribution independent, median-unbiased (default).
+    //
     // <latex>
-    // \begin{eqnarray}
     // IQR = x_{0.75} - x_{0.25} \\
-    // (x_{0.25} - 1.5 \cdot IQR)  < x_i < (x_{0.25} + 1.5 \cdot IQR)  \quad \Rightarrow \quad x_i = \text{outliers (iqr15 mode)} \\
-    // (x_{0.25} - 3.0 \cdot IQR)  < x_i < (x_{0.25} + 3.0 \cdot IQR)  \quad \Rightarrow \quad x_i = \text{strong outlier (iqr30 mode)}
-    //\end{eqnarray}
+    // x_i < (x_{0.25} - 1.5 \cdot IQR) \; \text{or} \; x_i > (x_{0.75} + 1.5 \cdot IQR) \quad \Rightarrow \quad x_i = \text{outlier (iqr15 mode)} \\
+    // x_i < (x_{0.25} - 3.0 \cdot IQR) \; \text{or} \; x_i > (x_{0.75} + 3.0 \cdot IQR) \quad \Rightarrow \quad x_i = \text{strong outlier (iqr30 mode)}
     //</latex>
     //
     // <important><para>
@@ -85,10 +88,11 @@ function [outlierfree, outlier] = ST_outlier(v, mod)
     // -2.1700554  -4.7361261   0.0069708    14.626386 ..
     // -2.5036545  -2.9046385 ..
     // ];
-    // of = ST_outlier(data')      // outlier-free values with sd-mode
-    // [of, o] = ST_outlier(data', "sd")  // outlier and outlier-free values
-    // [of15, o15] = ST_outlier(data', "iqr15")  // outlier and outlier-free values
-    // [of30, o30] = ST_outlier(data', "iqr30")  // outlier and outlier-free values
+    // of              = ST_outlier(data')             // outlier-free values with sd-mode
+    // [of, o]         = ST_outlier(data', "sd")       // outlier and outlier-free values
+    // [of15, o15]     = ST_outlier(data', "iqr15")    // IQR, quantile type 8 (default)
+    // [of15t7, o15t7] = ST_outlier(data', "iqr15", 7) // IQR, quantile type 7
+    // [of30, o30]     = ST_outlier(data', "iqr30", 8) // IQR, quantile type 8
     //
     // See also
     //  ST_grubbs
@@ -107,54 +111,67 @@ function [outlierfree, outlier] = ST_outlier(v, mod)
     //   Lohringer, H., "Grundlagen der Statistik", Oct, 10th, 2012, http://www.statistics4u.info/fundstat_germ/cc_outlier_tests_4sigma.html
     //   
 
-    function q = ST_quantile(v, p)
-        // Quantile
-        //
-        // Syntax
-        //   q=ST_quantile(x,p)
-        //
-        // Parameters
-        // v : a n-by-1 matrix of doubles
-        // p : a m-by-1 matrix of doubles, the probabilities (0.25 or 0.50 or 0.75)
-        // q : a m-by-1 matrix of doubles, the quantiles. q(i)is greater than p(i) percents of the values in v
-        if min(size(v))==1 then
-            v = v(:);
-            %v1=size(p);
-            q = zeros(%v1(1),%v1(2));
+    function quant = ST_quantile(v, p, q)
+        // Internal quantile dispatcher.
+        // q = 7: Hyndman-Fan type 7
+        // q = 8: Hyndman-Fan type 8 (default)
+        [lhs_q, rhs_q] = argn();
+        if rhs_q < 3 then q = 8; end
+        if q == 7 then
+            quant = ST_quantile_type7(v, p);
+        elseif q == 8 then
+            quant = ST_quantile_type8(v, p);
         else
-            q = zeros(size(p,'*'),size(v,2));
+            error("ST_quantile: q must be 7 or 8.");
         end
-        if min(size(p))>1 then
-            error('Not matrix p input');
-        end
-        if or(p>1|p<0) then
-            error('Input p is not probability');
-        end
-        %val = v
-        if min(size(%val))==1 then 
-            %val=gsort(%val)
-        else 
-            %val=gsort(%val,'r')
-        end
-        v = %val($:-1:1,:);
-        p = p(:);
-        n = size(v,1);
-        v = [v(1,:);v;v(n,:)];
-        i = p*n+1.5;
-        iu = ceil(i);
-        il = floor(i);
-        d = (i-il)*ones(1,size(v,2));
-        qq = v(il,:) .* (1-d)+v(iu,:) .* d;
-        q(:) = qq;
     endfunction
 
-//    // Load Internals lib
-//    path = ST_getpath()
-//    internallib = lib(fullfile(path,"macros","internal"))
+    function quant = ST_quantile_type7(v, p)
+        // Hyndman-Fan quantile type 7:
+        // h = (n - 1) * p + 1
+        // Q(p) = x[j] + g * (x[j+1] - x[j]), j=floor(h), g=h-j
+        x = gsort(v(:), "g", "i");
+        n = size(x, "*");
+        quant = zeros(p);
+        for k = 1:size(p, "*")
+            h = (n - 1) * p(k) + 1;
+            if h <= 1 then
+                quant(k) = x(1);
+            elseif h >= n then
+                quant(k) = x(n);
+            else
+                j = floor(h);
+                g = h - j;
+                quant(k) = x(j) + g * (x(j + 1) - x(j));
+            end
+        end
+    endfunction
 
+    function quant = ST_quantile_type8(v, p)
+        // Hyndman-Fan quantile type 8 (default):
+        // h = (n + 1/3) * p + 1/3
+        // Q(p) = x[j] + g * (x[j+1] - x[j]), j=floor(h), g=h-j
+        x = gsort(v(:), "g", "i");
+        n = size(x, "*");
+        quant = zeros(p);
+        for k = 1:size(p, "*")
+            h = (n + 1/3) * p(k) + 1/3;
+            if h <= 1 then
+                quant(k) = x(1);
+            elseif h >= n then
+                quant(k) = x(n);
+            else
+                j = floor(h);
+                g = h - j;
+                quant(k) = x(j) + g * (x(j + 1) - x(j));
+            end
+        end
+    endfunction
+
+    // MAIN =================================================================================
     // Check arguments
     [lhs,rhs]=argn();
-    apifun_checkrhs("ST_outlier", rhs, 1:2); // Input args
+    apifun_checkrhs("ST_outlier", rhs, 1:3); // Input args
     apifun_checklhs("ST_outlier", lhs, 1:2); // Output args
     apifun_checkvector("ST_outlier", v, "v", 1); // Vector?
     apifun_checktype("ST_outlier", v, "v", 1, "constant"); //Double?
@@ -162,6 +179,16 @@ function [outlierfree, outlier] = ST_outlier(v, mod)
         apifun_checkoption("ST_outlier",mod,"mod",2,["sd" "iqr15" "iqr30"]);
     end
     if rhs < 2 then mod = "sd"; end  // if mode is not specified S.D.-mode is default
+    if rhs < 3 then q = 8; end       // Hyndman-Fan type 8 is default
+    if rhs > 2 then
+        apifun_checktype("ST_outlier", q, "q", 3, "constant");
+        if size(q, "*") <> 1 then
+            error("ST_outlier: Third argument q must be a scalar.");
+        end
+        if q <> 7 & q <> 8 then
+            error("ST_outlier: Third argument q must be 7 (Hyndman-Fan type 7) or 8 (Hyndman-Fan type 8).");
+        end
+    end
     if length(v) < 10 then
         warning("ST_outlier: Number of values should be >10, better >25");
     end
@@ -171,8 +198,8 @@ function [outlierfree, outlier] = ST_outlier(v, mod)
     end
 
     // Quantiles and inter-quartile range
-    x25 = ST_quantile(v, 0.25);
-    x75 = ST_quantile(v, 0.75);
+    x25 = ST_quantile(v, 0.25, q);
+    x75 = ST_quantile(v, 0.75, q);
     IQR = x75-x25; // Inter-quartile range
     m   = mean(v);
 
@@ -185,15 +212,13 @@ function [outlierfree, outlier] = ST_outlier(v, mod)
     oSDhi  = m + 2.5 * stdev(v, "*", m) // high border 2.5 * standard deviation of population (mode "sd") 
 
     if mod =="sd" then // standard deviation mode
-        outlierfree = v([v<oSDhi & v>oSDlo]);
+        outlierfree = v([v<=oSDhi & v>=oSDlo]);
         outlier     = v([v>oSDhi | v<oSDlo]);
-    elseif mod == "iqr15" // Inter-quartile range mode (IQR*1.5)
-        outlierfree = v([v<oIQR15hi & v>oIQR15lo]);
+    elseif mod == "iqr15" then // Inter-quartile range mode (IQR*1.5)
+        outlierfree = v([v<=oIQR15hi & v>=oIQR15lo]);
         outlier     = v([v>oIQR15hi | v<oIQR15lo]);
-    elseif mod == "iqr30" // Inter-quartile range mode (IQR*3.0)
-        outlierfree = v([v<oIQR30hi & v>oIQR30lo]);
+    elseif mod == "iqr30" then // Inter-quartile range mode (IQR*3.0)
+        outlierfree = v([v<=oIQR30hi & v>=oIQR30lo]);
         outlier     = v([v>oIQR30hi | v<oIQR30lo]);
-    else
-        error("ST_outlier: Wrong mode => ""sd"", ""irq15"" or ""iqr30"" are valid");
     end
 endfunction

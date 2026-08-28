@@ -26,8 +26,10 @@
    <synopsis>
    [outlierfree] = ST_outlier(v)
    [outlierfree] = ST_outlier(v, mod)
+   [outlierfree] = ST_outlier(v, mod, q)
    [outlierfree, outlier] = ST_outlier(v)
    [outlierfree, outlier] = ST_outlier(v, mod)
+   [outlierfree, outlier] = ST_outlier(v, mod, q)
    
    </synopsis>
 </refsynopsisdiv>
@@ -41,15 +43,19 @@
         </varlistentry>
         <varlistentry>
             <term>mod:</term>
-            <listitem><para> 1-by-1 matrix of strings, "sd" "iqr15"or "iqr30" mode</para></listitem>
+            <listitem><para> 1-by-1 matrix of strings, "sd", "iqr15" or "iqr30" mode</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>q:</term>
+            <listitem><para> 1-by-1 matrix of doubles. OPTIONAL. Quantile interpolation type for IQR modes 7 = Hyndman-Fan type 7, 8 = Hyndman-Fan type 8 (default)</para></listitem>
         </varlistentry>
         <varlistentry>
             <term>outlierfree :</term>
-            <listitem><para> input vector with all detected outliers removed; unchanged if</para></listitem>
+            <listitem><para> input vector with all detected outliers removed; unchanged if the test does not identify an outlier</para></listitem>
         </varlistentry>
         <varlistentry>
             <term>outlier :</term>
-            <listitem><para> detected outliers in their original input order; [] if no outlier</para></listitem>
+            <listitem><para> detected outliers in their original input order; [] if no outlier is detected</para></listitem>
         </varlistentry>
    </variablelist>
 </refsection>
@@ -67,8 +73,8 @@ the arithmetic mean in both directions.
    </para>
    <para>
 <latex>
+x_i &lt; (\bar{x} - 2.5\sigma) \; \text{or} \; x_i &gt; (\bar{x} + 2.5\sigma) \; \text{with} \quad \sigma = \sqrt{{1 \over n}\sum_{i=1}^{n}(x_i-\bar{x})^2} \quad \Rightarrow \quad x_i = \text{outlier}\\
 \begin{eqnarray}
-(\bar{x} - 2.5\sigma) &gt; x_i &gt; (\bar{x} + 2.5\sigma) \; \text{with} \quad \sigma = \sqrt{{1 \over n}\sum_{i=1}^{n}(x_i-\bar{x})^2} \quad \Rightarrow \quad x_i = \text{outlier}\\
 x_i: \text{value} \quad                            &amp;;&amp; \quad \bar{x}: \text{arithmetic mean} \\
 \sigma: \text{population standard deviation} \quad &amp;;&amp; \quad       n: \text{number of values}
 \end{eqnarray}
@@ -94,12 +100,15 @@ are strong outliers. SampleSTAT toolbox take care of this by introducing
 the "iqr30" mode.
    </para>
    <para>
+For quantile interpolation (IQR) two types are optionally available.
+Hyndman-Fan type 7- widely used, e.g. in the statistic software R and
+Hyndman-Fan type 8 - distribution independent, median-unbiased (default).
+   </para>
+   <para>
 <latex>
-\begin{eqnarray}
 IQR = x_{0.75} - x_{0.25} \\
-(x_{0.25} - 1.5 \cdot IQR)  &lt; x_i &lt; (x_{0.25} + 1.5 \cdot IQR)  \quad \Rightarrow \quad x_i = \text{outliers (iqr15 mode)} \\
-(x_{0.25} - 3.0 \cdot IQR)  &lt; x_i &lt; (x_{0.25} + 3.0 \cdot IQR)  \quad \Rightarrow \quad x_i = \text{strong outlier (iqr30 mode)}
-\end{eqnarray}
+x_i &lt; (x_{0.25} - 1.5 \cdot IQR) \; \text{or} \; x_i &gt; (x_{0.75} + 1.5 \cdot IQR) \quad \Rightarrow \quad x_i = \text{outlier (iqr15 mode)} \\
+x_i &lt; (x_{0.25} - 3.0 \cdot IQR) \; \text{or} \; x_i &gt; (x_{0.75} + 3.0 \cdot IQR) \quad \Rightarrow \quad x_i = \text{strong outlier (iqr30 mode)}
 </latex>
    </para>
    <para>
@@ -124,10 +133,11 @@ data = [
 -2.1700554  -4.7361261   0.0069708    14.626386 ..
 -2.5036545  -2.9046385 ..
 ];
-of = ST_outlier(data')      // outlier-free values with sd-mode
-[of, o] = ST_outlier(data', "sd")  // outlier and outlier-free values
-[of15, o15] = ST_outlier(data', "iqr15")  // outlier and outlier-free values
-[of30, o30] = ST_outlier(data', "iqr30")  // outlier and outlier-free values
+of              = ST_outlier(data')             // outlier-free values with sd-mode
+[of, o]         = ST_outlier(data', "sd")       // outlier and outlier-free values
+[of15, o15]     = ST_outlier(data', "iqr15")    // IQR, quantile type 8 (default)
+[of15t7, o15t7] = ST_outlier(data', "iqr15", 7) // IQR, quantile type 7
+[of30, o30]     = ST_outlier(data', "iqr30", 8) // IQR, quantile type 8
 
    ]]></programlisting>
 </refsection>

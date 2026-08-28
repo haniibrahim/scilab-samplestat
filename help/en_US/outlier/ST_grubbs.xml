@@ -74,11 +74,17 @@ not be interpreted as proof that the sample contains no outlier.
    </para>
    <para>
 Test directions:
-"both"  tests the observation with the largest absolute deviation from
+   </para>
+   <para>
+"both"    tests the observation with the largest absolute deviation from
 the sample mean. The critical probability uses α/(2*n).
-"left"  tests only the minimum observation. The critical probability
+   </para>
+   <para>
+"left"    tests only the minimum observation. The critical probability
 uses α/n.
-"right" tests only the maximum observation. The critical probability
+   </para>
+   <para>
+"right"   tests only the maximum observation. The critical probability
 uses α/n.
    </para>
    <para>

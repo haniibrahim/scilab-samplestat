@@ -17,7 +17,7 @@
 
   <refnamediv>
     <refname>ST_nalimov</refname>
-    <refpurpose>Nalimov outlier test</refpurpose>
+    <refpurpose>Nalimov outlier test (non-iterative implementation)</refpurpose>
   </refnamediv>
 
 
@@ -55,9 +55,12 @@
 <refsection>
    <title>Description</title>
    <para>
-Performs Nalimov outlier test for small and larger sample sizes.
-It calculates for all values the test value "q".
-It compares these q-values with the appropriate q<subscript>crit</subscript> value from a table.
+Performs a non-iterative Nalimov outlier screening based on the
+test statistic and critical values given by Kaiser/Gottschalk.
+Mean, sample standard deviation and q<subscript>crit</subscript> are calculated once
+from the complete input vector. The q value is then calculated for every sample
+value. All values with q &gt; q<subscript>crit</subscript> are returned as outliers in
+one pass. No value is removed and retested within this function.
    </para>
    <para>
 <latex>
@@ -69,22 +72,24 @@ s   : \text{sample standard deviation} \quad &amp;;&amp; \quad        n: \text{n
 </latex>
    </para>
    <para>
-q-values of the sample values which are greater than the q<subscript>crit</subscript> value are
-outliers
+In contrast to the classical sequential elimination procedure, this implementation
+may therefore identify more than one value as an outlier in a single call.
    </para>
    <para>
 <important><para>
 Do use ST_nalimov ONLY with NORMAL distributed data and
-with more than 3 and less than 1000 values!
+with 3 to 1002 values (corresponding to f = n-2 = 1 to 1000)!
 </para></important>
    </para>
    <para>
 <caution><para>
-Do use ST_nalimov with care. It indicates outliers very strict and is
-controversially discussed in the scientific community. For a convervative
+Do use ST_nalimov with care. This historical Kaiser/Gottschalk procedure is
+controversially discussed in the scientific literature. This function deliberately
+implements a NON-ITERATIVE one-pass screening and can flag multiple values at once.
+For a conservative
 outlier test substitute Nalimov with Dean-Dixon (ST_deandixon)
-small sample sizes (&lt;30) and Pearson-Hartley (ST-pearsonhartley) for
-larger ones (&gt;30) or better the generalized Extreme Studentized
+for small sample sizes (&lt;30) and Pearson-Hartley (ST_pearsonhartley) for
+larger ones (&gt;30), or preferably the generalized Extreme Studentized
 Deviate test according to Rosner "ST_esd()" instead.
 </para></caution>
    </para>
@@ -126,6 +131,12 @@ of = ST_nalimov(data, "95%")      // outlier-free values
 
 <refsection>
    <title>Bibliography</title>
-   <para>R. Kaiser, G. Gottschalk; "Elementare Tests zur Beurteilung von Meßdaten", BI Hochschultaschenbücher, Bd. 774, Mannheim 1972.</para>
+   <para>R. Kaiser, G. Gottschalk; "Elementare Tests zur Beurteilung von Meßdaten",</para>
+   <para>BI Hochschultaschenbücher, Bd. 774, Bibliographisches Institut, Mannheim 1972.</para>
+   <para>Note:</para>
+   <para>The statistic and critical values follow the Kaiser/Gottschalk presentation.</para>
+   <para>Their classical elimination workflow is sequential: test the most extreme</para>
+   <para>suspected value, remove it if significant, then recalculate and repeat.</para>
+   <para>ST_nalimov intentionally does NOT perform that iterative elimination.</para>
 </refsection>
 </refentry>

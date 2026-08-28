@@ -12,17 +12,25 @@ function [outlierfree, outlier] = ST_pearsonhartley(v, p)
     // outlier: vector of outliers
     //
     // Description
-    // Performs the Pearson-Hartley outlier test. It should be used for distributions 
-    // with more than 30 values.
-    //
+    // Performs the historical, table-based Pearson-Hartley outlier test.
+    // It is intended for normally distributed samples with more than 30 values.
+    // The historical method is retained here for compatibility with the published
+    // Pearson-Hartley table. The test statistic is q = abs((x-mean(v))/stdev(v)).
     //
     // <important><para>
-    // Do use ST_pearsonhartley ONLY with NORMAL distrinutions. 
+    // Use ST_pearsonhartley ONLY with NORMAL distributions.
     // </para></important>
     //
     // <note><para>
-    // Do use ST_pearsonhartley with more than 30 values! For less than 30 
-    // values use Dean-Dixon test "ST_deandion()" instead. 
+    // Use ST_pearsonhartley only for sample sizes greater than 30 and not greater
+    // than 1000. For smaller samples use an appropriate small-sample outlier test.
+    // </para></note>
+    //
+    // <note><para>
+    // The historical Pearson-Hartley critical-value table is retained unchanged.
+    // Its tabulated limits correspond to the historical formulation even though
+    // the statistic uses an absolute deviation. For a modern formal test for a
+    // single unknown outlier in normally distributed data, ST_grubbs is preferred.
     // </para></note>
     //
     // Examples
@@ -49,7 +57,8 @@ function [outlierfree, outlier] = ST_pearsonhartley(v, p)
     //  Hani A. Ibrahim - hani.ibrahim@gmx.de
     //
     // Bibliography
-    //   Lohringer, H., "Grundlagen der Statistik", Oct, 10th, 2012, http://www.statistics4u.info/fundstat_germ/cc_outlier_tests_4sigma.html
+    //   Lohringer, H., "Pearson-Hartley Outlier Test", Statistics4U,
+    //   http://www.statistics4u.com/fundstat_eng/ee_pearson_outliertest.html
     //   
 
     // === FUNCTIONS ===========================================================
@@ -162,10 +171,10 @@ function [outlierfree, outlier] = ST_pearsonhartley(v, p)
     end
 
     n = length(v);
-        if (n < 3 | n > 1000)
-            error(msprintf( ..
-    "Pearson-Hartley is just applicable for sample distributions greater than 3\n" + ..
-    "and less than 1000 values.")); 
+    if (n <= 30 | n > 1000) then
+        error(msprintf( ..
+        "ST_pearsonhartley: Pearson-Hartley is applicable only for sample sizes greater than 30\n" + ..
+        "and not greater than 1000 values."));
     end
 
     // Determine Q_crit
@@ -173,6 +182,15 @@ function [outlierfree, outlier] = ST_pearsonhartley(v, p)
 
     S = stdev(v);
     X = mean(v);
+
+    // A constant sample has zero standard deviation. In this case q would be
+    // undefined (0/0), but no observation differs from the sample mean.
+    if S == 0 then
+        outlierfree = v;
+        outlier = [];
+        return;
+    end
+
     j = 1; // index variable for outlier vector
     k = 1; // index variable for outlier-free vector
     outlier = [];
@@ -189,11 +207,12 @@ function [outlierfree, outlier] = ST_pearsonhartley(v, p)
         k = k + 1;
     end
 
-    // Preserve vector orientation
-    if (size(outlier, 1) == 1) == rowvector then
+    // Preserve the orientation of the input vector. Values assigned by index are
+    // created as row vectors, so transpose only for a column-vector input.
+    if rowvector then
         outlier = outlier';
         outlierfree = outlierfree';
-    end;
+    end
 
     return;
 

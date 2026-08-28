@@ -55,20 +55,28 @@
 <refsection>
    <title>Description</title>
    <para>
-Performs the Pearson-Hartley outlier test. It should be used for distributions
-with more than 30 values.
-   </para>
-   <para>
+Performs the historical, table-based Pearson-Hartley outlier test.
+It is intended for normally distributed samples with more than 30 values.
+The historical method is retained here for compatibility with the published
+Pearson-Hartley table. The test statistic is q = abs((x-mean(v))/stdev(v)).
    </para>
    <para>
 <important><para>
-Do use ST_pearsonhartley ONLY with NORMAL distrinutions.
+Use ST_pearsonhartley ONLY with NORMAL distributions.
 </para></important>
    </para>
    <para>
 <note><para>
-Do use ST_pearsonhartley with more than 30 values! For less than 30
-values use Dean-Dixon test "ST_deandion()" instead.
+Use ST_pearsonhartley only for sample sizes greater than 30 and not greater
+than 1000. For smaller samples use an appropriate small-sample outlier test.
+</para></note>
+   </para>
+   <para>
+<note><para>
+The historical Pearson-Hartley critical-value table is retained unchanged.
+Its tabulated limits correspond to the historical formulation even though
+the statistic uses an absolute deviation. For a modern formal test for a
+single unknown outlier in normally distributed data, ST_grubbs is preferred.
 </para></note>
    </para>
    <para>
@@ -113,6 +121,7 @@ of = ST_pearsonhartley(data, "95%")      // outlier-free values
 
 <refsection>
    <title>Bibliography</title>
-   <para>Lohringer, H., "Grundlagen der Statistik", Oct, 10th, 2012, http://www.statistics4u.info/fundstat_germ/cc_outlier_tests_4sigma.html</para>
+   <para>Lohringer, H., "Pearson-Hartley Outlier Test", Statistics4U,</para>
+   <para>http://www.statistics4u.com/fundstat_eng/ee_pearson_outliertest.html</para>
 </refsection>
 </refentry>

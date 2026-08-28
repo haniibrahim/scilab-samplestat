@@ -14,7 +14,7 @@
 // this program; if not, see <http://www.gnu.org/licenses/>.
 
 function [outlierfree, outlier] = ST_nalimov(v, p)
-    // Nalimov outlier test 
+    // Nalimov outlier test (non-iterative implementation)
     //
     // Syntax
     //   [outlierfree] = ST_nalimov(v, p)
@@ -29,9 +29,12 @@ function [outlierfree, outlier] = ST_nalimov(v, p)
     //           is detected
     //
     // Description
-    // Performs Nalimov outlier test for small and larger sample sizes. 
-    // It calculates for all values the test value "q". 
-    // It compares these q-values with the appropriate q<subscript>crit</subscript> value from a table.
+    // Performs a non-iterative Nalimov outlier screening based on the
+    // test statistic and critical values given by Kaiser/Gottschalk.
+    // Mean, sample standard deviation and q<subscript>crit</subscript> are calculated once
+    // from the complete input vector. The q value is then calculated for every sample
+    // value. All values with q > q<subscript>crit</subscript> are returned as outliers in
+    // one pass. No value is removed and retested within this function.
     //
     // <latex>
     // \begin{eqnarray}
@@ -41,20 +44,22 @@ function [outlierfree, outlier] = ST_nalimov(v, p)
     // \end{eqnarray}
     // </latex>
     //
-    // q-values of the sample values which are greater than the q<subscript>crit</subscript> value are 
-    // outliers
+    // In contrast to the classical sequential elimination procedure, this implementation
+    // may therefore identify more than one value as an outlier in a single call.
     //
     // <important><para>
     // Do use ST_nalimov ONLY with NORMAL distributed data and
-    // with more than 3 and less than 1000 values!
+    // with 3 to 1002 values (corresponding to f = n-2 = 1 to 1000)!
     // </para></important>
     //
     // <caution><para>
-    // Do use ST_nalimov with care. It indicates outliers very strict and is 
-    // controversially discussed in the scientific community. For a convervative
+    // Do use ST_nalimov with care. This historical Kaiser/Gottschalk procedure is
+    // controversially discussed in the scientific literature. This function deliberately
+    // implements a NON-ITERATIVE one-pass screening and can flag multiple values at once.
+    // For a conservative
     // outlier test substitute Nalimov with Dean-Dixon (ST_deandixon)
-    // small sample sizes (<30) and Pearson-Hartley (ST-pearsonhartley) for 
-    // larger ones (>30) or better the generalized Extreme Studentized 
+    // for small sample sizes (<30) and Pearson-Hartley (ST_pearsonhartley) for
+    // larger ones (>30), or preferably the generalized Extreme Studentized
     // Deviate test according to Rosner "ST_esd()" instead.
     // </para></caution>
     //
@@ -78,7 +83,14 @@ function [outlierfree, outlier] = ST_nalimov(v, p)
     //  Hani A. Ibrahim - hani.ibrahim@gmx.de
     //
     // Bibliography
-    //   R. Kaiser, G. Gottschalk; "Elementare Tests zur Beurteilung von Meßdaten", BI Hochschultaschenbücher, Bd. 774, Mannheim 1972.
+    //   R. Kaiser, G. Gottschalk; "Elementare Tests zur Beurteilung von Meßdaten",
+    //   BI Hochschultaschenbücher, Bd. 774, Bibliographisches Institut, Mannheim 1972.
+    //
+    // Note:
+    //   The statistic and critical values follow the Kaiser/Gottschalk presentation.
+    //   Their classical elimination workflow is sequential: test the most extreme
+    //   suspected value, remove it if significant, then recalculate and repeat.
+    //   ST_nalimov intentionally does NOT perform that iterative elimination.
     
     // === FUNCTIONS ===========================================================
 
@@ -105,7 +117,7 @@ function [outlierfree, outlier] = ST_nalimov(v, p)
 
         // qtable contains the critical values critval for N (number of values)
         // and alpha (niveau of significance)  
-        // Column 1 : Dregree of freedom (f = n-2)
+        // Column 1 : Degree of freedom (f = n-2)
         // Column 2 : Student factor, confidence level: 95%, level of significance = 0.05
         // Column 3 : Student factor, confidence level: 99%, level of significance = 0.01
         // Column 4 : Student factor, confidence level: 99.9%, level of significance = 0.001
@@ -116,7 +128,7 @@ function [outlierfree, outlier] = ST_nalimov(v, p)
         4   1.814   2.051   2.178; ...
         5   1.848   2.142   2.329; ...
         6   1.870   2.208   2.447; ...
-        5   1.885   2.256   2.540; ...
+        7   1.885   2.256   2.540; ...
         8   1.895   2.294   2.616; ...
         9   1.903   2.324   2.678; ...
         10  1.910   2.348   2.730; ...
@@ -192,7 +204,7 @@ function [outlierfree, outlier] = ST_nalimov(v, p)
             mul = f - qtable(i,1); // Multiplicator for qs
             critval = qtable(i,j) + (mul * qs);
         else // for the last value (1000)
-            i = 35; // Determine row, 6=correction factor
+            i = 35; // Last table row: f = 1000
             critval = qtable(i,j);
         end
         return;
@@ -217,6 +229,9 @@ function [outlierfree, outlier] = ST_nalimov(v, p)
     end
 
     n = length(v);
+    if n < 3 | n > 1002 then
+        error("ST_nalimov: First argument v must contain between 3 and 1002 values.");
+    end
     
     // Check the orientation of the input vector
     rowvector = (size(v, 1) == 1);
@@ -225,10 +240,17 @@ function [outlierfree, outlier] = ST_nalimov(v, p)
     qcritval = nalimov_crit(n, p);
 
     x = mean(v);   // mean
-    sd = stdev(v); // standard deviation
+    sd = stdev(v); // sample standard deviation
 
     outlier = [];
     outlierfree = [];
+
+    // If all values are identical, q is undefined (0/0), but no value can be
+    // distinguished as an outlier. Return the input unchanged.
+    if sd == 0 then
+        outlierfree = v;
+        return;
+    end
 
     for i=1:n
         q = abs(v(i)-x)/sd * sqrt(n/(n-1));

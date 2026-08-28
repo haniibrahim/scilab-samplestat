@@ -45,11 +45,14 @@ function [outlierfree, outlier] = ST_grubbs(v, p, side)
     //   not be interpreted as proof that the sample contains no outlier.
     //
     //   Test directions:
-    //     "both"  tests the observation with the largest absolute deviation from
+    //
+    //   "both"    tests the observation with the largest absolute deviation from
     //             the sample mean. The critical probability uses α/(2*n).
-    //     "left"  tests only the minimum observation. The critical probability
+    //
+    //   "left"    tests only the minimum observation. The critical probability
     //             uses α/n.
-    //     "right" tests only the maximum observation. The critical probability
+    //
+    //   "right"   tests only the maximum observation. The critical probability
     //             uses α/n.
     //
     //   The sample standard deviation is calculated with denominator n-1.

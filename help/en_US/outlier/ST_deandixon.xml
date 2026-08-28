@@ -81,7 +81,7 @@ Apply this test ONLY one time to your data.
    <para>
 <important><para>
 Do use ST_deandixon ONLY with NORMAL distributed data and
-with more than 3 and less than 30 values! For more than 30 values use
+with sample sizes from 3 through 30 values! For more than 30 values use
 Pearson-Hartley "ST_pearsonhartley()" or better the generalized Extreme Studentized
 Deviate test according to Rosner "ST_esd()" instead.
 </para></important>
