@@ -55,10 +55,6 @@ function outlier_demo()
     [e_of095, e_o095] = ST_esd(data2, "95%", 2);
     [e_of099, e_o099] = ST_esd(data2, "99%", 2);
     [e_of999, e_o999] = ST_esd(data2, "99.9%", 2);
-    
-    // Distribution test ===========================================
-    sw1 = ST_shapirowilk(data1,"99%"); // definitly normally distributed ...
-    sw2 = ST_shapirowilk(data2,"99%"); // ... with 99% confidence
 
     // Output ======================================================
     
@@ -83,28 +79,23 @@ function outlier_demo()
     disp(data2')
     
     mprintf("\n" + ..
-            "SHAPIRO-WILK TEST FOR NORMAL DISTRIBUTIONS\n" + ..
-            "==========================================\n")
-    mprintf("Data record 1 definitly normally distributed with 99%% confidence? => %s \n", sw1);
-    mprintf("Data record 2 definitly normally distributed with 99%% confidence? => %s \n\n", sw2);
-    
-    mprintf("GRUBBS OUTLIER TEST ON DATA RECORD 1\n" + ..
+            "GRUBBS OUTLIER TEST ON DATA RECORD 1\n" + ..
             "====================================\n")
-    mprintf("Data record 1: Grubbs-Outliers at 95%% confidence level (probable outliers)\n");
+    mprintf("Data record 1: Grubbs-Outliers at 95%% confidence level (probable outliers):\n");
     disp(g_o095);
-    mprintf("Data record 1: Grubbs-Outliers at 99%% confidence level (signigicant outliers)\n");
+    mprintf("Data record 1: Grubbs-Outliers at 99%% confidence level (signigicant outliers):\n");
     disp(g_o099);
-    mprintf("Data record 1: Grubbs-Outliers at 99.9%% confidence level (highly significant outliers)\n");
+    mprintf("Data record 1: Grubbs-Outliers at 99.9%% confidence level (highly significant outliers):\n");
     disp(g_o099);
     
     mprintf("\n" + ..
             "ESD OUTLIER TEST ON DATA RECORD 2\n" + ..
             "=================================\n")
-    mprintf("Data record 2: ESD-Outliers at 95%% confidence level (probable outliers)\n");
+    mprintf("Data record 2: ESD-Outliers at 95%% confidence level (probable outliers):\n");
     disp(e_o095);
-    mprintf("Data record 2: ESD-Outliers at 99%% confidence level (signigicant outliers)\n");
+    mprintf("Data record 2: ESD-Outliers at 99%% confidence level (signigicant outliers):\n");
     disp(e_o099)
-    mprintf("Data record 2: ESD-Outliers at 99.9%% confidence level (highly significant outliers)\n");
+    mprintf("Data record 2: ESD-Outliers at 99.9%% confidence level (highly significant outliers):\n");
     disp(e_o999)
 
 //    disp("Dean-Dixon-Outliers at 95% confidence level  : " + string(o095) + " (probable outliers)")

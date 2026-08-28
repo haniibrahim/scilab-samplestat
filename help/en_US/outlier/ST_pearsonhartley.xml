@@ -21,6 +21,15 @@
   </refnamediv>
 
 
+<refsynopsisdiv>
+   <title>Syntax</title>
+   <synopsis>
+   [outlierfree] = ST_pearsonhartley(v, p)
+   [outlierfree, outlier] = ST_pearsonhartley(v, p)
+   
+   </synopsis>
+</refsynopsisdiv>
+
 <refsection>
    <title>Parameters</title>
    <variablelist>
