@@ -23,16 +23,12 @@ function [outlierfree, outlier] = ST_esd(v, p, maxoutliers, side)
     //   outlierfree = ST_esd(v, p, maxoutliers, side)
     //
     // Parameters
-    //   v : real vector of numerical sample values; at least three values are required
-    //   p : statistical confidence level as a string or significance level alpha
-    //       as a decimal value "95%", "99%", "99.9%", 0.05, 0.01 or 0.001
-    //   maxoutliers : positive integer specifying the maximum number of suspected
-    //                 outliers; it must not exceed n-2
-    //   side : test direction, "both" (default), "left" or "right"
-    //   outlierfree : input vector with all detected outliers removed; unchanged if
-    //                 the test does not identify an outlier
-    //   outlier : detected outliers in their original input order; [] if no outlier
-    //             is detected
+    //   v: real vector of numerical sample values; at least three values are required
+    //   p: statistical confidence level as a string or significance level alpha as a decimal value "95%", "99%", "99.9%", 0.05, 0.01 or 0.001
+    //   maxoutliers: positive integer specifying the maximum number of suspected outliers; it must not exceed n-2
+    //   side: test direction, "both" (default), "left" or "right"
+    //   outlierfree: input vector with all detected outliers removed; unchanged if the test does not identify an outlier
+    //   outlier: detected outliers in their original input order; [] if no outlier is detected
     //
     // Description
     //   ST_esd performs Rosner's generalized Extreme Studentized Deviate (ESD)

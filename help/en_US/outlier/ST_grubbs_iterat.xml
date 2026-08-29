@@ -50,7 +50,7 @@
         </varlistentry>
         <varlistentry>
             <term>outlierfree :</term>
-            <listitem><para> input vector with the detected outlier removed; unchanged if</para></listitem>
+            <listitem><para> input vector with the detected outlier removed; unchanged if the test does not identify an outlier</para></listitem>
         </varlistentry>
         <varlistentry>
             <term>outlier :</term>
@@ -62,7 +62,7 @@
 <refsection>
    <title>Description</title>
    <para>
-Performs an INTERACTIVE Grubbs outlier test. The classic Grubbs test detects just one outlier at a time. This function
+Performs an ITERATIVE Grubbs outlier test. The classic Grubbs test detects just one outlier at a time. This function
 applies the test iteratively on the same data record until no further outlier is found.
    </para>
    <para>
@@ -115,6 +115,13 @@ x_{min} &amp;:&amp; \text{min value} \\
 \alpha  &amp;:&amp; \text{statistical confidence level}
 \end{eqnarray}
 </latex>
+   </para>
+   <para>
+Decision rule
+   </para>
+   <para>
+The selected observation is classified as an outlier when G &gt; G<subscript>crit</subscript>.
+Equality does not lead to rejection.
    </para>
    <para>
 </para>

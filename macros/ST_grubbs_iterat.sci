@@ -27,12 +27,11 @@ function [outlierfree, outlier] = ST_grubbs_iterat(v, p, side)
     //   v : vector of numerical values
     //   p : statistical confidence level (%) as a string or the level of significance (α) as a decimal value, "95%", "99%", "99.9%" or 0.05, 0.01, 0.001 resp (see examples).
     //   side: one-or two-sided "both" (default), "left", "right"
-    //   outlierfree : input vector with the detected outlier removed; unchanged if
-    //                 the test does not identify an outlier
+    //   outlierfree : input vector with the detected outlier removed; unchanged if the test does not identify an outlier
     //   outlier : detected outliers as a scalar vector; [] if no outlier is detected
     //
     // Description
-    // Performs an INTERACTIVE Grubbs outlier test. The classic Grubbs test detects just one outlier at a time. This function
+    // Performs an ITERATIVE Grubbs outlier test. The classic Grubbs test detects just one outlier at a time. This function
     // applies the test iteratively on the same data record until no further outlier is found. 
     //
     // <caution><para>IMPORTANT: When ST_grubbs_iterat() repeatedly used its interative algorithm on the same data it does not adapting the critical value. 
@@ -78,6 +77,11 @@ function [outlierfree, outlier] = ST_grubbs_iterat(v, p, side)
     // \alpha  &:& \text{statistical confidence level}
     // \end{eqnarray}
     // </latex>
+    //
+    // Decision rule
+    // 
+    // The selected observation is classified as an outlier when G > G<subscript>crit</subscript>.
+    // Equality does not lead to rejection.
     //
     // Examples
     // data = [

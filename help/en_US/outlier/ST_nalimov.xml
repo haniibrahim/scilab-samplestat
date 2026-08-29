@@ -43,11 +43,11 @@
         </varlistentry>
         <varlistentry>
             <term>outlierfree :</term>
-            <listitem><para> input vector with all detected outliers removed; unchanged if</para></listitem>
+            <listitem><para> input vector with all detected outliers removed; unchanged if the test does not identify an outlier</para></listitem>
         </varlistentry>
         <varlistentry>
             <term>outlier :</term>
-            <listitem><para> detected outliers in their original input order; [] if no outlier</para></listitem>
+            <listitem><para> detected outliers in their original input order; [] if no outlier is detected</para></listitem>
         </varlistentry>
    </variablelist>
 </refsection>
@@ -131,12 +131,6 @@ of = ST_nalimov(data, "95%")      // outlier-free values
 
 <refsection>
    <title>Bibliography</title>
-   <para>R. Kaiser, G. Gottschalk; "Elementare Tests zur Beurteilung von Meßdaten",</para>
-   <para>BI Hochschultaschenbücher, Bd. 774, Bibliographisches Institut, Mannheim 1972.</para>
-   <para>Note:</para>
-   <para>The statistic and critical values follow the Kaiser/Gottschalk presentation.</para>
-   <para>Their classical elimination workflow is sequential: test the most extreme</para>
-   <para>suspected value, remove it if significant, then recalculate and repeat.</para>
-   <para>ST_nalimov intentionally does NOT perform that iterative elimination.</para>
+   <para>R. Kaiser, G. Gottschalk; "Elementare Tests zur Beurteilung von Meßdaten",BI Hochschultaschenbücher, Bd. 774, Bibliographisches Institut, Mannheim 1972.</para>
 </refsection>
 </refentry>

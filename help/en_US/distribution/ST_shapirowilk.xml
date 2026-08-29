@@ -136,7 +136,6 @@ ST_ivplot(data2,"data2");
 
 <refsection>
    <title>Bibliography</title>
-   <para>Shapiro, S.S. &amp; Wilk, M.B. (1965). An Analysis of Variance Test for</para>
-   <para>Normality (Complete Samples). Biometrika 52(3/4), 591-611.</para>
+   <para>Shapiro, S.S. &amp; Wilk, M.B. (1965). An Analysis of Variance Test for Normality (Complete Samples). Biometrika 52(3/4), 591-611.</para>
 </refsection>
 </refentry>

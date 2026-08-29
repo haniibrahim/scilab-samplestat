@@ -15,7 +15,14 @@ function [outlierfree, outlier] = ST_pearsonhartley(v, p)
     // Performs the historical, table-based Pearson-Hartley outlier test.
     // It is intended for normally distributed samples with more than 30 values.
     // The historical method is retained here for compatibility with the published
-    // Pearson-Hartley table. The test statistic is q = abs((x-mean(v))/stdev(v)).
+    // Pearson-Hartley table. The test statistic is 
+    //
+    // <latex>
+    // \begin{eqnarray}
+    //  q=\left| \frac{1}{s}(x_i - \bar{x}) \right| \quad ; \quad q > q_{crit} \quad  \Rightarrow \quad x_i = \text{outlier} \\
+    //  x_i: \text{test value} \quad ; \quad \bar{x}: \text{arithmetic mean} \quad ; \quad s: \text{sample standard deviation}
+    // \end{eqnarray}
+    // </latex>
     //
     // <important><para>
     // Use ST_pearsonhartley ONLY with NORMAL distributions.
@@ -57,8 +64,7 @@ function [outlierfree, outlier] = ST_pearsonhartley(v, p)
     //  Hani A. Ibrahim - hani.ibrahim@gmx.de
     //
     // Bibliography
-    //   Lohringer, H., "Pearson-Hartley Outlier Test", Statistics4U,
-    //   http://www.statistics4u.com/fundstat_eng/ee_pearson_outliertest.html
+    //   Lohringer, H., "Pearson-Hartley Outlier Test", Statistics4U, http://www.statistics4u.com/fundstat_eng/ee_pearson_outliertest.html
     //   
 
     // === FUNCTIONS ===========================================================

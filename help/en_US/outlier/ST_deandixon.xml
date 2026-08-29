@@ -43,7 +43,7 @@
         </varlistentry>
         <varlistentry>
             <term>outlierfree :</term>
-            <listitem><para> input vector with the detected outlier removed; unchanged if</para></listitem>
+            <listitem><para> input vector with the detected outlier removed; unchanged if the test does not identify an outlier</para></listitem>
         </varlistentry>
         <varlistentry>
             <term>outlier :</term>

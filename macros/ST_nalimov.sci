@@ -23,10 +23,8 @@ function [outlierfree, outlier] = ST_nalimov(v, p)
     // Parameters
     // v: vector of numerical values
     // p: statistical confidence level (%) as a string or the level of significance (α) as a decimal value, "95%", "99%", "99.9%" or 0.05, 0.01, 0.001 resp (see examples).
-    // outlierfree : input vector with all detected outliers removed; unchanged if
-    //               the test does not identify an outlier
-    // outlier : detected outliers in their original input order; [] if no outlier
-    //           is detected
+    // outlierfree : input vector with all detected outliers removed; unchanged if the test does not identify an outlier
+    // outlier : detected outliers in their original input order; [] if no outlier is detected
     //
     // Description
     // Performs a non-iterative Nalimov outlier screening based on the
@@ -83,14 +81,8 @@ function [outlierfree, outlier] = ST_nalimov(v, p)
     //  Hani A. Ibrahim - hani.ibrahim@gmx.de
     //
     // Bibliography
-    //   R. Kaiser, G. Gottschalk; "Elementare Tests zur Beurteilung von Meßdaten",
-    //   BI Hochschultaschenbücher, Bd. 774, Bibliographisches Institut, Mannheim 1972.
+    //   R. Kaiser, G. Gottschalk; "Elementare Tests zur Beurteilung von Meßdaten",BI Hochschultaschenbücher, Bd. 774, Bibliographisches Institut, Mannheim 1972.
     //
-    // Note:
-    //   The statistic and critical values follow the Kaiser/Gottschalk presentation.
-    //   Their classical elimination workflow is sequential: test the most extreme
-    //   suspected value, remove it if significant, then recalculate and repeat.
-    //   ST_nalimov intentionally does NOT perform that iterative elimination.
     
     // === FUNCTIONS ===========================================================
 

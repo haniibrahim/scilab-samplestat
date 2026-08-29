@@ -39,7 +39,7 @@ function [outlierfree, outlier] = ST_outlier(v, mod, q)
     // a value is presented as an outlier when it is more than 2.5xS.D. off 
     // the arithmetic mean in both directions.
     //
-    // <important><para>The data has to be normally distributed.</para></important>
+    // <important><para>The data has to be normally distributed when using the "sd" option!</para></important>
     //
     // <latex>
     // x_i < (\bar{x} - 2.5\sigma) \; \text{or} \; x_i > (\bar{x} + 2.5\sigma) \; \text{with} \quad \sigma = \sqrt{{1 \over n}\sum_{i=1}^{n}(x_i-\bar{x})^2} \quad \Rightarrow \quad x_i = \text{outlier}\\
@@ -67,8 +67,8 @@ function [outlierfree, outlier] = ST_outlier(v, mod, q)
     // are strong outliers. SampleSTAT toolbox take care of this by introducing  
     // the "iqr30" mode.
     //
-    // For quantile interpolation (IQR) two types are optionally available. 
-    // Hyndman-Fan type 7- widely used, e.g. in the statistic software R and 
+    // For quantile interpolation two types are available. 
+    // Hyndman-Fan type 7 - widely used, e.g. in the statistic software R and 
     // Hyndman-Fan type 8 - distribution independent, median-unbiased (default).
     //
     // <latex>
@@ -76,12 +76,6 @@ function [outlierfree, outlier] = ST_outlier(v, mod, q)
     // x_i < (x_{0.25} - 1.5 \cdot IQR) \; \text{or} \; x_i > (x_{0.75} + 1.5 \cdot IQR) \quad \Rightarrow \quad x_i = \text{outlier (iqr15 mode)} \\
     // x_i < (x_{0.25} - 3.0 \cdot IQR) \; \text{or} \; x_i > (x_{0.75} + 3.0 \cdot IQR) \quad \Rightarrow \quad x_i = \text{strong outlier (iqr30 mode)}
     //</latex>
-    //
-    // <important><para>
-    // Do use ST_outlier "sd" mode ONLY with NORMAL distributed data and
-    // with more than 10 or better more than 25 values! Use ST_grubbs
-    // or ST_deandixon for distributions with lower number of values.
-    // </para></important>
     //
     // Examples
     // data = [

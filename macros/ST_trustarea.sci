@@ -28,11 +28,12 @@ function trustval = ST_trustarea(v, p)
 // "ST_trustarea" determines the range of dispersion of the mean. It describes the
 // quality of the mean and indicates the range of dispersion of the 
 // mean and not of the raw values as the stray area does.
+// It defines the range around the mean may vary at a given significance level. 
 //
 // <latex>
 // \begin{eqnarray}
-// T = s \cdot t \\
-// T_{\bar{x}} = T/ \sqrt{n} 
+// T &=& s \cdot t \\
+// T_{\bar{x}} &=& T/ \sqrt{n} 
 // \end{eqnarray}
 // </latex>
 //
@@ -65,6 +66,7 @@ function trustval = ST_trustarea(v, p)
 //
 // Bibliography
 //   R. Kaiser, G. Gottschalk; "Elementare Tests zur Beurteilung von Meßdaten", BI Hochschultaschenbücher, Bd. 774, Mannheim 1972.
+//
 
   // Check arguments
   [lhs,rhs]=argn()

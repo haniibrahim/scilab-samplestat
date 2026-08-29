@@ -68,7 +68,7 @@ Calculates the stray area (range of dispersion of the values) of univariate data
 				<term><link linkend="ST_trustarea">ST_trustarea</link>:</term>
 				<listitem>
 					<para>
-Calculates the trust area (range of dispersion of the mean) of univariate data and for a statistical confidence level (95%, 99%, 99.9%) and level of significance (0.5, 0.01, 0.001), resp.It defines the range around the mean may vary at a given significance level. 
+Calculates the trust area (range of dispersion of the mean) of univariate data and for a statistical confidence level (95%, 99%, 99.9%) and level of significance (0.5, 0.01, 0.001), resp. It defines the range around the mean may vary at a given significance level. 
 					</para>
 				</listitem>
 			</varlistentry>

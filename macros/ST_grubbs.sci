@@ -24,13 +24,9 @@ function [outlierfree, outlier] = ST_grubbs(v, p, side)
     //
     // Parameters
     //   v : real vector of numerical sample values; at least three values are required
-    //   p : statistical confidence level as a string or significance level α
-    //       as a decimal value "95%", "99%", "99.9%", 0.05, 0.01 or 0.001
+    //   p : statistical confidence level as a string or significance level α as a decimal value "95%", "99%", "99.9%", 0.05, 0.01 or 0.001
     //   side : test direction, "both" (default), "left" or "right"
-    //
-    // Returned values
-    //   outlierfree : input vector with the detected outlier removed; unchanged if
-    //                 the test does not identify an outlier
+    //   outlierfree : input vector with the detected outlier removed; unchanged if the test does not identify an outlier
     //   outlier : detected outlier as a scalar vector; [] if no outlier is detected
     //
     // Description

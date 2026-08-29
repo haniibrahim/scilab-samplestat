@@ -24,8 +24,7 @@ function [outlierfree, outlier] = ST_deandixon(v, p)
     // Parameters
     // v: vector of numerical values
     // p: statistical confidence level (%) as a string or the level of significance (α) as a decimal value, "95%", "99%", "99.9%" or 0.05, 0.01, 0.001 resp (see examples).
-    // outlierfree : input vector with the detected outlier removed; unchanged if
-    //               the test does not identify an outlier
+    // outlierfree : input vector with the detected outlier removed; unchanged if the test does not identify an outlier
     // outlier : detected outliers as a scalar vector; [] if no outlier is detected
     //
     // Description

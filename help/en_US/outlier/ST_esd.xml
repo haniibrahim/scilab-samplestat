@@ -36,28 +36,28 @@
    <title>Parameters</title>
    <variablelist>
         <varlistentry>
-            <term>v :</term>
+            <term>v:</term>
             <listitem><para> real vector of numerical sample values; at least three values are required</para></listitem>
         </varlistentry>
         <varlistentry>
-            <term>p :</term>
-            <listitem><para> statistical confidence level as a string or significance level alpha</para></listitem>
+            <term>p:</term>
+            <listitem><para> statistical confidence level as a string or significance level alpha as a decimal value "95%", "99%", "99.9%", 0.05, 0.01 or 0.001</para></listitem>
         </varlistentry>
         <varlistentry>
-            <term>maxoutliers :</term>
-            <listitem><para> positive integer specifying the maximum number of suspected</para></listitem>
+            <term>maxoutliers:</term>
+            <listitem><para> positive integer specifying the maximum number of suspected outliers; it must not exceed n-2</para></listitem>
         </varlistentry>
         <varlistentry>
-            <term>side :</term>
+            <term>side:</term>
             <listitem><para> test direction, "both" (default), "left" or "right"</para></listitem>
         </varlistentry>
         <varlistentry>
-            <term>outlierfree :</term>
-            <listitem><para> input vector with all detected outliers removed; unchanged if</para></listitem>
+            <term>outlierfree:</term>
+            <listitem><para> input vector with all detected outliers removed; unchanged if the test does not identify an outlier</para></listitem>
         </varlistentry>
         <varlistentry>
-            <term>outlier :</term>
-            <listitem><para> detected outliers in their original input order; [] if no outlier</para></listitem>
+            <term>outlier:</term>
+            <listitem><para> detected outliers in their original input order; [] if no outlier is detected</para></listitem>
         </varlistentry>
    </variablelist>
 </refsection>

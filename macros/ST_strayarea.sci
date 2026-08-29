@@ -26,9 +26,7 @@ function strayval = ST_strayarea(v, p)
 //
 // Description
 // "ST_strayarea" calculates the historical stray area (German: Streubereich)
-// according to Kaiser/Gottschalk as T = s*t. This quantity must not be
-// confused with a modern prediction interval for a future individual
-// observation, which is defined differently.
+// according to Kaiser/Gottschalk as 
 //
 // <latex>
 // \begin{eqnarray}
@@ -38,6 +36,12 @@ function strayval = ST_strayarea(v, p)
 //
 // T: stray area of values; s: sample standard deviation; t: student factor (dependent 
 // on statistical confidence level P% and degree of freedom f=n-1 with n: number of values)
+//
+// It defines the range around the mean within which the values may vary at a given significance level.
+//
+// This quantity must not be
+// confused with a modern prediction interval for a future individual
+// observation, which is defined differently.
 //
 // E.g. if strayval = 1.4 at p = 95% and mean(v) = 10.0, the historical
 // Kaiser/Gottschalk stray area is reported as approximately 10.0 +/- 1.4.

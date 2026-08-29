@@ -85,8 +85,7 @@ function [normal, W] = ST_shapirowilk(v, p)
     //  Hani A. Ibrahim - hani.ibrahim@gmx.de
     //
     // Bibliography
-    // Shapiro, S.S. & Wilk, M.B. (1965). An Analysis of Variance Test for
-    // Normality (Complete Samples). Biometrika 52(3/4), 591-611.
+    // Shapiro, S.S. & Wilk, M.B. (1965). An Analysis of Variance Test for Normality (Complete Samples). Biometrika 52(3/4), 591-611.
     // 
 
     // === FUNCTIONS ===========================================================

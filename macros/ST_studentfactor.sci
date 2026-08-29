@@ -42,6 +42,7 @@ function [retval] = ST_studentfactor(n, p)
 //
 // Bibliography
 //   R. Kaiser, G. Gottschalk; "Elementare Tests zur Beurteilung von Meßdaten", BI Hochschultaschenbücher, Bd. 774, Mannheim 1972.
+//
 
   
   // Check arguments
