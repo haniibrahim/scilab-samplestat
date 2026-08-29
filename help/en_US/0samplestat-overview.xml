@@ -28,7 +28,7 @@ These routines are applicable for normally distributed data ONLY.
 Calculates the stray areas of values and mean of normally distributed data. That gives you more information of the quality of your data as the sample standard deviation (s) of samples can do. s has an statistical confidence of 68%. Stray area (of values) can provide a confidence level of 95%, 99% and 99.9%. It determines the range in which the values are expected to fall within the specified statistical confidence level.
 					</para>
 					<para>
-IThe trust area (stray area of the mean) gives you information of the confidence of your mean with a probability of 95%, 99% and 99.9%.  It determines the range in which the mean stray within the specified statistical confidence level.
+The trust area (stray area of the mean) gives you information of the confidence of your mean with a probability of 95%, 99% and 99.9%.  It determines the range in which the mean stray within the specified statistical confidence level.
 					</para>
 				</listitem>
 			</varlistentry>
@@ -60,7 +60,7 @@ These functions are good to extend the built-in functions mean(), stdev(), max()
 				<term><link linkend="ST_strayarea">ST_strayarea</link>:</term>
 				<listitem>
 					<para>
-Calculates the stray area (range of dispersion of the values) of univariate data for a statistical confidence level (95%, 99%, 99.9%) and level of significance (0.5, 0.01, 0.001), resp.
+Calculates the stray area (range of dispersion of the values) of univariate data for a statistical confidence level (95%, 99%, 99.9%) and level of significance (0.5, 0.01, 0.001), resp. It defines the range around the mean within which the values may vary at a given significance level.
 					</para>
 				</listitem>
 			</varlistentry>
@@ -68,7 +68,7 @@ Calculates the stray area (range of dispersion of the values) of univariate data
 				<term><link linkend="ST_trustarea">ST_trustarea</link>:</term>
 				<listitem>
 					<para>
-Calculates the trust area (range of dispersion of the mean) of univariate data and for a statistical confidence level (95%, 99%, 99.9%) and level of significance (0.5, 0.01, 0.001), resp. and is the standard deviation of the mean.
+Calculates the trust area (range of dispersion of the mean) of univariate data and for a statistical confidence level (95%, 99%, 99.9%) and level of significance (0.5, 0.01, 0.001), resp.It defines the range around the mean may vary at a given significance level. 
 					</para>
 				</listitem>
 			</varlistentry>
@@ -76,7 +76,7 @@ Calculates the trust area (range of dispersion of the mean) of univariate data a
 				<term><link linkend="ST_studentfactor">ST_studentfactor</link>:</term>
 				<listitem>
 					<para>
-Determines the student factor for an amount of numbers and for a statistical confidence level (95%, 99%, 99.9%) and level of significance (0.5, 0.01, 0.001), resp.- service function for ST_strayarea and ST_trustarea
+Determines the student factor for an amount of numbers and for a statistical confidence level (95%, 99%, 99.9%) and level of significance (0.5, 0.01, 0.001), resp.- service function for ST_strayarea and ST_trustarea.
 					</para>
 				</listitem>
 			</varlistentry>
@@ -133,7 +133,7 @@ This test for outliers is eminently suitable for small sample sizes. It can find
 				<term><link linkend="ST_outlier">ST_outlier</link>:</term>
 				<listitem>
 					<para>
-Provide two basic and standard tests on outliers based on population standard deviation (S.D.) or inter-quartile range (IQR). It should be applied to sample sizes larger than 10 better more than 25. For small sample sizes the Grubbs test is recommended.
+Provide two basic and standard tests on outliers based on population standard deviation (S.D.) or inter-quartile range (IQR). It should be applied to sample sizes larger than 10 better more than 25. For small sample sizes the Grubbs test is recommended. The iqr-options are robust against non-normally distributed data. ST_outlier with one of the iqr-option is the only test in sampleSTAT which can be used with skewed data.
 		  			</para>
 				</listitem>
 			</varlistentry>

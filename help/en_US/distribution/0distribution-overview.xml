@@ -40,13 +40,6 @@ However measured data in natural sciences are commonly naturally distributed. Th
 		<para>
 Boxplots or histograms are useful to distinguish normal from non-normally distributed data but they are sometimes hard to interpret by unexperienced users and limited on small sample sizes smaller than 20 values. For this sizes "<link linkend="ST_ivplot">Individual Value Plots</link>" are more significant.
 		</para>
-		<para>
-		<inlinemediaobject>
-				<imageobject>
-					<imagedata fileref="../../images/ivplot.png" align="center" valign="middle"/>
-				</imageobject>
-			</inlinemediaobject>
-		</para>
 	<para>
 In general, the test for normality can be achieved by applying a goodness-of-fit method (i.e. chi-square test, or Kolmogorov-Smirnov test). These two tests, however, do not perform well (the power of these tests is not too high). Therefore some other tests have been developed, which have various advantages but also some drawbacks: the power of the Shapiro-Wilk test is good, but the calculation procedure is rather cumbersome but with computers it is easy to do now. It returns easy to interpret results: True (normal distribution) or false (non-normal distribution).
 	</para>

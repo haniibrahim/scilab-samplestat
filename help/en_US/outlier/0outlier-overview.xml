@@ -74,14 +74,14 @@ The outlier tests of SampleSTAT are applicable for normally distributed data ONL
 				<varlistentry>
 					<term><link linkend="ST_nalimov">Nalimov (ST_nalimov)</link>:</term>
 					<listitem>
-						<para>For small and larger sample sizes. It has a very strict algorithm and is controversially discussed. It was very common in Germany and Eastern Europe. Use it with care. Especially the iterative version implemented here.</para>
+						<para>For small and larger sample sizes. It has a very strict algorithm and is controversially discussed. It was very common in Germany and Eastern Europe. Use it with care.</para>
 					</listitem>
 				</varlistentry>
 				<varlistentry>
 					<term><link linkend="ST_outlier">Basic rules (ST_outlier)</link>:</term>
 					<listitem>
 						<para>Up from medium sample sizes (larger than 10, better more than 25). </para>
-						<para>Threshold are based on population standard deviation ("sd" mode) or interquantile range distance ("iqr15", "iqr30" modes). The latter allows to distinguish weak from strong outliers.</para>
+						<para>Threshold are based on population standard deviation ("sd" mode) or interquantile range distance ("iqr15", "iqr30" modes). The iqr-options are robust against skewed data (non-normally distributed data).</para>
 					</listitem>
 				</varlistentry>
 			</variablelist>
@@ -93,12 +93,15 @@ For LARGER data sets (>25) and also when more than one outlier is expected, the 
 		</para>
 		<para> </para>
 		<para>
-In QUALITY CONTROL or LAB ANALYSIS, the Nalimov test is often the standard.
+In QUALITY CONTROL or LAB ANALYSIS, the Nalimov test is often the standard. But use it with care.
 		</para>
 		<para> </para>
 		<para>
 The Dean-Dixon and Pearson-Hartley tests are used less frequently today and have been largely replaced by the Grubbs and ESD tests.
-The basic outlier test rounds out the portfolio and is only practical for use with medium to large sample sizes.
+		</para>
+		<para> </para>
+		<para>
+The basic outlier test rounds out the portfolio and is only practical for use with medium to large sample sizes. While the option using the standard deviation "sd" needs normally distributed data, the option using the quantile "iqr15" and "iqr30" are more robust against non-normally distruted data like skewed data. If you are not sure if your data is normally distributed and has more than 25 values ST_outlier with one of the iqr-Options can be a quick solution.
 		</para>
 		</note>
 		</para>
@@ -204,7 +207,7 @@ More than one outlier can be found in a data set.
 	<refsection>
 		<title><link linkend="ST_nalimov">Nalimov (ST_nalimov)</link></title>
 		<para>
-Nalimov is applicable for data sets between 3 and 1000 values. It calculates for all values the test value "q". It compares these q-values with the appropriate qcrit value from a table (Kaiser/Gottschalk 1972).
+Nalimov is applicable for data sets between 3 and 1002 values. It calculates for all values the test value "q". It compares these q-values with the appropriate qcrit value from a table (Kaiser/Gottschalk 1972).
 	</para>
 		<para>
 			<latex><![CDATA[
@@ -216,7 +219,10 @@ s: \text{sample standard deviation} \quad ; \quad n: \text{number of values}
 ]]></latex>
 		</para>
 		<para>
-The Nalimov test widely known in Germany and German-speaking countries. But it has it flaws. Especially the iterative version implemented in sampleSTAT. It indicates outliers very strict. That could eliminates valid data in some circumstances. There is some scientific discussion about this test. It is thus recommended to use other tests instead of the Nalimov test (Grubbs test for small samples, the ESD test for larger ones).
+The Nalimov test was widely used in quality cotrol and laboratory analysis in Germany and German-speaking countries as well as in Eastern Europe. But it has it flaws. Especially the version implemented in sampleSTAT from Kaiser/Gottschalk 1972. It indicates outliers very strict. That could eliminates valid data in some circumstances. There is some scientific discussion about this test. It is thus recommended to use other tests instead of the Nalimov test (Grubbs test for small samples, the ESD test for larger ones).
+		</para>
+		<para>
+In contrast to the classical sequential elimination procedure, this implementation may therefore identify more than one value as an outlier in a single call.
 		</para>
 		<caution>
 			<para>
@@ -263,7 +269,7 @@ x_i: \text{test value} \quad ; \quad \bar{x}: \text{arithmetic mean} \quad ; \qu
 	<refsection>
 		<title><link linkend="ST_outlier">Basic rules (ST_outlier)</link></title>
 		<para>
-Provide two basic tests on outliers based on population standard deviation (S.D.) or inter-quartile range (IQR). It should be applied to sample sizes larger than 10 better more than 25. For small sample sizes the Dean-Dixon test is recommended.
+Provide two basic tests on outliers based on population standard deviation (S.D.) or inter-quartile range (IQR). It should be applied to sample sizes larger than 10 better more than 25. For small sample sizes Grubbs or the Dean-Dixon test is recommended.
 		</para>
 		<variablelist>
 			<varlistentry>
@@ -287,9 +293,10 @@ x_i: \text{value} \quad ; \quad \bar{x}: \text{arithmetic mean} \\
 				<term>Based on he interquartile range (IQR)</term>
 				<listitem>
 					<para>
-This approach is used for skewed data in the first place but is - of course - applicable for normally distributed data as well. It allows to distinguish between weak and strong outliers.
-					</para>
-					<para>
+This approach is used for skewed data in the first place but is - of course - applicable for normally distributed data as well. It allows to distinguish between weak and strong outliers. It is the only outlier test which is applicable to non-normally distributed data.
+					</para><para>
+ST_outlier offers in both iqr-options two different quantile interpolations: The Hydman-Fan type 7, which is widley used e.g. in the statistic software R and the Hyndman-Fan type 8 which is distribution independent and median-unbiased. So, it is more robust against non-normally distributed data. Therefore type 8 is the default. Type 8 is implemented for better comparison to results from statistic software, like R.
+				</para><para>
 x0.25 is the first quartile and x0.75 the third and IQR is the difference. 
 					</para>
 					<para>

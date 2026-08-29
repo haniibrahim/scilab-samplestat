@@ -17,7 +17,7 @@
 
   <refnamediv>
     <refname>ST_outlier</refname>
-    <refpurpose>Basic outlier tests for normal distributions</refpurpose>
+    <refpurpose>Basic outlier tests with standard deviation or quantile</refpurpose>
   </refnamediv>
 
 
@@ -72,6 +72,9 @@ a value is presented as an outlier when it is more than 2.5xS.D. off
 the arithmetic mean in both directions.
    </para>
    <para>
+<important><para>The data has to be normally distributed.</para></important>
+   </para>
+   <para>
 <latex>
 x_i &lt; (\bar{x} - 2.5\sigma) \; \text{or} \; x_i &gt; (\bar{x} + 2.5\sigma) \; \text{with} \quad \sigma = \sqrt{{1 \over n}\sum_{i=1}^{n}(x_i-\bar{x})^2} \quad \Rightarrow \quad x_i = \text{outlier}\\
 \begin{eqnarray}
@@ -84,6 +87,9 @@ x_i: \text{value} \quad                            &amp;;&amp; \quad \bar{x}: \t
 IQR-MODES:Testing on outliers with interquartile range (IQR) distance is
 recommended for skewed data in the first place. But it is also applicaple
 for normally distributed data.
+   </para>
+   <para>
+<note><para>The IQR-Mode is more robust against non-normally distributed data.</para></note>
    </para>
    <para>
 IQR15-MODE: It is common to consider a value an outlier when it is more
@@ -114,8 +120,8 @@ x_i &lt; (x_{0.25} - 3.0 \cdot IQR) \; \text{or} \; x_i &gt; (x_{0.75} + 3.0 \cd
    <para>
 <important><para>
 Do use ST_outlier "sd" mode ONLY with NORMAL distributed data and
-with more than 10 or better more than 25 values! Use ST_deandixon
-(or ST_grubbs, ST_esd) for distributions with lower number of values.
+with more than 10 or better more than 25 values! Use ST_grubbs
+or ST_deandixon for distributions with lower number of values.
 </para></important>
    </para>
    <para>

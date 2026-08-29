@@ -44,8 +44,8 @@ function [outlierfree, outlier] = ST_nalimov(v, p)
     // \end{eqnarray}
     // </latex>
     //
-    // In contrast to the classical sequential elimination procedure, this implementation
-    // may therefore identify more than one value as an outlier in a single call.
+    // <note><para>In contrast to the classical sequential elimination procedure, this implementation
+    // may therefore identify MORE THAN ONE OUTLIER in a single call.</para></note>
     //
     // <important><para>
     // Do use ST_nalimov ONLY with NORMAL distributed data and
@@ -55,9 +55,9 @@ function [outlierfree, outlier] = ST_nalimov(v, p)
     // <caution><para>
     // Do use ST_nalimov with care. This historical Kaiser/Gottschalk procedure is
     // controversially discussed in the scientific literature. This function deliberately
-    // implements a NON-ITERATIVE one-pass screening and can flag multiple values at once.
+    // implements a one-pass screening and can flag multiple values at once.
     // For a conservative
-    // outlier test substitute Nalimov with Dean-Dixon (ST_deandixon)
+    // outlier test substitute Nalimov with Grubbs (ST_grubbs) or Dean-Dixon (ST_deandixon)
     // for small sample sizes (<30) and Pearson-Hartley (ST_pearsonhartley) for
     // larger ones (>30), or preferably the generalized Extreme Studentized
     // Deviate test according to Rosner "ST_esd()" instead.

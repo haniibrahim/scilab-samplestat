@@ -14,7 +14,7 @@
 // this program; if not, see <http://www.gnu.org/licenses/>.
 
 function [outlierfree, outlier] = ST_outlier(v, mod, q)
-    // Basic outlier tests for normal distributions
+    // Basic outlier tests with standard deviation or quantile
     //
     // Syntax
     //   [outlierfree] = ST_outlier(v)
@@ -39,6 +39,8 @@ function [outlierfree, outlier] = ST_outlier(v, mod, q)
     // a value is presented as an outlier when it is more than 2.5xS.D. off 
     // the arithmetic mean in both directions.
     //
+    // <important><para>The data has to be normally distributed.</para></important>
+    //
     // <latex>
     // x_i < (\bar{x} - 2.5\sigma) \; \text{or} \; x_i > (\bar{x} + 2.5\sigma) \; \text{with} \quad \sigma = \sqrt{{1 \over n}\sum_{i=1}^{n}(x_i-\bar{x})^2} \quad \Rightarrow \quad x_i = \text{outlier}\\
     // \begin{eqnarray}
@@ -50,6 +52,8 @@ function [outlierfree, outlier] = ST_outlier(v, mod, q)
     // IQR-MODES:Testing on outliers with interquartile range (IQR) distance is
     // recommended for skewed data in the first place. But it is also applicaple
     // for normally distributed data.
+    //
+    // <note><para>The IQR-Mode is more robust against non-normally distributed data.</para></note>
     //
     // IQR15-MODE: It is common to consider a value an outlier when it is more 
     // than 1.5xIQR (inter-quartile range) off from the lower or upper quartile.  
@@ -75,8 +79,8 @@ function [outlierfree, outlier] = ST_outlier(v, mod, q)
     //
     // <important><para>
     // Do use ST_outlier "sd" mode ONLY with NORMAL distributed data and
-    // with more than 10 or better more than 25 values! Use ST_deandixon 
-    // (or ST_grubbs, ST_esd) for distributions with lower number of values.
+    // with more than 10 or better more than 25 values! Use ST_grubbs
+    // or ST_deandixon for distributions with lower number of values.
     // </para></important>
     //
     // Examples
