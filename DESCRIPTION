@@ -151,10 +151,13 @@ Description: Toolbox for statistics of normal distributed univariate samples for
            - Shapiro-Wilk test extended (test statistic output added)
            - Checks for NaN and INF in the input data 
            - More demos added
-           - Bug fix
+           - All documentation updated 
+           - Bug fixes
              - Preserve orientation of imput vectors in the output in ST_nalinv
                and ST_personhartley
              - ST_shapirowilk typos fixed
+             - ST_nalimov table typo fixed (had no impact on results)
+             - ST_deandixon table mapping fixed (severe bug)
  
     2.0.2  - Help-Bugfix
     

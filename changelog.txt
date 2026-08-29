@@ -2,20 +2,23 @@ ChangeLog of sampleSTAT for Scilab
 ==================================
 
 2.1.0  - Grubbs outlier test (classic and iterated) added
-           - Generalized Extreme Studentized Deviate (ESD) outlier test added
-             according to Rosner
-           - Individual Value Plot ST_ivplot completed & extended
-             - Multiple dataset capability 
-             - Same or similar values are plotted beside each others
-             - Tolerance threshold for similar values
-             - Setting markers and colors
-           - Shapiro-Wilk test extended (test statistic output added)
-           - Checks for NaN and INF in the input data 
-           - More demos added
-           - Bug fix
-             - Preserve orientation of imput vectors in the output in ST_nalinv
-               and ST_personhartley
-             - ST_shapirowilk typos fixed
+       - Generalized Extreme Studentized Deviate (ESD) outlier test added
+         according to Rosner
+       - Individual Value Plot ST_ivplot completed & extended
+         - Multiple dataset capability 
+         - Same or similar values are plotted beside each others
+         - Tolerance threshold for similar values
+         - Setting markers and colors
+       - Shapiro-Wilk test extended (test statistic output added)
+       - Checks for NaN and INF in the input data 
+       - More demos added
+       - All documentation updated 
+       - Bug fixes
+         - Preserve orientation of imput vectors in the output in ST_nalinv
+           and ST_personhartley
+         - ST_shapirowilk typos fixed
+         - ST_nalimov table typo fixed (had no impact on results)
+         - ST_deandixon table mapping fixed (severe bug)
 
 2.0.2  - Help-Bugfix
 
