@@ -64,7 +64,6 @@ ScilabVersion: >= 6.1
 // where operator can be: ~, >, <, >=, <=
 // If multiple dependencies, put one per line (starting each line with a space)
 Depends: >= apifun 0.4.0
-~ helptbx any
 
 // Creation date
 Date: 2020-0
@@ -173,7 +172,6 @@ Description: Toolbox for statistics of normal distributed univariate samples for
  DEPENDENCIES:
  
  apifun  >= 0.4.0
- helptbx >= 0.6
 
  ---------------------------------------------------------------------
     
