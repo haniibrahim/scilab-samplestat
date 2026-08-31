@@ -10,9 +10,9 @@ To-Do Grubbs-Zweig => v2.1.0
 [x] Changelog, Readme.txt ergänzen
 [x] Demos für ivplot erstellen
 [x] Demos für Außreißer überarbeiten & ergänzen
-[ ] Toolbox bauen
-[ ] Testen auf Windows
-[ ] Testen auf Linux
-[ ] Testen auf macOS
-[ ] Grubbs-Zweig auf master mergen und Version 2.1.0 taggen & pushen
-[ ] Auf ATOMS veröffentlichen
+[x] Toolbox bauen
+[x] Testen auf Windows
+[x] Testen auf Linux
+[x] Testen auf macOS
+[x] Grubbs-Zweig auf master mergen und Version 2.1.0 taggen & pushen
+[x] Auf ATOMS veröffentlichen
