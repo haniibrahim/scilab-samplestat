@@ -49,7 +49,7 @@ function [outlierfree, outlier] = ST_deandixon(v, p)
     // </para></important>
     //
     // <important><para>
-    // Do use ST_deandixon ONLY with NORMAL distributed data and
+    // Do use ST_deandixon ONLY with NORMALLY distributed data and
     // with sample sizes from 3 through 30 values! For more than 30 values use 
     // Pearson-Hartley "ST_pearsonhartley()" or better the generalized Extreme Studentized 
     // Deviate test according to Rosner "ST_esd()" instead.

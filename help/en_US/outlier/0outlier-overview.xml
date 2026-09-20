@@ -101,7 +101,7 @@ The Dean-Dixon and Pearson-Hartley tests are used less frequently today and have
 		</para>
 		<para> </para>
 		<para>
-The basic outlier test rounds out the portfolio and is only practical for use with medium to large sample sizes. While the option using the standard deviation "sd" needs normally distributed data, the option using the quantile "iqr15" and "iqr30" are more robust against non-normally distruted data like skewed data. If you are not sure if your data is normally distributed and has more than 25 values ST_outlier with one of the iqr-Options can be a quick solution.
+The basic outlier test rounds out the portfolio and is only practical for use with medium to large sample sizes. While the option using the standard deviation "sd" needs normally distributed data, the option using the quantile "iqr15" and "iqr30" are more robust against non-normally distributed data like skewed data. If you are not sure if your data is normally distributed and has more than 25 values ST_outlier with one of the iqr-Options can be a quick solution.
 		</para>
 		</note>
 		</para>

@@ -46,7 +46,7 @@ function [outlierfree, outlier] = ST_nalimov(v, p)
     // may therefore identify MORE THAN ONE OUTLIER in a single call.</para></note>
     //
     // <important><para>
-    // Do use ST_nalimov ONLY with NORMAL distributed data and
+    // Do use ST_nalimov ONLY with NORMALLY distributed data and
     // with 3 to 1002 values (corresponding to f = n-2 = 1 to 1000)!
     // </para></important>
     //
